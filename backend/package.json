@@ -1,0 +1,32 @@
+{
+  "name": "m1p10mean-sitraka-felana-back",
+  "version": "1.0.0",
+  "description": "Backend : Projet - Web Avancé \r Express et Javascript",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js",
+    "build": "echo \"QWERTY\"",
+    "dev": "nodemon src/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelanaRasata/m1p10mean-sitraka-felana-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FelanaRasata/m1p10mean-sitraka-felana-back/issues"
+  },
+  "homepage": "https://github.com/FelanaRasata/m1p10mean-sitraka-felana-back#readme",
+  "engines": {
+    "node": "18.13.0",
+    "npm": "8.19.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
