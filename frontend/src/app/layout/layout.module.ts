@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LayoutRoutingModule } from './layout-routing.module';
+import { LayoutRouting } from './layout-routing';
 import { LayoutComponent } from './layout.component';
 
 
@@ -11,7 +11,7 @@ import { LayoutComponent } from './layout.component';
   ],
   imports: [
     CommonModule,
-    LayoutRoutingModule
+    LayoutRouting
   ]
 })
 export class LayoutModule { }
