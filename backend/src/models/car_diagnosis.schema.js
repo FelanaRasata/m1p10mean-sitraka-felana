@@ -3,27 +3,27 @@ import paginate from 'mongoose-paginate-v2'
 import { baseModel } from '../utils/utils.js'
 
 
-const CarSchema = new mongoose.Schema(
+const CarDiagnosisSchema = new mongoose.Schema(
     baseModel({
         _id: {
             type: String,
             required: true,
             unique: true
         },
-        carNumber: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        brand: {
-            type: String,
-            required: true,
-        },
-        customer: {
-            type: String,
-            ref: 'User',
+        price: {
+            type: Number,
             required: true
-        }
+        },
+        repair: {
+            type: String,
+            ref: 'Repair',
+            required: true
+        },
+        repairType: [{
+            type: String,
+            ref: 'RepairType',
+            required: true
+        }]
     }),
     {
         timestamps: true,
@@ -31,6 +31,7 @@ const CarSchema = new mongoose.Schema(
     }
 )
 
-CarSchema.plugin(paginate)
 
-module.exports = mongoose.model('Car', CarSchema, 'cars')
+CarDiagnosisSchema.plugin(paginate)
+
+module.exports = mongoose.model('CarDiagnosis', CarDiagnosisSchema, 'car_diagnoses')

@@ -7,7 +7,8 @@ const RepairTypeSchema = new mongoose.Schema(
     baseModel({
         _id: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         name: {
             type: String,
@@ -22,6 +23,11 @@ const RepairTypeSchema = new mongoose.Schema(
                 message: (props) => `${props.value} is not a valid price.`
             }
         },
+        carPart: {
+            type: Boolean,
+            default: true,
+            required: true
+        }
     }),
     {
         timestamps: true,
@@ -29,7 +35,6 @@ const RepairTypeSchema = new mongoose.Schema(
     }
 )
 
-// Add paginate plugin
 RepairTypeSchema.plugin(paginate)
 
 module.exports = mongoose.model('RepairType', RepairTypeSchema, 'repair_types')
