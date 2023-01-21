@@ -4,6 +4,7 @@ import { RegistrationComponent } from './page/registration/registration.componen
 import { NotFoundComponent } from './page/not-found/not-found.component';
 import { LoginComponent } from './page/login/login.component';
 import {FormsModule} from "@angular/forms";
+import {ComponentsModule} from "../../components/components.module";
 
 
 
@@ -13,13 +14,15 @@ import {FormsModule} from "@angular/forms";
     NotFoundComponent,
     LoginComponent
   ],
-  exports: [
-    LoginComponent,
-    RegistrationComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule
-  ]
+    exports: [
+        LoginComponent,
+        RegistrationComponent,
+        NotFoundComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ComponentsModule
+    ]
 })
 export class PublicModule { }

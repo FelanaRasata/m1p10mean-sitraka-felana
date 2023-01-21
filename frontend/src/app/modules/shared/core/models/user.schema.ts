@@ -1,4 +1,4 @@
-import {BaseSchema} from "./base.schema";
+import {BaseSchema} from "./bases.schema";
 
 export interface IUser extends BaseSchema{
 
