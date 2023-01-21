@@ -1,6 +1,6 @@
 import {BaseSchema} from "./base.schema";
 
-export interface ICars extends BaseSchema {
+export interface ICar extends BaseSchema {
   userId : number;
   matricule : string;
   type : string;

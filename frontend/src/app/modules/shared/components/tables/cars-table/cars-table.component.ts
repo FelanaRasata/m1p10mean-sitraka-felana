@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ICars} from "../../../core/models/cars.schema";
+import {ICar} from "../../../core/models/car.schema";
 
 @Component({
   selector: 'app-cars-table',
@@ -8,6 +8,6 @@ import {ICars} from "../../../core/models/cars.schema";
 })
 export class CarsTableComponent {
 
-  @Input() cars : ICars[] = [];
+  @Input() cars : ICar[] = [];
 
 }

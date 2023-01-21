@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IUsers} from "../../../shared/core/models/users.schema";
+import {IUser} from "../../../shared/core/models/user.schema";
 
 @Component({
   selector: 'app-registration',
@@ -7,6 +7,6 @@ import {IUsers} from "../../../shared/core/models/users.schema";
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
-  users = {} as IUsers;
+  users = {} as IUser;
   passwordConfirm : string = "";
 }
