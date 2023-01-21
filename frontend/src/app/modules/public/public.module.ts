@@ -1,28 +1,28 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RegistrationComponent } from './page/registration/registration.component';
-import { NotFoundComponent } from './page/not-found/not-found.component';
-import { LoginComponent } from './page/login/login.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NotFoundComponent} from './page/not-found/not-found.component';
 import {FormsModule} from "@angular/forms";
 import {ComponentsModule} from "../../components/components.module";
-
+import {SignInComponent} from './page/sign-in/sign-in.component';
+import {SignUpComponent} from './page/sign-up/sign-up.component';
 
 
 @NgModule({
   declarations: [
-    RegistrationComponent,
     NotFoundComponent,
-    LoginComponent
+    SignInComponent,
+    SignUpComponent
   ],
-    exports: [
-        LoginComponent,
-        RegistrationComponent,
-        NotFoundComponent
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ComponentsModule
-    ]
+  exports: [
+    NotFoundComponent,
+    SignInComponent,
+    SignUpComponent
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ComponentsModule
+  ]
 })
-export class PublicModule { }
+export class PublicModule {
+}

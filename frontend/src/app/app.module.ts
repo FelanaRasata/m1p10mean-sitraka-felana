@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {SharedModule} from "./modules/shared/shared.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from "./material.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import {MaterialModule} from "./material.module";
     BrowserModule,
     AppRouting,
     FormsModule,
+    HttpClientModule,
+
     BrowserAnimationsModule,
   ],
   providers: [],

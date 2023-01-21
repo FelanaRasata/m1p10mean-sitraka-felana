@@ -6,4 +6,6 @@ export interface BaseSchema {
 
   updatedAt: Date;
 
+  delete: boolean;
+
 }

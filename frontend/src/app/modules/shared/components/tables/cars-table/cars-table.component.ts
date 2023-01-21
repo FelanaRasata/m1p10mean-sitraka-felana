@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ICar} from "../../../core/models/cars.schema";
+import {ICar} from "../../../core/models/schemas/cars.schema";
 
 @Component({
   selector: 'app-cars-table',
