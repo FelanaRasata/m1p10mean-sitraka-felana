@@ -27,7 +27,35 @@ const RepairSchema = new mongoose.Schema(
             type: String,
             ref: 'RepairType',
             required: true
-        }]
+        }],
+        carDroppedOffAt: {
+            type: Date,
+            required: true
+        },
+        diagnosedAt: {
+            type: Date,
+            required: false
+        },
+        initiatedAt: {
+            type: Date,
+            required: false
+        },
+        inProgressAt: {
+            type: Date,
+            required: false
+        },
+        carRepairedAt: {
+            type: Date,
+            required: false
+        },
+        paidAt: {
+            type: Date,
+            required: false
+        },
+        carTakenBackAt: {
+            type: Date,
+            required: false
+        },
     }),
     {
         timestamps: true,
