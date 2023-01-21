@@ -10,7 +10,8 @@ const UserSchema = new mongoose.Schema(
     baseModel({
         _id: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         firstName: {
             type: String,
@@ -36,7 +37,7 @@ const UserSchema = new mongoose.Schema(
         },
         password: {
             type: String
-        }
+        },
     }),
     {
         timestamps: true,
@@ -76,7 +77,6 @@ UserSchema.methods.comparePassword = async function (pwdToCompare) {
 
 }
 
-// Add paginate plugin
 UserSchema.plugin(paginate)
 
 module.exports = mongoose.model('User', UserSchema, 'users')
