@@ -7,4 +7,5 @@ export interface IRepairType extends BaseSchema {
 
   repairCost: number;
 
+  carPart: boolean;
 }

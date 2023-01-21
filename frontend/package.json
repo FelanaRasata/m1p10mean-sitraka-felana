@@ -21,9 +21,11 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "bootstrap": "^5.2.3",
+    "crypto-js": "^4.1.1",
     "express": "^4.18.2",
     "jquery": "^3.6.3",
     "jquery.easing": "^1.4.1",
+    "ngx-build-plus": "^15.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

@@ -1,6 +1,6 @@
 import {BaseSchema} from "./bases.schema";
 
-export interface IUser extends BaseSchema{
+export interface IUser extends BaseSchema {
 
   firstName: string;
 
