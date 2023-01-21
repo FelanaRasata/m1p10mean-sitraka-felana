@@ -7,7 +7,7 @@ import morgan from 'morgan'
 import { connectWithMongoose } from './config/mongo_db.js'
 import { Settings } from './config/settings.js'
 import { DefaultRouter } from './controllers/default.controller.js'
-import { UserRouter } from './controllers/users.controller.js'
+import { SessionRouter } from './controllers/session.controller.js'
 
 
 config()
@@ -77,7 +77,7 @@ class Server {
 
 const server = new Server([
     { path: '/', router: DefaultRouter },
-    { path: '/users', router: UserRouter }
+    { path: '/auth', router: SessionRouter },
 ])
 
 server.run()

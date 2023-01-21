@@ -1,5 +1,11 @@
+import jsonwebtoken from 'jsonwebtoken'
+import mongoose from 'mongoose'
 import * as nodemailer from 'nodemailer'
+import validator from 'validator'
 import { CONSTANTS } from './constants.js'
+
+
+const SECRET_KEY = process.env.SECRET_KEY || 'secret-key'
 
 
 export async function sendEmail(recipients, topic, message, isHtml, cc = [], bcc = [], attachments = []) {
@@ -96,5 +102,73 @@ export function baseModel(schemaDefinition) {
 export function customLabels() {
 
     return CONSTANTS.custom_labels
+
+}
+
+
+export function isEmailValid(email) {
+
+    try {
+
+        return validator.isEmail(email)
+
+    } catch (error) {
+
+        console.log(error)
+
+        return false
+
+    }
+
+}
+
+
+export function toDocumentFormat(userData) {
+
+    return Object.assign(userData, { _id: String(new mongoose.mongo.ObjectId()) })
+
+}
+
+
+export async function retrieveToken(req) {
+
+    const authorization = req.header('Authorization').split('Bearer ')[1] || null
+
+    if (isEmpty(authorization))
+        throw new Error('Session not found')
+
+    return authorization
+
+}
+
+
+export async function retrieveTokenData(req) {
+
+    return await verifyToken(retrieveToken(req))
+
+}
+
+
+export async function generateToken(tokenData, expiresIn) {
+
+    return jsonwebtoken.sign(tokenData, SECRET_KEY, { expiresIn })
+
+}
+
+
+export async function verifyToken(token) {
+
+    return jsonwebtoken.verify(token, SECRET_KEY)
+
+}
+
+
+export function toResponseEntity(status, message = '', data = undefined) {
+
+    const response = { message: isEmpty(message) ? 'Data found' : message, status: status }
+
+    if (!isEmpty(data)) Object.assign(response, { data: data })
+
+    return response
 
 }

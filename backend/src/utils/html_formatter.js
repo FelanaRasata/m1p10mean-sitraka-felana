@@ -1,6 +1,6 @@
 export const index = () => {
 
-  return `
+    return `
   <!DOCTYPE html>
   <html lang="en">
   <head>

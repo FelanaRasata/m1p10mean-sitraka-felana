@@ -1,6 +1,7 @@
 import { isEmpty } from 'class-validator'
 import mongoose from 'mongoose'
-import { customLabels } from '../utils/utils.js'
+import { EUserType } from '../utils/static_enum.js'
+import { customLabels, generateToken, isEmailValid, toDocumentFormat } from '../utils/utils.js'
 
 
 const User = mongoose.model('User')
@@ -8,102 +9,105 @@ const User = mongoose.model('User')
 
 export class UserService {
 
+    async signIn(signInData) {
+
+        if (isEmpty(signInData)) throw new Error('Please fill all the inputs')
+
+        if (!isEmailValid(signInData.emailAddress)) throw new Error('Incorrect email address.')
+
+        const user = await User.findOne({ emailAddress: signInData.emailAddress })
+
+        if (isEmpty(user)) throw new Error('Email address not found.')
+
+        const isMatching = await user.comparePassword(String(signInData.password))
+
+        if (!isMatching) throw new Error('Incorrect password')
+
+        const token = generateToken({ user_id: user._id }, process.env.EXPIRES_IN || '30d')
+
+        return { token: token, user_type: user.type }
+
+    }
+
+
     // Create a new user
-    static async create(userData) {
+    async create(userData) {
 
-        try {
+        if (!isEmailValid(userData.emailAddress)) throw new Error('Incorrect email address.')
 
-            const user = new User(userData)
+        if (userData.type !== EUserType.CUS) throw new Error('Incorrect user type.')
 
-            return await user.save()
+        const createdUser = new User(toDocumentFormat(userData))
 
-        } catch (error) {
+        await createdUser.save()
 
-            throw error
-
-        }
+        return await this.findById(createdUser._id)
 
     }
 
 
     // Get all users with pagination
-    static async find(query, options) {
+    async find(query, options) {
 
-        try {
+        query = Object.assign(isEmpty(query) ? {} : query, { deleted: false })
 
-            query = isEmpty(query) ? {} : query
+        options = Object.assign(isEmpty(options) ? {} : options, {
+            select: '-password',
+            lean: true,
+            allowDiskUse: true,
+            customLabels: customLabels()
+        })
 
-            options = Object.assign(isEmpty(options) ? {} : options, {
-                select: '-password',
-                lean: true,
-                allowDiskUse: true,
-                customLabels: customLabels()
-            })
-
-            return await User.paginate(
-                { ...query },
-                { ...options },
-            )
-
-        } catch (error) {
-
-            throw error
-
-        }
+        return await User.paginate(query, options)
 
     }
 
 
     // Get a single user by ID
-    static async findById(userId) {
+    async findById(userId) {
 
-        try {
+        if (isEmpty(userId)) throw new Error('No user ID found')
 
-            return await User
-                .findById(userId)
-                .select('-password')
-                .lean()
-
-        } catch (error) {
-
-            throw error
-
-        }
+        return User
+            .find({ _id: userId, deleted: false })
+            .select('-password')
+            .lean()
 
     }
 
 
     // Update a user by ID
-    static async update(userId, userData) {
+    async update(userId, userData) {
 
-        try {
-
-            return await User
-                .findByIdAndUpdate(userId, userData, { new: true })
-                .select('-password')
-                .lean()
-
-        } catch (error) {
-
-            throw error
-
-        }
+        /**
+         * Never use combined method like this `findByIdAndUpdate`, I used it because this method will never be used
+         * I MEAN NEVER USE COMBINED METHOD PLEASE
+         * I MEAN NEVER USE COMBINED METHOD PLEASE
+         * I MEAN NEVER USE COMBINED METHOD PLEASE
+         * I MEAN NEVER USE COMBINED METHOD PLEASE
+         * */
+        return User
+            .findByIdAndUpdate(userId, userData, { new: true })
+            .select('-password')
+            .lean()
 
     }
 
 
     // Delete a user by ID
-    static async delete(userId) {
+    async delete(userId) {
 
-        try {
+        if (isEmpty(userId)) throw new Error('No user ID found')
 
-            return await User.findByIdAndDelete(userId)
+        const currentUser = await User.findById(userId)
 
-        } catch (error) {
+        if (isEmpty(currentUser)) throw new Error('No user found')
 
-            throw error
+        currentUser.deleted = true
 
-        }
+        await currentUser.save()
+
+        return await this.findById(userId)
 
     }
 

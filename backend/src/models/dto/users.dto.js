@@ -1,16 +1,8 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator'
 import { EUserType } from '../../utils/static_enum.js'
 
 
 export class SignInDto {
-
-    constructor(emailAddress, password) {
-
-        this.emailAddress = emailAddress
-        this.password = password
-
-    }
-
 
     @IsEmail()
     @IsNotEmpty()
@@ -20,24 +12,21 @@ export class SignInDto {
     @IsNotEmpty()
     password
 
+
+    constructor(emailAddress, password) {
+
+        this.emailAddress = emailAddress
+        this.password = password
+
+    }
+
 }
 
 
 export class UserDto {
 
-    constructor(lastName, emailAddress, firstName, password) {
-
-        this.lastName = lastName
-        this.type = EUserType.CUS
-        this.emailAddress = emailAddress
-        this.firstName = firstName
-        this.password = password
-
-    }
-
-
     @IsString()
-    @IsOptional()
+    @IsNotEmpty()
     firstName
 
     @IsString()
@@ -55,5 +44,16 @@ export class UserDto {
     @IsString()
     @IsNotEmpty()
     password
+
+
+    constructor(lastName, emailAddress, firstName, password) {
+
+        this.lastName = lastName
+        this.type = EUserType.CUS
+        this.emailAddress = emailAddress
+        this.firstName = firstName
+        this.password = password
+
+    }
 
 }

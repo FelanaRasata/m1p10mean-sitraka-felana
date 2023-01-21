@@ -10,7 +10,7 @@ export const validationMiddleware = (
 ) => {
 
     return (req, res, next) => {
-        const instance = Object.assign(new type(), req[value]);
+        const instance = Object.assign(new type(), req[value])
 
         validate(instance, {
             skipMissingProperties,
@@ -23,7 +23,7 @@ export const validationMiddleware = (
                 console.error('-------------------- Request body error --------------------\n', errors, '\n\'-------------------- Request body error --------------------\'')
                 const message = errors.map((error) => Object.values(error.constraints)).join(', ')
 
-                throw new Error(message)
+                next(new Error(message))
 
             } else {
 
