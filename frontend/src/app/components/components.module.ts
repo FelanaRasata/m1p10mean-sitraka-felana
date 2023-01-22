@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopbarComponent } from './topbar/topbar.component';
+import {SharedModule} from "../modules/shared/shared.module";
 
 
 
@@ -17,8 +18,9 @@ import { TopbarComponent } from './topbar/topbar.component';
     FooterComponent,
     TopbarComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule
+    ]
 })
 export class ComponentsModule { }

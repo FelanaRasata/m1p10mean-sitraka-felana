@@ -6,6 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
-  email : string = "";
+  emailAddress : string = "";
   password : string = "";
+
+  constructor() {
+  }
+
+  signIn(){
+
+    console.log("Sign In");
+
+  }
 }

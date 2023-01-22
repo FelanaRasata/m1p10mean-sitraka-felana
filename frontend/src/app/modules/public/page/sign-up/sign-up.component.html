@@ -10,54 +10,58 @@
             <div class="text-center">
               <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                       placeholder="First Name"
-                       [(ngModel)]="users.firstName"
+            <form class="user">
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="text" class="form-control form-control-user" id="firstName"
+                         placeholder="First Name" name="firstName"
+                         [(ngModel)]="users.firstName"
+                  >
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control form-control-user" id="lastName"
+                         placeholder="Last Name" name="lastName"
+                         [(ngModel)]="users.lastName"
+                  >
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control form-control-user" id="userName"
+                       placeholder="Username" name="userName"
+                       [(ngModel)]="users.userName"
                 >
               </div>
-              <div class="col-sm-6">
-                <input type="text" class="form-control form-control-user" id="exampleLastName"
-                       placeholder="Last Name"
-                       [(ngModel)]="users.lastName"
+              <div class="form-group">
+                <input type="email" class="form-control form-control-user" id="emailAddress"
+                       placeholder="Email Address" name="emailAddress"
+                       [(ngModel)]="users.emailAddress"
                 >
               </div>
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control form-control-user" id="exampleInputUsername"
-                     placeholder="Username"
-                     [(ngModel)]="users.userName"
-              >
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                     placeholder="Email Address"
-                     [(ngModel)]="users.emailAddress"
-              >
-            </div>
 
-            <div class="form-group row">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="password" class="form-control form-control-user"
-                       id="exampleInputPassword" placeholder="Password"
-                       [(ngModel)]="users.password"
-                >
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="password" class="form-control form-control-user"
+                         id="password" placeholder="Password" name="password"
+                         [(ngModel)]="users.password"
+                  >
+                </div>
+                <div class="col-sm-6">
+                  <input type="password" class="form-control form-control-user"
+                         id="passwordConfirm" placeholder="Repeat Password" name="passwordConfirm"
+                         [(ngModel)]="passwordConfirm"
+                  >
+                </div>
               </div>
-              <div class="col-sm-6">
-                <input type="password" class="form-control form-control-user"
-                       id="exampleRepeatPassword" placeholder="Repeat Password"
-                       [(ngModel)]="passwordConfirm"
-                >
-              </div>
-            </div>
-            <a href="login.html" class="btn btn-primary btn-user btn-block">
-              Register Account
-            </a>
+              <a (click)="signUp()" class="btn btn-primary btn-user btn-block">
+                Sign Up
+              </a>
+
+            </form>
+
             <hr>
 
             <div class="text-center">
-              <a class="small" href="/sign-in">Already have an account? Login!</a>
+              <a class="small" href="/sign-in">Already have an account? Sign In!</a>
             </div>
           </div>
         </div>
