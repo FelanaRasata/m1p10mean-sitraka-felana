@@ -27,12 +27,12 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'car-list',
+        redirectTo: 'car_list',
         pathMatch: 'full'
       },
 
       {
-        path: 'car-list',
+        path: 'car_list',
         resolve: {
           cars: CarListResolver
         },
@@ -40,43 +40,43 @@ const routes: Routes = [
       },
 
       {
-        path: 'car-card',
+        path: 'car_card',
         resolve: {},
         component: CarCardComponent
       },
 
       {
-        path: 'car-dropped-off',
+        path: 'car_dropped_off',
         resolve: {},
         component: CarCardComponent
       },
 
       {
-        path: 'car-taken-back',
+        path: 'car_taken_back',
         resolve: {},
         component: CarTakenBackComponent
       },
 
       {
-        path: 'repair-list',
+        path: 'repair_list',
         resolve: {},
         component: RepairListComponent
       },
 
       {
-        path: 'repair-card',
+        path: 'repair_card',
         resolve: {},
         component: RepairCardComponent
       },
 
       {
-        path: 'repair-choice',
+        path: 'repair_choice',
         resolve: {},
         component: RepairChoiceComponent
       },
 
       {
-        path: 'repair-payment',
+        path: 'repair_payment',
         resolve: {},
         component: RepairPaymentComponent
       },
@@ -106,25 +106,25 @@ const routes: Routes = [
       },
 
       {
-        path: 'repairs-initiated',
+        path: 'repairs_initiated',
         resolve: {},
         component: RepairsInitiatedComponent
       },
 
       {
-        path: 'repair-initiated',
+        path: 'repair_initiated',
         resolve: {},
         component: RepairInitiatedComponent
       },
 
       {
-        path: 'repairs-paid',
+        path: 'repairs_paid',
         resolve: {},
         component: RepairsPaidComponent
       },
 
       {
-        path: 'repair-paid',
+        path: 'repair_paid',
         resolve: {},
         component: RepairPaidComponent
       },
@@ -143,30 +143,30 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'filtered-repairs',
+        redirectTo: 'filtered_repairs',
         pathMatch: 'full'
       },
 
       {
-        path: 'filtered-repairs',
+        path: 'filtered_repairs',
         resolve: {},
         component: RepairsFilteredComponent
       },
 
       {
-        path: 'car-diagnosis',
+        path: 'car_diagnosis',
         resolve: {},
         component: CarDiagnosisComponent
       },
 
       {
-        path: 'repair-in-progress',
+        path: 'repair_in_progress',
         resolve: {},
         component: RepairInProgressComponent
       },
 
       {
-        path: 'exit-ticket',
+        path: 'exit_ticket',
         resolve: {},
         component: ExitTicketComponent
       },
