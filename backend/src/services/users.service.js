@@ -1,13 +1,17 @@
-import { isEmpty } from 'class-validator'
-import mongoose from 'mongoose'
+import { Settings } from '../config/settings.js'
+import { User } from '../models/users.schema.js'
 import { EUserType } from '../utils/static_enum.js'
-import { customLabels, generateToken, isEmailValid, toDocumentFormat } from '../utils/utils.js'
-
-
-const User = mongoose.model('User')
+import { customLabels, generateToken, isEmailValid, isEmpty, toDocumentFormat } from '../utils/utils.js'
 
 
 export class UserService {
+
+    constructor() {
+
+        this.settings = new Settings()
+
+    }
+
 
     async signIn(signInData) {
 
@@ -23,7 +27,7 @@ export class UserService {
 
         if (!isMatching) throw new Error('Incorrect password')
 
-        const token = generateToken({ user_id: user._id }, process.env.EXPIRES_IN || '30d')
+        const token = generateToken({ user_id: user._id }, this.settings.expiresIn)
 
         return { token: token, user_type: user.type }
 
@@ -69,7 +73,7 @@ export class UserService {
         if (isEmpty(userId)) throw new Error('No user ID found')
 
         return User
-            .find({ _id: userId, deleted: false })
+            .findOne({ _id: userId, deleted: false })
             .select('-password')
             .lean()
 

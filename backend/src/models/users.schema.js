@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt'
-import { isEmpty } from 'class-validator'
 import mongoose from 'mongoose'
 import paginate from 'mongoose-paginate-v2'
 import { EUserType } from '../utils/static_enum.js'
-import { baseModel } from '../utils/utils.js'
+import { baseModel, isEmpty } from '../utils/utils.js'
 
 
 const UserSchema = new mongoose.Schema(
@@ -79,4 +78,4 @@ UserSchema.methods.comparePassword = async function (pwdToCompare) {
 
 UserSchema.plugin(paginate)
 
-module.exports = mongoose.model('User', UserSchema, 'users')
+export const User = mongoose.model('User', UserSchema, 'users')

@@ -26,4 +26,4 @@ const RentSchema = new mongoose.Schema(
 
 RentSchema.plugin(paginate)
 
-module.exports = mongoose.model('Rent', RentSchema, 'car_parts')
+export const Rent = mongoose.model('Rent', RentSchema, 'car_parts')

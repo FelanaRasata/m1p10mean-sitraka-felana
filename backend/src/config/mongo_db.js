@@ -5,20 +5,19 @@ async function connectWithMongoose(databaseUri) {
 
     try {
 
-        console.log('-------------------- DB CONNECTION - ATTEMPT --------------------')
-
         mongoose.set('strictQuery', false)
-        await mongoose.connect(databaseUri)
 
-        console.log('-------------------- DB CONNECTION - SUCCEED --------------------')
+        await mongoose.connect(databaseUri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        })
 
-        return true
+        console.log('MongoDB Connected...')
 
     } catch (error) {
 
-        console.log(`-------------------- DB CONNECTION - FAILED --------------------\n${error}\n-------------------- DB CONNECTION - FAILED --------------------`)
-
-        return false
+        console.log(`MongoDB Connection failed due to:\n${error}\n`)
+        process.exit(1)
 
     }
 

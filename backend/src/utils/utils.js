@@ -1,11 +1,13 @@
-import jsonwebtoken from 'jsonwebtoken'
+import * as CryptoJS from 'crypto-js'
+import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
 import * as nodemailer from 'nodemailer'
 import validator from 'validator'
+import { Settings } from '../config/settings.js'
 import { CONSTANTS } from './constants.js'
 
 
-const SECRET_KEY = process.env.SECRET_KEY || 'secret-key'
+const settings = new Settings()
 
 
 export async function sendEmail(recipients, topic, message, isHtml, cc = [], bcc = [], attachments = []) {
@@ -149,16 +151,16 @@ export async function retrieveTokenData(req) {
 }
 
 
-export async function generateToken(tokenData, expiresIn) {
+export function generateToken(tokenData, expiresIn) {
 
-    return jsonwebtoken.sign(tokenData, SECRET_KEY, { expiresIn })
+    return jwt.sign(tokenData, settings.secretKey, { expiresIn })
 
 }
 
 
 export async function verifyToken(token) {
 
-    return jsonwebtoken.verify(token, SECRET_KEY)
+    return jwt.verify(token, settings.secretKey)
 
 }
 
@@ -170,5 +172,23 @@ export function toResponseEntity(status, message = '', data = undefined) {
     if (!isEmpty(data)) Object.assign(response, { data: data })
 
     return response
+
+}
+
+
+export function encrypt(value) {
+
+    if (isEmpty(value) || isEmpty(value.trim())) throw new Error('Value not found')
+
+    return CryptoJS.AES.encrypt(value.trim(), settings.encryptionKey).toString()
+
+}
+
+
+export function decrypt(value) {
+
+    if (isEmpty(value) || isEmpty(value.trim())) throw new Error('Value not found')
+
+    return CryptoJS.AES.decrypt(value.trim(), settings.encryptionKey).toString(CryptoJS.enc.Utf8)
 
 }

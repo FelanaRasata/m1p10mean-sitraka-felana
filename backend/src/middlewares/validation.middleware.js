@@ -1,38 +1,29 @@
-import { validate } from 'class-validator'
+export const validationMiddleware = (schema, Class) => {
 
+    return async (req, res, next) => {
 
-export const validationMiddleware = (
-    type,
-    value = 'body',
-    skipMissingProperties = false,
-    whitelist = true,
-    forbidNonWhitelisted = true,
-) => {
+        const { body } = req
 
-    return (req, res, next) => {
-        const instance = Object.assign(new type(), req[value])
+        try {
 
-        validate(instance, {
-            skipMissingProperties,
-            whitelist,
-            forbidNonWhitelisted
-        }).then((errors) => {
+            await schema.validate(body, { abortEarly: false })
+            req.body = new Class(body)
+            next()
 
-            if (errors.length > 0) {
+        } catch (err) {
 
-                console.error('-------------------- Request body error --------------------\n', errors, '\n\'-------------------- Request body error --------------------\'')
-                const message = errors.map((error) => Object.values(error.constraints)).join(', ')
+            const errors = err.inner.map(e => {
 
-                next(new Error(message))
+                return {
+                    path: e.path,
+                    message: e.message
+                }
 
-            } else {
+            })
 
-                next()
+            res.status(400).json({ errors })
 
-            }
-
-        })
-
+        }
     }
 
 }

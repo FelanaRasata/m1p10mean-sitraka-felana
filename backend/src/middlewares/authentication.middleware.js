@@ -1,7 +1,10 @@
-import { isEmpty } from 'class-validator'
-import { TokenExpiredError } from 'jsonwebtoken'
+import pkg from 'jsonwebtoken'
 import { UserService } from '../services/users.service.js'
-import { retrieveTokenData } from '../utils/utils.js'
+import { logger } from '../utils/logger.js'
+import { isEmpty, retrieveTokenData } from '../utils/utils.js'
+
+
+const { JsonWebTokenError } = pkg
 
 
 export const authentication = async (request, response, next) => {
@@ -10,7 +13,7 @@ export const authentication = async (request, response, next) => {
 
         const verificationResponse = await retrieveTokenData(request)
         const userService = new UserService()
-        const userId = verificationResponse.user_id
+        const userId = verificationResponse.userId
         const foundUser = await userService.findById(userId)
 
         if (!isEmpty(foundUser)) {
@@ -20,23 +23,26 @@ export const authentication = async (request, response, next) => {
 
         } else {
 
-            next(new Error('Session not found'))
+            const error = new Error('Session not found')
+            next(error)
 
         }
 
     } catch (error) {
 
-        if (error instanceof TokenExpiredError) {
+        if (error instanceof JsonWebTokenError) {
 
-            next(new Error('Session expired'))
+            logger.error(error)
+            const err = new Error('Session expired')
+            next(err)
 
         } else {
 
-            console.error(error)
-            next(new Error('Session not found'))
+            logger.error(error)
+            const err = new Error('Session not found')
+            next(err)
 
         }
-
 
     }
 
