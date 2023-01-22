@@ -26,4 +26,4 @@ const OtherExpensesSchema = new mongoose.Schema(
 
 OtherExpensesSchema.plugin(paginate)
 
-module.exports = mongoose.model('OtherExpenses', OtherExpensesSchema, 'other_expenses')
+export const OtherExpenses = mongoose.model('OtherExpenses', OtherExpensesSchema, 'other_expenses')

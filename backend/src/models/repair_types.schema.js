@@ -37,4 +37,4 @@ const RepairTypeSchema = new mongoose.Schema(
 
 RepairTypeSchema.plugin(paginate)
 
-module.exports = mongoose.model('RepairType', RepairTypeSchema, 'repair_types')
+export const RepairType = mongoose.model('RepairType', RepairTypeSchema, 'repair_types')

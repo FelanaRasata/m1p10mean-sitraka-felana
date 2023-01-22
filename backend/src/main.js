@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { config } from 'dotenv'
@@ -15,10 +16,6 @@ config()
 
 class Server {
 
-    settings
-
-    app
-
 
     constructor(routes) {
 
@@ -33,10 +30,10 @@ class Server {
     setupMiddlewares() {
 
         // Use morgan for http log
-        this.app.use(helmet())
         this.app.use(morgan('dev'))
         this.app.use(bodyParser.json({ limit: 1024 * 1024 * 10, type: 'application/json' }))
         this.app.use(bodyParser.urlencoded({ extended: false, limit: 1024 * 1024 * 10 }))
+        this.app.use(helmet())
         this.app.use(cors({ origin: '*' }))
 
     }
@@ -62,11 +59,7 @@ class Server {
 ███████ ██   ██  ██████  ██   ████  ██████ ██   ██ ███████ ██████  ██ ██ ██ 
             `)
 
-            if (!(await connectWithMongoose(this.settings.mongodbUri))) {
-
-                process.exit(1)
-
-            }
+            await connectWithMongoose(this.settings.mongodbUri)
 
         })
 

@@ -26,4 +26,4 @@ const SalarySchema = new mongoose.Schema(
 
 SalarySchema.plugin(paginate)
 
-module.exports = mongoose.model('Salary', SalarySchema, 'salaries')
+export const Salary = mongoose.model('Salary', SalarySchema, 'salaries')

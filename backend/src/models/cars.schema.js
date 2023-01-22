@@ -33,4 +33,4 @@ const CarSchema = new mongoose.Schema(
 
 CarSchema.plugin(paginate)
 
-module.exports = mongoose.model('Car', CarSchema, 'cars')
+export const Car = mongoose.model('Car', CarSchema, 'cars')

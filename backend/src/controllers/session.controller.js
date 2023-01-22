@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { authentication } from '../middlewares/authentication.middleware.js'
 import { validationMiddleware } from '../middlewares/validation.middleware.js'
-import { SignInDto, UserDto } from '../models/dto/users.dto.js'
+import { SignInDto, SignInVS, UserDto, UserVS } from '../dto/users.dto.js'
 import { UserService } from '../services/users.service.js'
 import { toResponseEntity } from '../utils/utils.js'
 
@@ -10,11 +10,11 @@ const router = Router()
 
 const userService = new UserService()
 
-router.get('/sign_in', validationMiddleware(SignInDto), async (request, response) => {
+router.post('/sign_in', validationMiddleware(SignInVS, SignInDto), async (request, response) => {
 
     try {
 
-        const signInData = Object.assign(new SignInDto(), request.body)
+        const signInData = request.body
         const responseData = await userService.signIn(signInData)
 
         response.status(200).json(toResponseEntity(200, 'User created', responseData))
@@ -27,11 +27,11 @@ router.get('/sign_in', validationMiddleware(SignInDto), async (request, response
 
 })
 
-router.get('/sign_up', validationMiddleware(UserDto), async (request, response) => {
+router.post('/sign_up', validationMiddleware(UserVS, UserDto), async (request, response) => {
 
     try {
 
-        const userData = Object.assign(new UserDto(), request.body)
+        const userData = request.body
         const user = await userService.create(userData)
 
         const tokenData = await userService.signIn({

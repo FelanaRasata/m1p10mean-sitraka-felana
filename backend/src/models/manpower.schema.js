@@ -26,4 +26,4 @@ const ManPowerSchema = new mongoose.Schema(
 
 ManPowerSchema.plugin(paginate)
 
-module.exports = mongoose.model('ManPower', ManPowerSchema, 'man_power')
+export const ManPower = mongoose.model('ManPower', ManPowerSchema, 'man_power')

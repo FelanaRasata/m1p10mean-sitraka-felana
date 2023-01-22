@@ -34,4 +34,4 @@ const CarDiagnosisSchema = new mongoose.Schema(
 
 CarDiagnosisSchema.plugin(paginate)
 
-module.exports = mongoose.model('CarDiagnosis', CarDiagnosisSchema, 'car_diagnoses')
+export const CarDiagnosis = mongoose.model('CarDiagnosis', CarDiagnosisSchema, 'car_diagnoses')
