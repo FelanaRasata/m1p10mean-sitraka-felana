@@ -9,24 +9,26 @@ import {SharedModule} from "./modules/shared/shared.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from "./material.module";
 import {HttpClientModule} from "@angular/common/http";
+import {CustomerModule} from "./modules/customer/customer.module";
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
-  imports: [
-    PublicModule,
-    SharedModule,
+    imports: [
+        PublicModule,
+        SharedModule,
 
-    MaterialModule,
+        MaterialModule,
 
-    BrowserModule,
-    AppRouting,
-    FormsModule,
-    HttpClientModule,
+        BrowserModule,
+        AppRouting,
+        FormsModule,
+        HttpClientModule,
 
-    BrowserAnimationsModule,
-  ],
+        BrowserAnimationsModule,
+        CustomerModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

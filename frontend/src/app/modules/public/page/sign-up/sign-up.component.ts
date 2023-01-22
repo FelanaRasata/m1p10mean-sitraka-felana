@@ -9,4 +9,14 @@ import {IUser} from "../../../shared/core/models/schemas/users.schema";
 export class SignUpComponent {
   users = {} as IUser;
   passwordConfirm : string = "";
+
+  constructor() {
+  }
+
+  signUp(){
+
+    console.log("Sign Up");
+
+  }
+
 }
