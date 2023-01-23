@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  base_url: 'http://localhost:3200/',
+  baseUrl: 'http://localhost:3200/',
+  encryptionKey: '$2b$10$lQ.8Kqhj68LXkKYlAOBC1.3lcZxxeqCnFCf5fNVndOK4Dxzlk4Jf6',
   production: false
 };
 

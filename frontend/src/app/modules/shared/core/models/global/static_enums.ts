@@ -16,4 +16,5 @@ export enum EUrlPart {
   FIM = 'financial',
 
   WOM = 'workshop',
+
 }

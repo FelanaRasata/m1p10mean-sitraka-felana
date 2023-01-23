@@ -1,6 +1,6 @@
 import { Settings } from '../config/settings.js'
 import { User } from '../models/users.schema.js'
-import { EUserType } from '../utils/static_enum.js'
+import { EUserType } from '../utils/static_enums.js'
 import { customLabels, generateToken, isEmailValid, isEmpty, toDocumentFormat } from '../utils/utils.js'
 
 

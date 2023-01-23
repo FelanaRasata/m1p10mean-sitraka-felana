@@ -1,5 +1,5 @@
 import yup from 'yup'
-import { EUserType } from '../utils/static_enum.js'
+import { EUserType } from '../utils/static_enums.js'
 
 /* VS: Validation Schema */
 export const UserVS = yup.object().shape({

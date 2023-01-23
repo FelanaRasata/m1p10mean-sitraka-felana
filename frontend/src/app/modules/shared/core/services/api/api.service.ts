@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IResponseType} from "../../models/global/global";
@@ -40,4 +40,5 @@ export class ApiService {
     return this.httpClient.delete<IResponseType<T>>(url, {...options});
 
   }
+
 }

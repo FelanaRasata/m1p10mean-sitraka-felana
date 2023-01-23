@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import mongoose from 'mongoose'
 import paginate from 'mongoose-paginate-v2'
-import { EUserType } from '../utils/static_enum.js'
+import { EUserType } from '../utils/static_enums.js'
 import { baseModel, isEmpty } from '../utils/utils.js'
 
 

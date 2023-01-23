@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {IPaginationData} from "../../models/global/pagination";
 import {BehaviorSubject} from "rxjs";
-import {isEmpty} from "../utils/utils.service";
+import {isEmpty} from "../utils/utils";
 
 @Injectable({
   providedIn: 'root'
