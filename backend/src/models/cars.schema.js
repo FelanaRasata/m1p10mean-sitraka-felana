@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import paginate from 'mongoose-paginate-v2'
-import { baseModel } from '../utils/utils.js'
+import {baseModel} from '../utils/utils.js'
 
 
 const CarSchema = new mongoose.Schema(
