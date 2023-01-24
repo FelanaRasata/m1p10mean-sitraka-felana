@@ -1,7 +1,8 @@
-import {BaseSchema} from "./bases.schema";
+import { BaseSchema } from './bases.schema'
+
 
 export interface IManpower extends BaseSchema {
 
-  percentage: number;
+    percentage: number;
 
 }

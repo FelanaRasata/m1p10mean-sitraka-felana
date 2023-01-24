@@ -1,22 +1,22 @@
 export interface ISignInRequirements {
 
-  emailAddress: string;
+    emailAddress: string;
 
-  password: string;
+    password: string;
 
 }
 
 
 export interface ISignUpRequirements {
 
-  firstName: string;
+    firstName: string;
 
-  lastName: string;
+    lastName: string;
 
-  type: string;
+    type: string;
 
-  emailAddress: string;
+    emailAddress: string;
 
-  password: string;
+    password: string;
 
 }

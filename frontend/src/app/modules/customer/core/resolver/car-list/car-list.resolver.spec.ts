@@ -1,16 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { CarListResolver } from './car-list.resolver';
+import { CarListResolver } from './car-list.resolver'
+
 
 describe('CarListResolver', () => {
-  let resolver: CarListResolver;
+    let resolver: CarListResolver
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    resolver = TestBed.inject(CarListResolver);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({})
+        resolver = TestBed.inject(CarListResolver)
+    })
 
-  it('should be created', () => {
-    expect(resolver).toBeTruthy();
-  });
-});
+    it('should be created', () => {
+        expect(resolver).toBeTruthy()
+    })
+})

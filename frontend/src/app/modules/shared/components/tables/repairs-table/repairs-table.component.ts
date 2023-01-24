@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
+
 
 @Component({
-  selector: 'app-repairs-table',
-  templateUrl: './repairs-table.component.html',
-  styleUrls: ['./repairs-table.component.scss']
+    selector: 'app-repairs-table',
+    templateUrl: './repairs-table.component.html',
+    styleUrls: ['./repairs-table.component.scss'],
 })
 export class RepairsTableComponent {
 

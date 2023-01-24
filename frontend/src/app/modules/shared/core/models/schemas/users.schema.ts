@@ -1,17 +1,18 @@
-import {BaseSchema} from "./bases.schema";
+import { BaseSchema } from './bases.schema'
+
 
 export interface IUser extends BaseSchema {
 
-  firstName: string;
+    firstName: string;
 
-  lastName: string;
+    lastName: string;
 
-  userName: string;
+    userName: string;
 
-  type: string;
+    type: string;
 
-  emailAddress: string;
+    emailAddress: string;
 
-  password: string;
+    password: string;
 
 }

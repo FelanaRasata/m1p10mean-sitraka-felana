@@ -1,8 +1,8 @@
 <mat-paginator
-  showFirstLastButtons
-  [length]="length"
-  [pageSize]="pageSize"
-  [pageIndex]="pageIndex"
-  (page)="setPage($event)"
-  class="main-pagination">
+    (page)="setPage($event)"
+    [length]="length"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    class="main-pagination"
+    showFirstLastButtons>
 </mat-paginator>

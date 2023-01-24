@@ -1,20 +1,21 @@
 export interface ISignInResponse {
 
-  token: string,
+    token: string,
 
-  token_identifier: string,
+    token_identifier: string,
 
-  user_type: string,
+    user_type: string,
 
 }
 
+
 export interface IResponseType<T> {
 
-  status: boolean | number;
+    status: boolean | number;
 
-  message: string;
+    message: string;
 
-  data?: T;
+    data?: T;
 
 }
 

@@ -1,5 +1,4 @@
 import yup from 'yup'
-import {EUserType} from "../utils/static_enum.js";
 
 /* VS: Validation Schema */
 export const CarVS = yup.object().shape({

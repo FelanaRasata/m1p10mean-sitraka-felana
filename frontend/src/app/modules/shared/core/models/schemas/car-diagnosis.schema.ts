@@ -1,11 +1,12 @@
-import {BaseSchema} from "./bases.schema";
+import { BaseSchema } from './bases.schema'
+
 
 export interface ICarDiagnosis extends BaseSchema {
 
-  price: number;
+    price: number;
 
-  repair: string;
+    repair: string;
 
-  repairType: string[];
+    repairType: string[];
 
 }

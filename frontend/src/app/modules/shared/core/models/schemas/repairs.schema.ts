@@ -1,24 +1,25 @@
-import {BaseSchema} from "./bases.schema";
+import { BaseSchema } from './bases.schema'
+
 
 export interface IReparation extends BaseSchema {
-  car: string;
+    car: string;
 
-  price: number;
+    price: number;
 
-  repairType: string[];
+    repairType: string[];
 
-  carDroppedOffAt: Date;
+    carDroppedOffAt: Date;
 
-  diagnosedAt: Date;
+    diagnosedAt: Date;
 
-  initiatedAt: Date;
+    initiatedAt: Date;
 
-  inProgressAt: Date;
+    inProgressAt: Date;
 
-  carRepairedAt: Date;
+    carRepairedAt: Date;
 
-  paidAt: Date;
+    paidAt: Date;
 
-  carTakenBackAt: Date;
+    carTakenBackAt: Date;
 
 }

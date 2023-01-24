@@ -1,72 +1,75 @@
 <div class="container">
 
-  <div class="card o-hidden border-0 shadow-lg my-5">
-    <div class="card-body p-0">
-      <!-- Nested Row within Card Body -->
-      <div class="row">
-        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-        <div class="col-lg-7">
-          <div class="p-5">
-            <div class="text-center">
-              <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <form class="user" [formGroup]="signUpForm" (submit)="signUp()">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input class="form-control form-control-user"
+                                           id="firstName"
+                                           formControlName="firstName" placeholder="First Name"
+                                           type="text"
+                                    >
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control form-control-user"
+                                           id="lastName"
+                                           formControlName="lastName" placeholder="Last Name"
+                                           type="text"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control form-control-user" id="userName"
+                                       formControlName="userName" placeholder="Username"
+                                       type="email"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control form-control-user"
+                                       id="emailAddress"
+                                       formControlName="emailAddress" placeholder="Email Address"
+                                       type="email"
+                                >
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input class="form-control form-control-user"
+                                           id="password" formControlName="password" placeholder="Password"
+                                           type="password"
+                                    >
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control form-control-user"
+                                           id="passwordConfirm" formControlName="passwordConfirm" placeholder="Repeat Password"
+                                           type="password"
+                                    >
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                Sign Up
+                            </button>
+
+                        </form>
+
+                        <hr>
+
+                        <div class="text-center">
+                            <a class="small" href="/sign_in">Already have an account? Sign In!</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form class="user">
-              <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  <input type="text" class="form-control form-control-user" id="firstName"
-                         placeholder="First Name" name="firstName"
-                         [(ngModel)]="users.firstName"
-                  >
-                </div>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control form-control-user" id="lastName"
-                         placeholder="Last Name" name="lastName"
-                         [(ngModel)]="users.lastName"
-                  >
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control form-control-user" id="userName"
-                       placeholder="Username" name="userName"
-                       [(ngModel)]="users.userName"
-                >
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control form-control-user" id="emailAddress"
-                       placeholder="Email Address" name="emailAddress"
-                       [(ngModel)]="users.emailAddress"
-                >
-              </div>
-
-              <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  <input type="password" class="form-control form-control-user"
-                         id="password" placeholder="Password" name="password"
-                         [(ngModel)]="users.password"
-                  >
-                </div>
-                <div class="col-sm-6">
-                  <input type="password" class="form-control form-control-user"
-                         id="passwordConfirm" placeholder="Repeat Password" name="passwordConfirm"
-                         [(ngModel)]="passwordConfirm"
-                  >
-                </div>
-              </div>
-              <a (click)="signUp()" class="btn btn-primary btn-user btn-block">
-                Sign Up
-              </a>
-
-            </form>
-
-            <hr>
-
-            <div class="text-center">
-              <a class="small" href="/sign_in">Already have an account? Sign In!</a>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
 </div>

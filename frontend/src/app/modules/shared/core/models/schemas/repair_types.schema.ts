@@ -1,11 +1,12 @@
-import {BaseSchema} from "./bases.schema";
+import { BaseSchema } from './bases.schema'
+
 
 export interface IRepairType extends BaseSchema {
-  _id: string;
+    _id: string;
 
-  name: string;
+    name: string;
 
-  repairCost: number;
+    repairCost: number;
 
-  carPart: boolean;
+    carPart: boolean;
 }

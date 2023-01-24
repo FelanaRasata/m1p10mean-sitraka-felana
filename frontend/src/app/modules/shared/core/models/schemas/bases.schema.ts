@@ -1,11 +1,11 @@
 export interface BaseSchema {
 
-  _id: string;
+    _id: string;
 
-  createdAt: Date;
+    createdAt: Date;
 
-  updatedAt: Date;
+    updatedAt: Date;
 
-  delete: boolean;
+    delete: boolean;
 
 }

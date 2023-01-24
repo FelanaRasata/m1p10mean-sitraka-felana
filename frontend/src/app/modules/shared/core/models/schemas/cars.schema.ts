@@ -1,7 +1,10 @@
-import {BaseSchema} from "./bases.schema";
+import { BaseSchema } from './bases.schema'
+
 
 export interface ICar extends BaseSchema {
-  carNumber: string,
-  brand: string,
-  customer: string,
+    carNumber: string,
+
+    brand: string,
+
+    customer: string,
 }

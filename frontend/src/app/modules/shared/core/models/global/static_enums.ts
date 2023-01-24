@@ -1,20 +1,20 @@
 export enum EUserType {
 
-  CUS = 'Customer',
+    CUS = 'Customer',
 
-  FIM = 'Financial Manager',
+    FIM = 'Financial Manager',
 
-  WOM = 'Workshop Manager',
+    WOM = 'Workshop Manager',
 
 }
 
 
 export enum EUrlPart {
 
-  CUS = 'customer',
+    CUS = 'customer',
 
-  FIM = 'financial',
+    FIM = 'financial',
 
-  WOM = 'workshop',
+    WOM = 'workshop',
 
 }

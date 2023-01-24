@@ -1,7 +1,8 @@
-import {BaseSchema} from "./bases.schema";
+import { BaseSchema } from './bases.schema'
+
 
 export interface ISalary extends BaseSchema {
 
-  price: number;
+    price: number;
 
 }

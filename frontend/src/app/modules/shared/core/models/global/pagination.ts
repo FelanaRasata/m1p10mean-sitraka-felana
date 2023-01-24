@@ -1,9 +1,9 @@
 export interface IPaginationData {
 
-  page: number;
+    page: number;
 
-  limit: number;
+    limit: number;
 
-  totalItems: number;
+    totalItems: number;
 
 }
