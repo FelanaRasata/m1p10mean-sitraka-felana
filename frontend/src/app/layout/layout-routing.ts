@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { RedirectGuard } from '../modules/shared/core/guards/redirect.guard'
+import { RedirectGuard } from '../modules/shared/core/guards/redirect/redirect.guard'
 import { CarListComponent } from '../modules/customer/page/car-list/car-list.component'
 import { CarCardComponent } from '../modules/customer/page/car-card/car-card.component'
 import { RepairListComponent } from '../modules/customer/page/repair-list/repair-list.component'
@@ -35,7 +35,7 @@ const routes: Routes = [
             {
                 path: 'car_list',
                 resolve: {
-                    cars: CarListResolver,
+                    data: CarListResolver,
                 },
                 component: CarListComponent,
             },

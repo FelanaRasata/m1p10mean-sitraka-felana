@@ -16,7 +16,7 @@ export const API_ENDPOINTS = {
     delivery_men: 'users/delivery_men',
     order: 'orders',
     benefits: 'orders/benefits',
-    dish: 'dishes',
+    car: 'cars',
     session: {
         sign_in: 'auth/sign_in',
         sign_up: 'auth/sign_up',
@@ -46,8 +46,8 @@ export interface RouteInfo {
 
 export const CUSTOMER_ROUTES: RouteInfo[] = [
     {
-        path: 'customer/restaurants',
-        title: 'Make an order',
+        path: 'customer/car_list',
+        title: 'Your cars',
         class: '',
         icon: faBasketShopping,
     },

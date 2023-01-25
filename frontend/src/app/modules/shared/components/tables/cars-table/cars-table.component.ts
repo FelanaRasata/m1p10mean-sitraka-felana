@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core'
-import { ICar } from '../../../core/models/schemas/cars.schema'
+import {Component} from '@angular/core'
+import {CarService} from "../../../core/services/car/car.service";
 
 
 @Component({
@@ -9,6 +9,11 @@ import { ICar } from '../../../core/models/schemas/cars.schema'
 })
 export class CarsTableComponent {
 
-    @Input() cars: ICar[] = []
+    // @Input() cars: ICar[] = []
+
+    constructor(
+        public carService : CarService
+    ) {
+    }
 
 }

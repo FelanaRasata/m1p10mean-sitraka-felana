@@ -72,7 +72,7 @@ class Server {
 const server = new Server([
     {path: '/', router: DefaultRouter},
     {path: '/auth', router: SessionRouter},
-    {path: '/car', router: CarRouter},
+    {path: '/cars', router: CarRouter},
 ])
 
 server.run()

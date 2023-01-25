@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import {CarService} from "../../../shared/core/services/car/car.service";
 
 
 @Component({
@@ -7,5 +8,10 @@ import { Component } from '@angular/core'
     styleUrls: ['./car-list.component.scss'],
 })
 export class CarListComponent {
+
+    constructor(
+
+    ) {
+    }
 
 }

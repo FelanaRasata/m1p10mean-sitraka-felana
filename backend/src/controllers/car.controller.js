@@ -3,18 +3,20 @@ import {validationMiddleware} from '../middlewares/validation.middleware.js'
 import {toResponseEntity} from '../utils/utils.js'
 import {CarDto, CarVS} from "../dto/cars.dto.js";
 import {CarService} from "../services/cars.service.js";
+import {authentication} from "../middlewares/authentication.middleware.js";
 
 
 const router = Router()
 
 const carService = new CarService()
 
-router.get('/list/:customer', async (request, response) => {
+router.get('', authentication, async (request, response) => {
 
     try {
 
-        const customer = request.params.customer
-        const cars = await carService.findByCustomer(customer)
+
+        const customer = request.user
+        const cars = await carService.findByCustomer(customer._id)
 
         response.status(200).json(toResponseEntity(200, 'Cars Customer.', cars))
 
@@ -49,7 +51,7 @@ router.put('/update/:car_id', validationMiddleware(CarVS, CarDto), async (reques
 
         const carData = request.body
         const carId = request.params.car_id;
-        const car = await carService.update(carId,carData)
+        const car = await carService.update(carId, carData)
 
         response.status(200).json(toResponseEntity(200, 'Car has updated', car))
 
@@ -61,7 +63,7 @@ router.put('/update/:car_id', validationMiddleware(CarVS, CarDto), async (reques
 
 })
 
-router.delete('/delete/:car_id',async (request, response) => {
+router.delete('/delete/:car_id', async (request, response) => {
 
     try {
 
@@ -78,4 +80,4 @@ router.delete('/delete/:car_id',async (request, response) => {
 
 })
 
-export { router as CarRouter }
+export {router as CarRouter}
