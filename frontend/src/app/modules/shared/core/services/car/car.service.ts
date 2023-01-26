@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {baseUrl} from "../utils/utils";
 import {PaginationService} from "../pagination/pagination.service";
@@ -22,7 +22,7 @@ export class CarService {
     ) {
     }
 
-    getCars(query: any, options: any): Observable<boolean> {
+    getCars(options: any): Observable<boolean> {
 
         return new Observable<boolean>((subscriber) => {
 
@@ -30,7 +30,7 @@ export class CarService {
                 .get<any>(
                     baseUrl(API_ENDPOINTS.car)
                     , {
-                        params: {query: JSON.stringify(query), options: JSON.stringify(options)}
+                        params: {options: JSON.stringify(options)}
                     }
                 )
                 .subscribe((result) => {

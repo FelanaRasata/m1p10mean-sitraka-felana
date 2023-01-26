@@ -1,11 +1,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a href="https://datatables.net"
-                                                                   target="_blank">official DataTables
-            documentation</a>.</p>
+    <h1 class="h3 mb-2 text-gray-800">{{title}}</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -35,6 +31,8 @@
                     <tr *ngFor="let car of carService.cars.value">
                         <td>{{car.carNumber}}</td>
                         <td>{{car.brand}}</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>

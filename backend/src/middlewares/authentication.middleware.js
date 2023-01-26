@@ -12,6 +12,7 @@ export const authentication = async (request, response, next) => {
     try {
 
         const verificationResponse = await retrieveTokenData(request)
+        console.log(verificationResponse)
         const userService = new UserService()
         const userId = verificationResponse.userId
         const foundUser = await userService.findById(userId)

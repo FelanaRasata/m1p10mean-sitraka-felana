@@ -1,7 +1,7 @@
 import { BaseSchema } from './bases.schema'
 
 
-export interface IReparation extends BaseSchema {
+export interface IRepair extends BaseSchema {
     car: string;
 
     price: number;

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router'
-import { EMPTY, Observable } from 'rxjs'
-import { ICar } from '../../../../shared/core/models/schemas/cars.schema'
+import {Injectable} from '@angular/core'
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router'
+import {EMPTY, Observable} from 'rxjs'
+import {ICar} from '../../../../shared/core/models/schemas/cars.schema'
 import {CarService} from "../../../../shared/core/services/car/car.service";
 
 
@@ -11,29 +11,28 @@ import {CarService} from "../../../../shared/core/services/car/car.service";
 export class CarListResolver implements Resolve<boolean> {
 
     constructor(
-        private carService : CarService
-    ) { }
+        private carService: CarService
+    ) {
+    }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
         return new Observable<boolean>(subscriber => {
 
-                this.carService
-                    .getCars(
-                        {
-                        },
-                        {
-                            // page: 1,
-                            // limit: 10,
-                            // sort: 'name'
-                        }
-                    )
-                    .subscribe((status) => {
+            this.carService
+                .getCars(
+                    {
+                        page: 1,
+                        limit: 10,
+                        sort: 'carNumber'
+                    }
+                )
+                .subscribe((status) => {
 
-                        subscriber.next(status);
-                        subscriber.complete();
+                    subscriber.next(status);
+                    subscriber.complete();
 
-                    });
+                });
 
 
         });

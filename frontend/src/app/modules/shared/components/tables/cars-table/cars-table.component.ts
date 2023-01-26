@@ -1,4 +1,4 @@
-import {Component} from '@angular/core'
+import {Component, Input} from '@angular/core'
 import {CarService} from "../../../core/services/car/car.service";
 
 
@@ -9,7 +9,7 @@ import {CarService} from "../../../core/services/car/car.service";
 })
 export class CarsTableComponent {
 
-    // @Input() cars: ICar[] = []
+    @Input('title') title: string = '';
 
     constructor(
         public carService : CarService

@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core'
-import { API_ENDPOINTS, CUSTOMER_ROUTES, KEYS, RouteInfo } from '../../config/constants'
+import {
+    API_ENDPOINTS,
+    CUSTOMER_ROUTES,
+    FINANCIAL_ROUTES,
+    KEYS,
+    RouteInfo,
+    WORKSHOP_ROUTES
+} from '../../config/constants'
 import { EUrlPart, EUserType } from '../../models/global/static_enums'
 import { BehaviorSubject, Observable, Subscriber } from 'rxjs'
 import { IUser } from '../../models/schemas/users.schema'
@@ -36,10 +43,10 @@ export class SessionService {
                 return CUSTOMER_ROUTES
 
             case EUrlPart.FIM:
-                return CUSTOMER_ROUTES
+                return FINANCIAL_ROUTES
 
             case EUrlPart.WOM:
-                return CUSTOMER_ROUTES
+                return WORKSHOP_ROUTES
 
             default:
                 return []

@@ -17,6 +17,7 @@ export const API_ENDPOINTS = {
     order: 'orders',
     benefits: 'orders/benefits',
     car: 'cars',
+    repairs_car: '',
     session: {
         sign_in: 'auth/sign_in',
         sign_up: 'auth/sign_up',
@@ -51,74 +52,41 @@ export const CUSTOMER_ROUTES: RouteInfo[] = [
         class: '',
         icon: faBasketShopping,
     },
+    {
+        path: 'customer/repair_list',
+        title: 'Your repairs',
+        class: '',
+        icon: faBasketShopping,
+    },
 ]
 
 
-export const DELIVERY_ROUTES: RouteInfo[] = [
+export const WORKSHOP_ROUTES: RouteInfo[] = [
     {
-        path: 'delivery',
-        title: 'Deliveries',
+        path: 'workshop/filtered_repairs',
+        title: 'Repair List',
         class: '',
         icon: faTruckFast,
     },
 ]
 
-export const ADMIN_ROUTES: RouteInfo[] = [
+export const FINANCIAL_ROUTES: RouteInfo[] = [
     {
-        path: 'admin/orders',
-        title: 'Orders',
+        path: 'financial/dashboard',
+        title: 'Dashboard',
         class: '',
         icon: faList,
     },
     {
-        path: 'admin/administrators',
-        title: 'Managers',
+        path: 'financial/repairs_initiated',
+        title: 'Repairs Initiated',
         class: '',
         icon: faUserShield,
     },
     {
-        path: 'admin/delivery-men',
-        title: 'Delivery men',
+        path: 'financial/repairs_paid',
+        title: 'Repairs Paid',
         class: '',
         icon: faDolly,
-    },
-    {
-        path: 'admin/customers',
-        title: 'Customers',
-        class: '',
-        icon: faUsersGear,
-    },
-    {
-        path: 'admin/restaurants',
-        title: 'Restaurants',
-        class: '',
-        icon: faUtensils,
-    },
-    {
-        path: 'admin/benefits',
-        title: 'Benefits',
-        class: '',
-        icon: faMoneyBillTrendUp,
-    },
-]
-
-export const RESTAURANT_ROUTES: RouteInfo[] = [
-    {
-        path: 'restaurant/orders',
-        title: 'Orders',
-        class: '',
-        icon: faList,
-    },
-    {
-        path: 'restaurant/dishes',
-        title: 'Dishes',
-        class: '',
-        icon: faUtensils,
-    },
-    {
-        path: 'restaurant/benefits',
-        title: 'Benefits',
-        class: '',
-        icon: faMoneyBillTrendUp,
     },
 ]

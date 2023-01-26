@@ -9,7 +9,7 @@ import {connectWithMongoose} from './config/mongo_db.js'
 import {Settings} from './config/settings.js'
 import {DefaultRouter} from './controllers/default.controller.js'
 import {SessionRouter} from './controllers/session.controller.js'
-import {CarRouter} from "./controllers/car.controller.js";
+import {CarRouter} from "./controllers/cars.controller.js";
 
 
 config()

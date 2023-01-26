@@ -18,3 +18,19 @@ export enum EUrlPart {
     WOM = 'workshop',
 
 }
+
+export enum ERepairState {
+
+    DIAGNO = 'Diagnosed',
+
+    INIT = 'Initiated',
+
+    PROGRESS = 'In Progress',
+
+    REPAIRED = 'Car Repaired',
+
+    PAID = 'Paid',
+
+    TAKEN_BACK = 'Car Taken Back',
+
+}

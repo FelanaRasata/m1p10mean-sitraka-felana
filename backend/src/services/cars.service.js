@@ -49,16 +49,6 @@ export class CarService {
     }
 
 
-    // Get cars customer with pagination
-    async findByCustomer(customerId) {
-
-        const query = {customer: customerId}
-
-        return this.find(query)
-
-    }
-
-
     // Get a single car by ID
     async findById(carId) {
 
