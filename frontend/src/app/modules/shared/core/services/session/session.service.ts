@@ -5,10 +5,10 @@ import {
     FINANCIAL_ROUTES,
     KEYS,
     RouteInfo,
-    WORKSHOP_ROUTES
+    WORKSHOP_ROUTES,
 } from '../../config/constants'
 import { EUrlPart, EUserType } from '../../models/global/static_enums'
-import { BehaviorSubject, Observable, Subscriber } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { IUser } from '../../models/schemas/users.schema'
 import { ApiService } from '../api/api.service'
 import { NotificationService } from '../notification/notification.service'

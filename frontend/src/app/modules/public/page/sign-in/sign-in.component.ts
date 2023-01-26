@@ -1,7 +1,7 @@
-import {Component} from '@angular/core'
-import {FormBuilder, FormGroup, Validators} from '@angular/forms'
-import {SessionService} from '../../../shared/core/services/session/session.service'
-import {ActivatedRoute, Router} from '@angular/router'
+import { Component } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { SessionService } from '../../../shared/core/services/session/session.service'
+import { ActivatedRoute, Router } from '@angular/router'
 
 
 @Component({
@@ -13,14 +13,14 @@ export class SignInComponent {
 
     signInForm: FormGroup
 
-    signUp = true;
+    signUp: boolean = true
 
 
     constructor(
         private formBuilder: FormBuilder,
         private sessionService: SessionService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
     ) {
 
         this.signInForm = formBuilder.group({
@@ -33,10 +33,10 @@ export class SignInComponent {
 
     ngOnInit(): void {
 
-        const path = this.route.snapshot.url[0].path;
+        const path = this.route.snapshot.url[0].path
 
-        if (path == "back_office")
-            this.signUp = false;
+        if (path == 'back_office')
+            this.signUp = false
 
     }
 

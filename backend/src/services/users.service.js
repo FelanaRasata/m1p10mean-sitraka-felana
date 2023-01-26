@@ -27,7 +27,7 @@ export class UserService {
 
         if (!isMatching) throw new Error('Incorrect password')
 
-        const token = generateToken({ user_id: user._id }, this.settings.expiresIn)
+        const token = generateToken({ userId: user._id }, this.settings.expiresIn)
 
         return { token: token, user_type: user.type }
 

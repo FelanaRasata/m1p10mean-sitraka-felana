@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 export class Settings {
 
     port = process.env.PORT || 3200
@@ -9,4 +11,5 @@ export class Settings {
     secretKey = process.env.SECRET_KEY || 'secret_key'
 
     encryptionKey = process.env.ENCRYPTION_KEY || 'encryption_key'
+
 }

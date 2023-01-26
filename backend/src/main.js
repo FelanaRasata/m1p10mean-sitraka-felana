@@ -1,18 +1,14 @@
-import bcrypt from 'bcrypt'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import {config} from 'dotenv'
+import 'dotenv/config'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import {connectWithMongoose} from './config/mongo_db.js'
-import {Settings} from './config/settings.js'
-import {DefaultRouter} from './controllers/default.controller.js'
-import {SessionRouter} from './controllers/session.controller.js'
-import {CarRouter} from "./controllers/cars.controller.js";
-
-
-config()
+import { connectWithMongoose } from './config/mongo_db.js'
+import { Settings } from './config/settings.js'
+import { CarRouter } from './controllers/cars.controller.js'
+import { DefaultRouter } from './controllers/default.controller.js'
+import { SessionRouter } from './controllers/session.controller.js'
 
 
 class Server {

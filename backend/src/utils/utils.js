@@ -132,7 +132,7 @@ export function toDocumentFormat(userData) {
 }
 
 
-export async function retrieveToken(req) {
+export function retrieveToken(req) {
 
     const authorization = req.header('Authorization').split('Bearer ')[1] || null
 
@@ -144,9 +144,11 @@ export async function retrieveToken(req) {
 }
 
 
-export async function retrieveTokenData(req) {
+export function retrieveTokenData(req) {
 
-    return await verifyToken(retrieveToken(req))
+    const token = retrieveToken(req)
+
+    return verifyToken(token)
 
 }
 
@@ -158,7 +160,7 @@ export function generateToken(tokenData, expiresIn) {
 }
 
 
-export async function verifyToken(token) {
+export function verifyToken(token) {
 
     return jwt.verify(token, settings.secretKey)
 
