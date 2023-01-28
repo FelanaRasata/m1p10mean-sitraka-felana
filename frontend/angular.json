@@ -32,7 +32,6 @@
                         "styles": [
                             "@angular/material/prebuilt-themes/pink-bluegrey.css",
                             "src/assets/css/sb-admin-2.css",
-                            "src/assets/css/sb-admin-2.min.css",
                             "src/styles.scss"
                         ],
                         "scripts": [

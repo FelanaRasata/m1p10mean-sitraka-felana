@@ -5,6 +5,7 @@ import { RepairsPaidComponent } from './page/repairs-paid/repairs-paid.component
 import { RepairsInitiatedComponent } from './page/repairs-initiated/repairs-initiated.component'
 import { RepairPaidComponent } from './page/repair-paid/repair-paid.component'
 import { RepairInitiatedComponent } from './page/repair-initiated/repair-initiated.component'
+import { SharedModule } from '../shared/shared.module'
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { RepairInitiatedComponent } from './page/repair-initiated/repair-initiat
     ],
     imports: [
         CommonModule,
+        SharedModule,
     ],
 })
 export class FinancialModule {

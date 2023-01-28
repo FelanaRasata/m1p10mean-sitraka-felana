@@ -5,7 +5,6 @@ import { CarListComponent } from '../modules/customer/page/car-list/car-list.com
 import { CarCardComponent } from '../modules/customer/page/car-card/car-card.component'
 import { RepairListComponent } from '../modules/customer/page/repair-list/repair-list.component'
 import { RepairChoiceComponent } from '../modules/customer/page/repair-choice/repair-choice.component'
-import { CarTakenBackComponent } from '../modules/customer/page/car-taken-back/car-taken-back.component'
 import { RepairPaymentComponent } from '../modules/customer/page/repair-payment/repair-payment.component'
 import { RepairCardComponent } from '../modules/customer/page/repair-card/repair-card.component'
 import { StatisticsComponent } from '../modules/financial/page/statistics/statistics.component'
@@ -17,9 +16,8 @@ import { RepairsFilteredComponent } from '../modules/workshop/page/repairs-filte
 import { CarDiagnosisComponent } from '../modules/workshop/page/car-diagnosis/car-diagnosis.component'
 import { RepairInProgressComponent } from '../modules/workshop/page/repair-in-progress/repair-in-progress.component'
 import { ExitTicketComponent } from '../modules/workshop/page/exit-ticket/exit-ticket.component'
-import { CarListResolver } from '../modules/customer/core/resolver/car-list/car-list.resolver'
 import { LayoutComponent } from './layout.component'
-import {AuthenticationGuard} from "../modules/public/core/guards/authentication/authentication.guard";
+import { AuthenticationGuard } from '../modules/public/core/guards/authentication/authentication.guard'
 
 
 const routes: Routes = [
@@ -48,16 +46,6 @@ const routes: Routes = [
                         path: 'car_card',
                         resolve: {},
                         component: CarCardComponent,
-                    },
-                    {
-                        path: 'car_dropped_off',
-                        resolve: {},
-                        component: CarCardComponent,
-                    },
-                    {
-                        path: 'car_taken_back',
-                        resolve: {},
-                        component: CarTakenBackComponent,
                     },
                     {
                         path: 'repair_list',

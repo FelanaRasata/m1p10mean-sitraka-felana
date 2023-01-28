@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { SessionService } from '../../modules/shared/core/services/session/session.service'
 
 
 @Component({
@@ -7,5 +8,8 @@ import { Component } from '@angular/core'
     styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent {
-
+    constructor(
+        public sessionService: SessionService
+    ) {
+    }
 }

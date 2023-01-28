@@ -7,5 +7,5 @@ import { Component } from '@angular/core'
     styleUrls: ['./repair-list.component.scss'],
 })
 export class RepairListComponent {
-
+    title = ''
 }

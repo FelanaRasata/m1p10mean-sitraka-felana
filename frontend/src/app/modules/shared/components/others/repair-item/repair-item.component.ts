@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import {CarService} from "../../../core/services/car/car.service";
-import {RepairService} from "../../../core/services/repair/repair.service";
+import { Component } from '@angular/core'
+import { RepairService } from '../../../core/services/repair/repair.service'
+
 
 @Component({
   selector: 'app-repair-item',

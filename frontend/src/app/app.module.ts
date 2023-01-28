@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 import { CustomerModule } from './modules/customer/customer.module'
 import { LayoutModule } from './layout/layout.module'
+import { WorkshopModule } from './modules/workshop/workshop.module'
+import { FinancialModule } from './modules/financial/financial.module'
 
 
 @NgModule({
@@ -19,7 +21,6 @@ import { LayoutModule } from './layout/layout.module'
     imports: [
         PublicModule,
         SharedModule,
-
         LayoutModule,
 
         BrowserModule,
@@ -29,6 +30,8 @@ import { LayoutModule } from './layout/layout.module'
 
         BrowserAnimationsModule,
         CustomerModule,
+        WorkshopModule,
+        FinancialModule
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -1,43 +1,33 @@
-<div class="container-fluid">
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{title}}</h1>
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">{{title}}</h1>
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable">
-                    <thead>
-                    <tr>
-                        <th>Car Dropped Off</th>
-                        <th>Car Taken Back</th>
-                        <th>Price</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Car Dropped Off</th>
-                        <th>Car Taken Back</th>
-                        <th>Price</th>
-                        <th></th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    <tr *ngFor="let repair of repairService.repairs.value">
-                        <td>{{repair.carDroppedOffAt}}</td>
-                        <td>{{repair.carTakenBackAt}}</td>
-                        <td>{{repair.price}}</td>
-                        <td></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
+<!-- DataTales Example -->
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable">
+        <thead>
+        <tr>
+            <th>Car Dropped Off</th>
+            <th>Car Taken Back</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Car Dropped Off</th>
+            <th>Car Taken Back</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </tfoot>
+        <tbody>
+        <tr *ngFor="let repair of repairService.repairs.value">
+            <td>{{repair.carDroppedOffAt}}</td>
+            <td>{{repair.carTakenBackAt}}</td>
+            <td>{{repair.price}}</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+

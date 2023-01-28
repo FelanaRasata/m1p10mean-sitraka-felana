@@ -9,7 +9,7 @@ import {TokenInterceptor} from './core/interceptor/token/token.interceptor'
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { CarItemComponent } from './components/others/car-item/car-item.component';
 import { RepairItemComponent } from './components/others/repair-item/repair-item.component';
-import { RepairDiagnoItemComponent } from './components/others/repair-diagno-item/repair-diagno-item.component';
+import { RepairTypeListComponent } from './components/others/repair-type-list/repair-type-list.component';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { RepairDiagnoItemComponent } from './components/others/repair-diagno-ite
         SignOutModalComponent,
         CarItemComponent,
         RepairItemComponent,
-        RepairDiagnoItemComponent,
+        RepairTypeListComponent,
     ],
     exports: [
         CarsTableComponent,
@@ -28,7 +28,7 @@ import { RepairDiagnoItemComponent } from './components/others/repair-diagno-ite
         RepairsTableComponent,
         CarItemComponent,
         RepairItemComponent,
-        RepairDiagnoItemComponent,
+        RepairTypeListComponent,
     ],
     imports: [
         MatPaginatorModule,
