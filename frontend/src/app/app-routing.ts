@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { SignUpComponent } from './modules/public/page/sign-up/sign-up.component'
 import { SignInComponent } from './modules/public/page/sign-in/sign-in.component'
-import { DataStorageResolver } from './modules/shared/core/resolver/data-storage/data-storage.resolver'
 import { AuthenticationGuard } from './modules/public/core/guards/authentication/authentication.guard'
+import { NotFoundComponent } from './modules/public/page/not-found/not-found.component'
 
 
 const routes: Routes = [
@@ -23,7 +23,12 @@ const routes: Routes = [
         canActivate: [AuthenticationGuard],
     },
     {
-        path: 'back_office/sign_in',
+        path: 'workshop/sign_in',
+        component: SignInComponent,
+        canActivate: [AuthenticationGuard],
+    },
+    {
+        path: 'finance/sign_in',
         component: SignInComponent,
         canActivate: [AuthenticationGuard],
     },
@@ -35,13 +40,15 @@ const routes: Routes = [
                 loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
             },
         ],
-
+    },{
+        path: '404',
+        component: NotFoundComponent
     },
     {
         path: '**',
-        component: SignInComponent,
-        canActivate: [AuthenticationGuard],
-    }
+        redirectTo: '404',
+        pathMatch: 'full',
+    },
 ]
 
 

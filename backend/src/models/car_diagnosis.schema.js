@@ -19,11 +19,20 @@ const CarDiagnosisSchema = new mongoose.Schema(
             ref: 'Repair',
             required: true
         },
-        repairType: [{
-            type: String,
-            ref: 'RepairType',
-            required: true
-        }]
+        diagnosisRepairs: [
+            {
+                repairType: {
+                    type: String,
+                    ref: 'RepairType',
+                    required: true
+                },
+                quantity: {
+                    type: Number,
+                    required: true,
+                    default: 1
+                }
+            }
+        ],
     }),
     {
         timestamps: true,

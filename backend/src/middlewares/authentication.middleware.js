@@ -1,8 +1,9 @@
+import createError from 'http-errors'
 import pkg from 'jsonwebtoken'
 import { UserService } from '../services/users.service.js'
 import { logger } from '../utils/logger.js'
 import { isEmpty, retrieveTokenData } from '../utils/utils.js'
-import createError from 'http-errors'
+
 
 const { JsonWebTokenError } = pkg
 

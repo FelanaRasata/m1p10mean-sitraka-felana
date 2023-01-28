@@ -18,15 +18,12 @@ import { RepairInProgressComponent } from '../modules/workshop/page/repair-in-pr
 import { ExitTicketComponent } from '../modules/workshop/page/exit-ticket/exit-ticket.component'
 import { LayoutComponent } from './layout.component'
 import { AuthenticationGuard } from '../modules/public/core/guards/authentication/authentication.guard'
-import { DataStorageResolver } from '../modules/shared/core/resolver/data-storage/data-storage.resolver'
 
 
 const routes: Routes = [
     {
         path: '',
-        resolve: {data: DataStorageResolver},
         component: LayoutComponent,
-        canActivateChild: [AuthenticationGuard],
         children: [
             {
                 path: 'customer',
@@ -39,34 +36,26 @@ const routes: Routes = [
                     },
                     {
                         path: 'car_list',
-                        /*resolve: {
-                            data: CarListResolver,
-                        },*/
                         component: CarListComponent,
                     },
                     {
                         path: 'car_card',
-                        resolve: {},
                         component: CarCardComponent,
                     },
                     {
                         path: 'repair_list',
-                        resolve: {},
                         component: RepairListComponent,
                     },
                     {
                         path: 'repair_card',
-                        resolve: {},
                         component: RepairCardComponent,
                     },
                     {
                         path: 'repair_choice',
-                        resolve: {},
                         component: RepairChoiceComponent,
                     },
                     {
                         path: 'repair_payment',
-                        resolve: {},
                         component: RepairPaymentComponent,
                     },
                     {
@@ -86,27 +75,22 @@ const routes: Routes = [
                     },
                     {
                         path: 'statistics',
-                        resolve: {},
                         component: StatisticsComponent,
                     },
                     {
                         path: 'repairs_initiated',
-                        resolve: {},
                         component: RepairsInitiatedComponent,
                     },
                     {
                         path: 'repair_initiated',
-                        resolve: {},
                         component: RepairInitiatedComponent,
                     },
                     {
                         path: 'repairs_paid',
-                        resolve: {},
                         component: RepairsPaidComponent,
                     },
                     {
                         path: 'repair_paid',
-                        resolve: {},
                         component: RepairPaidComponent,
                     },
                     {
@@ -126,22 +110,18 @@ const routes: Routes = [
                     },
                     {
                         path: 'filtered_repairs',
-                        resolve: {},
                         component: RepairsFilteredComponent,
                     },
                     {
                         path: 'car_diagnosis',
-                        resolve: {},
                         component: CarDiagnosisComponent,
                     },
                     {
                         path: 'repair_in_progress',
-                        resolve: {},
                         component: RepairInProgressComponent,
                     },
                     {
                         path: 'exit_ticket',
-                        resolve: {},
                         component: ExitTicketComponent,
                     },
                     {
@@ -151,7 +131,12 @@ const routes: Routes = [
 
                 ],
             },
+            {
+                path: '**',
+                redirectTo: '',
+            },
         ],
+        canActivateChild: [AuthenticationGuard],
     },
 ]
 

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GeneralErrorHandlerInterceptor } from './general-error-handler.interceptor';
+import { GeneralErrorHandlerInterceptor } from './general_error_handler.interceptor';
 
 describe('GeneraErrorHandlerInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({

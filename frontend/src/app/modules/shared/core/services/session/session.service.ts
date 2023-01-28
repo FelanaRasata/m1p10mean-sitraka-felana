@@ -62,9 +62,9 @@ export class SessionService {
 
             this.apiService.get<IResponseType<IUser>>(baseUrl(API_ENDPOINTS.session.logged_in_user)).subscribe((result) => {
 
-                if (result.status != 200) {
+                if (result.status !== 200) {
 
-                    this.notificationService.alert('No user found', result.message, 'error')
+                    this.notificationService.alert('Not authenticated', result.message, 'error')
                     subscriber.next(false)
 
                 } else {

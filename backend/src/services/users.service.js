@@ -1,3 +1,4 @@
+import createError from 'http-errors'
 import { Settings } from '../config/settings.js'
 import { User } from '../models/users.schema.js'
 import { EUserType } from '../utils/static_enums.js'
@@ -15,17 +16,17 @@ export class UserService {
 
     async signIn(signInData) {
 
-        if (isEmpty(signInData)) throw new Error('Please fill all the inputs')
+        if (isEmpty(signInData)) throw createError(409, 'Please fill all the inputs')
 
-        if (!isEmailValid(signInData.emailAddress)) throw new Error('Incorrect email address.')
+        if (!isEmailValid(signInData.emailAddress)) throw createError(409, 'Incorrect email address.')
 
         const user = await User.findOne({ emailAddress: signInData.emailAddress })
 
-        if (isEmpty(user)) throw new Error('Email address not found.')
+        if (isEmpty(user)) throw createError(409, 'Email address not found.')
 
         const isMatching = await user.comparePassword(String(signInData.password))
 
-        if (!isMatching) throw new Error('Incorrect password')
+        if (!isMatching) throw createError(409, 'Incorrect password')
 
         const token = generateToken({ userId: user._id }, this.settings.expiresIn)
 
@@ -36,9 +37,9 @@ export class UserService {
 
     async create(userData) {
 
-        if (!isEmailValid(userData.emailAddress)) throw new Error('Incorrect email address.')
+        if (!isEmailValid(userData.emailAddress)) throw createError(409, 'Incorrect email address.')
 
-        if (userData.type !== EUserType.CUS) throw new Error('Incorrect user type.')
+        if (userData.type !== EUserType.CUS) throw createError(409, 'Incorrect user type.')
 
         const createdUser = new User(toDocumentFormat(userData))
 
@@ -67,7 +68,7 @@ export class UserService {
 
     async findById(userId) {
 
-        if (isEmpty(userId)) throw new Error('No user ID found')
+        if (isEmpty(userId)) throw createError(409, 'No user ID found')
 
         return User
             .findOne({ _id: userId, deleted: false })
@@ -96,11 +97,11 @@ export class UserService {
 
     async delete(userId) {
 
-        if (isEmpty(userId)) throw new Error('No user ID found')
+        if (isEmpty(userId)) throw createError(409, 'No user ID found')
 
         const currentUser = await User.findById(userId)
 
-        if (isEmpty(currentUser)) throw new Error('No user found')
+        if (isEmpty(currentUser)) throw createError(409, 'No user found')
 
         currentUser.deleted = true
 

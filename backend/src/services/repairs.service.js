@@ -1,3 +1,4 @@
+import createError from 'http-errors'
 import * as _ from 'lodash'
 import { Settings } from '../config/settings.js'
 import { Repair } from '../models/repairs.schema.js'
@@ -41,7 +42,7 @@ export class RepairService {
 
         const car = await this.carService.findById(repairData.car)
 
-        if (isEmpty(car)) throw new Error('Car not found.')
+        if (isEmpty(car)) throw createError(409, 'Car not found.')
 
         if (isEmpty(repairData.carDroppedOffAt))
             repairData.carDroppedOffAt = new Date()
@@ -74,7 +75,7 @@ export class RepairService {
 
     async findById(repairId) {
 
-        if (isEmpty(repairId)) throw new Error('No repair ID found')
+        if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         return Repair
             .findOne({ _id: repairId, deleted: false })
@@ -106,7 +107,7 @@ export class RepairService {
 
             const errMessage = errMessages.join(' and ')
 
-            throw new Error(errMessage[0].toUpperCase() + (errMessage.split('').slice(1)).join(''))
+            throw createError(errMessage[0].toUpperCase() + (errMessage.split('').slice(1)).join(''))
 
         }
 
@@ -120,11 +121,11 @@ export class RepairService {
     // Update a repair by ID
     async update(repairId, repairData, repairState) {
 
-        if (isEmpty(repairId)) throw new Error('No repair ID found')
+        if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         let currentRepair = await Repair.findById(repairId)
 
-        if (isEmpty(currentRepair) || currentRepair?.deleted) throw new Error('No repair found')
+        if (isEmpty(currentRepair) || currentRepair?.deleted) throw createError(409, 'No repair found')
 
         currentRepair.price = repairData.price
         currentRepair.repairType = repairData.repairType
@@ -137,7 +138,7 @@ export class RepairService {
                 repairCurrent.diagnosedAt = new Date()
 
             if (isEmpty(repairData.carDroppedOffAt))
-                throw new Error('The car has not been dropped off')
+                throw createError(409, 'The car has not been dropped off')
 
         } else if (repairState === ERepairState.INIT) {
 
@@ -145,7 +146,7 @@ export class RepairService {
                 repairCurrent.initiatedAt = new Date()
 
             if (isEmpty(repairData.diagnosedAt))
-                throw new Error('The car has not diagnosed')
+                throw createError(409, 'The car has not diagnosed')
 
         } else if (repairState === ERepairState.PROGRESS) {
 
@@ -153,7 +154,7 @@ export class RepairService {
                 repairCurrent.inProgressAt = new Date()
 
             if (isEmpty(repairData.initiatedAt))
-                throw new Error('The repair has not initiated')
+                throw createError(409, 'The repair has not initiated')
 
         } else if (repairState === ERepairState.REPAIRED) {
 
@@ -161,7 +162,7 @@ export class RepairService {
                 repairCurrent.carRepairedAt = new Date()
 
             if (isEmpty(repairData.inProgressAt))
-                throw new Error('The repair is not in progress')
+                throw createError(409, 'The repair is not in progress')
 
         } else if (repairState === ERepairState.PAID) {
 
@@ -169,7 +170,7 @@ export class RepairService {
                 repairCurrent.paidAt = new Date()
 
             if (isEmpty(repairData.diagnosedAt) || isEmpty(repairData.carRepairedAt))
-                throw new Error('The car is not diagnosed or repaired')
+                throw createError(409, 'The car is not diagnosed or repaired')
 
         } else if (repairState === ERepairState.TAKEN_BACK) {
 
@@ -177,7 +178,7 @@ export class RepairService {
                 repairCurrent.carTakenBackAt = new Date()
 
             if (isEmpty(repairData.paidAt))
-                throw new Error('The repair is not paid')
+                throw createError(409, 'The repair is not paid')
 
         }*/
 
@@ -190,11 +191,11 @@ export class RepairService {
 
     async delete(repairId) {
 
-        if (isEmpty(repairId)) throw new Error('No repair ID found')
+        if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         const currentRepair = await Repair.findById(repairId)
 
-        if (isEmpty(currentRepair)) throw new Error('No repair found')
+        if (isEmpty(currentRepair)) throw createError(409, 'No repair found')
 
         currentRepair.deleted = true
 

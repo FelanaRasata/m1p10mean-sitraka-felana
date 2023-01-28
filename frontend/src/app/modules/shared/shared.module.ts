@@ -7,7 +7,7 @@ import {SignOutModalComponent} from './components/modals/sign-out-modal/sign-out
 import {HTTP_INTERCEPTORS} from '@angular/common/http'
 import {TokenInterceptor} from './core/interceptor/token/token.interceptor'
 import {MatPaginatorModule} from "@angular/material/paginator";
-import { GeneralErrorHandlerInterceptor } from './core/interceptor/error/general-error-handler.interceptor'
+import { GeneralErrorHandlerInterceptor } from './core/interceptor/error/general_error_handler.interceptor'
 import { CarItemComponent } from './components/others/car-item/car-item.component';
 import { RepairItemComponent } from './components/others/repair-item/repair-item.component';
 import { RepairTypeListComponent } from './components/others/repair-type-list/repair-type-list.component';
