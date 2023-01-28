@@ -27,14 +27,13 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-
         const token: string | null = this.sessionService.getToken()
 
         const urlPart: string = this.sessionService.getUrlPart()
 
         if (!isEmpty(token) && !isEmpty(urlPart)) {
 
-            this.router.navigate([`${urlPart}`]).then()
+            this.router.navigate([`${urlPart}`])
 
         } else {
 

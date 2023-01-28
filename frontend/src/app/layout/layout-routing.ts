@@ -18,141 +18,148 @@ import { CarDiagnosisComponent } from '../modules/workshop/page/car-diagnosis/ca
 import { RepairInProgressComponent } from '../modules/workshop/page/repair-in-progress/repair-in-progress.component'
 import { ExitTicketComponent } from '../modules/workshop/page/exit-ticket/exit-ticket.component'
 import { CarListResolver } from '../modules/customer/core/resolver/car-list/car-list.resolver'
+import { LayoutComponent } from './layout.component'
 
 
 const routes: Routes = [
     {
-        path: 'customer',
-        canActivateChild: [RedirectGuard],
+        path: '',
+        component: LayoutComponent,
         children: [
             {
-                path: '',
-                redirectTo: 'car_list',
-                pathMatch: 'full',
+                path: 'customer',
+                canActivateChild: [RedirectGuard],
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'car_list',
+                        pathMatch: 'full',
+                    },
+                    {
+                        path: 'car_list',
+                        resolve: {
+                            data: CarListResolver,
+                        },
+                        component: CarListComponent,
+                    },
+                    {
+                        path: 'car_card',
+                        resolve: {},
+                        component: CarCardComponent,
+                    },
+                    {
+                        path: 'car_dropped_off',
+                        resolve: {},
+                        component: CarCardComponent,
+                    },
+                    {
+                        path: 'car_taken_back',
+                        resolve: {},
+                        component: CarTakenBackComponent,
+                    },
+                    {
+                        path: 'repair_list',
+                        resolve: {},
+                        component: RepairListComponent,
+                    },
+                    {
+                        path: 'repair_card',
+                        resolve: {},
+                        component: RepairCardComponent,
+                    },
+                    {
+                        path: 'repair_choice',
+                        resolve: {},
+                        component: RepairChoiceComponent,
+                    },
+                    {
+                        path: 'repair_payment',
+                        resolve: {},
+                        component: RepairPaymentComponent,
+                    },
+                    {
+                        path: '**',
+                        redirectTo: '',
+                    },
+                ],
             },
             {
-                path: 'car_list',
-                resolve: {
-                    data: CarListResolver,
-                },
-                component: CarListComponent,
+                path: 'financial',
+                canActivateChild: [RedirectGuard],
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'statistics',
+                        pathMatch: 'full',
+                    },
+                    {
+                        path: 'statistics',
+                        resolve: {},
+                        component: StatisticsComponent,
+                    },
+                    {
+                        path: 'repairs_initiated',
+                        resolve: {},
+                        component: RepairsInitiatedComponent,
+                    },
+                    {
+                        path: 'repair_initiated',
+                        resolve: {},
+                        component: RepairInitiatedComponent,
+                    },
+                    {
+                        path: 'repairs_paid',
+                        resolve: {},
+                        component: RepairsPaidComponent,
+                    },
+                    {
+                        path: 'repair_paid',
+                        resolve: {},
+                        component: RepairPaidComponent,
+                    },
+                    {
+                        path: '**',
+                        redirectTo: '',
+                    },
+                ],
             },
             {
-                path: 'car_card',
-                resolve: {},
-                component: CarCardComponent,
-            },
-            {
-                path: 'car_dropped_off',
-                resolve: {},
-                component: CarCardComponent,
-            },
-            {
-                path: 'car_taken_back',
-                resolve: {},
-                component: CarTakenBackComponent,
-            },
-            {
-                path: 'repair_list',
-                resolve: {},
-                component: RepairListComponent,
-            },
-            {
-                path: 'repair_card',
-                resolve: {},
-                component: RepairCardComponent,
-            },
-            {
-                path: 'repair_choice',
-                resolve: {},
-                component: RepairChoiceComponent,
-            },
-            {
-                path: 'repair_payment',
-                resolve: {},
-                component: RepairPaymentComponent,
-            },
-            {
-                path: '**',
-                redirectTo: '',
-            },
-        ],
-    },
-    {
-        path: 'financial',
-        canActivateChild: [RedirectGuard],
-        children: [
-            {
-                path: '',
-                redirectTo: 'statistics',
-                pathMatch: 'full',
-            },
-            {
-                path: 'statistics',
-                resolve: {},
-                component: StatisticsComponent,
-            },
-            {
-                path: 'repairs_initiated',
-                resolve: {},
-                component: RepairsInitiatedComponent,
-            },
-            {
-                path: 'repair_initiated',
-                resolve: {},
-                component: RepairInitiatedComponent,
-            },
-            {
-                path: 'repairs_paid',
-                resolve: {},
-                component: RepairsPaidComponent,
-            },
-            {
-                path: 'repair_paid',
-                resolve: {},
-                component: RepairPaidComponent,
-            },
-            {
-                path: '**',
-                redirectTo: '',
-            },
-        ],
-    },
-    {
-        path: 'workshop',
-        canActivateChild: [RedirectGuard],
-        children: [
-            {
-                path: '',
-                redirectTo: 'filtered_repairs',
-                pathMatch: 'full',
-            },
-            {
-                path: 'filtered_repairs',
-                resolve: {},
-                component: RepairsFilteredComponent,
-            },
-            {
-                path: 'car_diagnosis',
-                resolve: {},
-                component: CarDiagnosisComponent,
-            },
-            {
-                path: 'repair_in_progress',
-                resolve: {},
-                component: RepairInProgressComponent,
-            },
-            {
-                path: 'exit_ticket',
-                resolve: {},
-                component: ExitTicketComponent,
-            },
-            {
-                path: '**',
-                redirectTo: '',
-            },
+                path: 'workshop',
+                canActivateChild: [RedirectGuard],
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'filtered_repairs',
+                        pathMatch: 'full',
+                    },
+                    {
+                        path: 'filtered_repairs',
+                        resolve: {},
+                        component: RepairsFilteredComponent,
+                    },
+                    {
+                        path: 'car_diagnosis',
+                        resolve: {},
+                        component: CarDiagnosisComponent,
+                    },
+                    {
+                        path: 'repair_in_progress',
+                        resolve: {},
+                        component: RepairInProgressComponent,
+                    },
+                    {
+                        path: 'exit_ticket',
+                        resolve: {},
+                        component: ExitTicketComponent,
+                    },
+                    {
+                        path: '**',
+                        redirectTo: '',
+                    },
 
-        ],
+                ],
+            },
+        ]
     },
 ]
 

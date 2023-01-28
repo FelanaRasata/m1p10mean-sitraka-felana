@@ -29,6 +29,7 @@ export class RedirectGuard implements CanActivateChild {
         }
 
         return state.url.includes(urlPart)
+
     }
 
 }

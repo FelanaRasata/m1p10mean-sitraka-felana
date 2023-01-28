@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http'
 import { CustomerModule } from './modules/customer/customer.module'
 import { LayoutModule } from './layout/layout.module'
-import { RouterModule } from '@angular/router'
 
 
 @NgModule({
@@ -30,7 +29,6 @@ import { RouterModule } from '@angular/router'
 
         BrowserAnimationsModule,
         CustomerModule,
-        RouterModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

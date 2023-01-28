@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router'
 import { SignUpComponent } from './modules/public/page/sign-up/sign-up.component'
 import { SignInComponent } from './modules/public/page/sign-in/sign-in.component'
 import { DataStorageResolver } from './modules/shared/core/resolver/data-storage/data-storage.resolver'
-import { LayoutComponent } from './layout/layout.component'
 import { AuthenticationGuard } from './modules/public/core/guards/authentication/authentication.guard'
 
 
@@ -31,7 +30,6 @@ const routes: Routes = [
     {
         path: '',
         resolve: {data: DataStorageResolver},
-        component: LayoutComponent,
         children: [
             {
                 path: '',
@@ -41,6 +39,11 @@ const routes: Routes = [
         canActivateChild: [AuthenticationGuard],
 
     },
+    {
+        path: '**',
+        component: SignInComponent,
+        canActivate: [AuthenticationGuard],
+    }
 ]
 
 
