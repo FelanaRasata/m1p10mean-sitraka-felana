@@ -19,12 +19,14 @@ import { RepairInProgressComponent } from '../modules/workshop/page/repair-in-pr
 import { ExitTicketComponent } from '../modules/workshop/page/exit-ticket/exit-ticket.component'
 import { CarListResolver } from '../modules/customer/core/resolver/car-list/car-list.resolver'
 import { LayoutComponent } from './layout.component'
+import {AuthenticationGuard} from "../modules/public/core/guards/authentication/authentication.guard";
 
 
 const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivateChild: [AuthenticationGuard],
         children: [
             {
                 path: 'customer',
@@ -37,9 +39,9 @@ const routes: Routes = [
                     },
                     {
                         path: 'car_list',
-                        resolve: {
+                        /*resolve: {
                             data: CarListResolver,
-                        },
+                        },*/
                         component: CarListComponent,
                     },
                     {

@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common'
 import {LayoutRouting} from './layout-routing'
 import { LayoutComponent } from './layout.component'
 import { ComponentsModule } from '../components/components.module'
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({

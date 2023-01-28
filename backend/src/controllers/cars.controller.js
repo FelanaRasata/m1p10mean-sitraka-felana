@@ -11,7 +11,6 @@ const router = Router()
 const carService = new CarService()
 
 router.get('', authentication, async (request, response) => {
-// router.get('', async (request, response) => {
 
     try {
 
@@ -20,12 +19,28 @@ router.get('', authentication, async (request, response) => {
         const customer = request.user
         const queryData = { customer: customer._id }
 
-        // const id = "63cce33697ca556feba7cb69";
-
         const cars = await carService.find(queryData, optionsData)
-        // const cars = await carService.findByCustomer(id, optionsData)
 
         response.status(200).json(toResponseEntity(200, 'Cars Customer.', cars))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
+router.get('/:car_id', async (request, response) => {
+// router.get('', async (request, response) => {
+
+    try {
+
+        const carId = request.params.car_id
+
+        const car = await carService.findById(carId)
+
+        response.status(200).json(toResponseEntity(200, 'Getting car.', cars))
 
     } catch (error) {
 

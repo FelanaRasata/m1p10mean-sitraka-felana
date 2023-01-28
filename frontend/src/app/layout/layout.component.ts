@@ -7,5 +7,4 @@ import { Component } from '@angular/core'
     styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent {
-
 }

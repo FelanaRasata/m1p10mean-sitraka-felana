@@ -7,6 +7,9 @@ import {SignOutModalComponent} from './components/modals/sign-out-modal/sign-out
 import {HTTP_INTERCEPTORS} from '@angular/common/http'
 import {TokenInterceptor} from './core/interceptor/token/token.interceptor'
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { CarItemComponent } from './components/others/car-item/car-item.component';
+import { RepairItemComponent } from './components/others/repair-item/repair-item.component';
+import { RepairDiagnoItemComponent } from './components/others/repair-diagno-item/repair-diagno-item.component';
 
 
 @NgModule({
@@ -15,11 +18,17 @@ import {MatPaginatorModule} from "@angular/material/paginator";
         RepairsTableComponent,
         PaginatorComponent,
         SignOutModalComponent,
+        CarItemComponent,
+        RepairItemComponent,
+        RepairDiagnoItemComponent,
     ],
     exports: [
         CarsTableComponent,
         SignOutModalComponent,
         RepairsTableComponent,
+        CarItemComponent,
+        RepairItemComponent,
+        RepairDiagnoItemComponent,
     ],
     imports: [
         MatPaginatorModule,

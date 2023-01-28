@@ -9,10 +9,12 @@ import {CarService} from "../../../core/services/car/car.service";
 })
 export class CarsTableComponent {
 
-    @Input('title') title: string = '';
+    @Input('title') title: string = ''
+
+    @Input('linkCard') linkCard: string = ''
 
     constructor(
-        public carService : CarService
+        public carService: CarService
     ) {
     }
 

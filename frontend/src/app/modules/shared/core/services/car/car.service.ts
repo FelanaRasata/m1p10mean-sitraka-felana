@@ -15,6 +15,8 @@ export class CarService {
 
     cars: BehaviorSubject<ICar[]> = new BehaviorSubject<ICar[]>([]);
 
+    car: BehaviorSubject<ICar> = new BehaviorSubject<ICar>({} as ICar);
+
     constructor(
         private apiService: ApiService,
         private notificationService: NotificationService,
@@ -43,6 +45,40 @@ export class CarService {
                     } else {
 
                         this.cars.next(result.data.items);
+                        this.paginationService.setPaginationData(result.data.paginator);
+                        subscriber.next(true);
+
+                    }
+
+                    subscriber.complete()
+
+                });
+
+        });
+
+    }
+
+
+    getCar(carId: string): Observable<boolean> {
+
+        return new Observable<boolean>((subscriber) => {
+
+            const url = API_ENDPOINTS.car + "/" + carId
+
+            this.apiService
+                .get<any>(
+                    baseUrl(url)
+                )
+                .subscribe((result) => {
+
+                    if (result.status != 200) {
+
+                        this.notificationService.alert('No data found', result.message, 'error');
+                        subscriber.next(false);
+
+                    } else {
+
+                        this.car.next(result.data.items);
                         this.paginationService.setPaginationData(result.data.paginator);
                         subscriber.next(true);
 
