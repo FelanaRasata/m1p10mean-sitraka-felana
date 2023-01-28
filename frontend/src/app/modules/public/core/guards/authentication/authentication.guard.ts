@@ -10,13 +10,12 @@ import {
 import { Observable } from 'rxjs'
 import { SessionService } from '../../../../shared/core/services/session/session.service'
 import { isEmpty } from '../../../../shared/core/services/utils/utils'
-import { NotificationService } from '../../../../shared/core/services/notification/notification.service'
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class AuthenticationGuard implements CanActivate, CanActivateChild {
+export class AuthenticationGuard implements CanActivate {
 
     constructor(
         public sessionService: SessionService,
@@ -30,31 +29,18 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
 
         const token: string | null = this.sessionService.getToken()
 
-        const urlPart: string = this.sessionService.getUrlPart()
+        if (isEmpty(token)) {
 
-        if (!isEmpty(token) && !isEmpty(urlPart)) {
-
-            this.router.navigate([`${urlPart}`])
-
-        } else {
-
+            console.log('>>>>>>>>>>>> ATO')
             this.sessionService.removeToken()
             this.sessionService.removeUrlPart()
+            this.router.navigate(['sign_in'])
+
+            return false
 
         }
 
-        return isEmpty(token) || isEmpty(urlPart)
-
-    }
-
-
-    canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-        const token: string | null = this.sessionService.getToken()
-
-        const urlPart: string = this.sessionService.getUrlPart()
-
-        return !isEmpty(token) && !isEmpty(urlPart)
+        return true
 
     }
 

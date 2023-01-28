@@ -4,50 +4,40 @@ import { SignUpComponent } from './modules/public/page/sign-up/sign-up.component
 import { SignInComponent } from './modules/public/page/sign-in/sign-in.component'
 import { AuthenticationGuard } from './modules/public/core/guards/authentication/authentication.guard'
 import { NotFoundComponent } from './modules/public/page/not-found/not-found.component'
+import { LayoutComponent } from './layout/layout.component'
 
 
 const routes: Routes = [
     {
-        path: '',
-        redirectTo: 'sign_in',
-        pathMatch: 'full',
-    },
-    {
         path: 'sign_up',
         component: SignUpComponent,
-        canActivate: [AuthenticationGuard],
     },
     {
         path: 'sign_in',
         component: SignInComponent,
-        canActivate: [AuthenticationGuard],
     },
     {
         path: 'workshop/sign_in',
         component: SignInComponent,
-        canActivate: [AuthenticationGuard],
     },
     {
         path: 'finance/sign_in',
         component: SignInComponent,
-        canActivate: [AuthenticationGuard],
     },
     {
         path: '',
+        component: LayoutComponent,
         children: [
             {
                 path: '',
                 loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
             },
         ],
-    },{
-        path: '404',
-        component: NotFoundComponent
+        canActivate: [AuthenticationGuard]
     },
     {
         path: '**',
-        redirectTo: '404',
-        pathMatch: 'full',
+        component: NotFoundComponent,
     },
 ]
 

@@ -1,12 +1,11 @@
-import {NgModule} from '@angular/core'
-import {CommonModule} from '@angular/common'
-import {FooterComponent} from './footer/footer.component'
-import {SidebarComponent} from './sidebar/sidebar.component'
-import {TopbarComponent} from './topbar/topbar.component'
-import {SharedModule} from '../modules/shared/shared.module'
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {BrowserModule} from "@angular/platform-browser";
-import {RouterModule} from "@angular/router";
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FooterComponent } from './footer/footer.component'
+import { SidebarComponent } from './sidebar/sidebar.component'
+import { TopbarComponent } from './topbar/topbar.component'
+import { SharedModule } from '../modules/shared/shared.module'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { RouterModule } from '@angular/router'
 
 
 @NgModule({
@@ -24,8 +23,7 @@ import {RouterModule} from "@angular/router";
         CommonModule,
         SharedModule,
         FontAwesomeModule,
-        BrowserModule,
-        RouterModule
+        RouterModule,
     ],
 })
 export class ComponentsModule {

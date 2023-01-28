@@ -36,7 +36,7 @@ export class SignInComponent {
         const path = this.route.snapshot.url[0].path
 
         switch (path) {
-            
+
             case 'workshop':
             case 'finance':
                 this.signUp = false
