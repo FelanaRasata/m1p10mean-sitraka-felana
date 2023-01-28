@@ -6,6 +6,7 @@ import { ComponentsModule } from '../../components/components.module'
 import { SignInComponent } from './page/sign-in/sign-in.component'
 import { SignUpComponent } from './page/sign-up/sign-up.component'
 import { SharedModule } from '../shared/shared.module'
+import { RouterLink } from '@angular/router'
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SharedModule } from '../shared/shared.module'
         ComponentsModule,
         SharedModule,
         ReactiveFormsModule,
+        RouterLink,
     ],
 })
 export class PublicModule {

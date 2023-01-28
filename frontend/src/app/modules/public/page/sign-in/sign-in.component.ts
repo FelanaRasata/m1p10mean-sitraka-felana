@@ -35,8 +35,22 @@ export class SignInComponent {
 
         const path = this.route.snapshot.url[0].path
 
-        if (path == 'back_office')
-            this.signUp = false
+        switch (path) {
+            
+            case 'workshop':
+            case 'finance':
+                this.signUp = false
+                break
+
+            case 'sign_in':
+                this.signUp = true
+                break
+
+            default:
+                this.router.navigate(['']).then()
+                break
+
+        }
 
     }
 

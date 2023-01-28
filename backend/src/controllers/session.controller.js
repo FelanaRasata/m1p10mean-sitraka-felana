@@ -51,15 +51,7 @@ router.post('/sign_up', validationMiddleware(UserVS, UserDto), async (request, r
 
 router.get('/logged_in_user', authentication, async (request, response) => {
 
-    try {
-
-        response.status(200).json(toResponseEntity(200, 'User created', request.user))
-
-    } catch (error) {
-
-        response.status(200).json(toResponseEntity(409, String(error)))
-
-    }
+    response.status(200).json(toResponseEntity(200, 'User created', request.user))
 
 })
 

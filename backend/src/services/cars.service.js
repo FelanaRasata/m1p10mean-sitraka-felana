@@ -1,3 +1,4 @@
+import createError from 'http-errors'
 import { Settings } from '../config/settings.js'
 import { Car } from '../models/cars.schema.js'
 import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
@@ -18,7 +19,7 @@ export class CarService {
 
         const customer = await this.userService.findById(carData.customer)
 
-        if (isEmpty(customer)) throw new Error('Customer not found.')
+        if (isEmpty(customer)) throw createError(409, 'Customer not found.')
 
         const createdCar = new Car(toDocumentFormat(carData))
 
@@ -46,7 +47,7 @@ export class CarService {
 
     async findById(carId) {
 
-        if (isEmpty(carId)) throw new Error('No car ID found')
+        if (isEmpty(carId)) throw createError(409, 'No car ID found')
 
         return Car
             .findOne({ _id: carId, deleted: false })
@@ -57,11 +58,11 @@ export class CarService {
 
     async update(carId, carData) {
 
-        if (isEmpty(carId)) throw new Error('No car ID found')
+        if (isEmpty(carId)) throw createError(409, 'No car ID found')
 
         const carCurrent = await Car.findById(carId)
 
-        if (carCurrent.deleted) throw new Error('The car is already deleted')
+        if (carCurrent.deleted) throw createError(409, 'The car is already deleted')
 
         carCurrent.carNumber = carData.carNumber
         carCurrent.brand = carData.brand
@@ -75,11 +76,11 @@ export class CarService {
 
     async delete(carId) {
 
-        if (isEmpty(carId)) throw new Error('No car ID found')
+        if (isEmpty(carId)) throw createError(409, 'No car ID found')
 
         const currentCar = await Car.findById(carId)
 
-        if (isEmpty(currentCar)) throw new Error('No car found')
+        if (isEmpty(currentCar)) throw createError(409, 'No car found')
 
         currentCar.deleted = true
 

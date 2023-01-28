@@ -1,4 +1,5 @@
 import * as CryptoJS from 'crypto-js'
+import createError from 'http-errors'
 import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
 import * as nodemailer from 'nodemailer'
@@ -137,7 +138,7 @@ export function retrieveToken(req) {
     const authorization = req.header('Authorization').split('Bearer ')[1] || null
 
     if (isEmpty(authorization))
-        throw new Error('Session not found')
+        throw createError(409, 'Session not found')
 
     return authorization
 
@@ -180,7 +181,7 @@ export function toResponseEntity(status, message = '', data = undefined) {
 
 export function encrypt(value) {
 
-    if (isEmpty(value) || isEmpty(value.trim())) throw new Error('Value not found')
+    if (isEmpty(value) || isEmpty(value.trim())) throw createError(409, 'Value not found')
 
     return CryptoJS.AES.encrypt(value.trim(), settings.encryptionKey).toString()
 
@@ -189,7 +190,7 @@ export function encrypt(value) {
 
 export function decrypt(value) {
 
-    if (isEmpty(value) || isEmpty(value.trim())) throw new Error('Value not found')
+    if (isEmpty(value) || isEmpty(value.trim())) throw createError(409, 'Value not found')
 
     return CryptoJS.AES.decrypt(value.trim(), settings.encryptionKey).toString(CryptoJS.enc.Utf8)
 

@@ -10,6 +10,7 @@ import { CarsRouter } from './controllers/cars.controller.js'
 import { DefaultRouter } from './controllers/default.controller.js'
 import { RepairsRouter } from './controllers/repairs.controller.js'
 import { SessionRouter } from './controllers/session.controller.js'
+import { errorHandlerMiddleware } from './middlewares/error_handler.middleware.js'
 
 
 class Server {
@@ -21,6 +22,7 @@ class Server {
         this.settings = new Settings()
         this.setupMiddlewares()
         this.setupRoutes(routes)
+        this.app.use(errorHandlerMiddleware)
 
     }
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router'
 import {Observable} from 'rxjs';
 import {SessionService} from "../../services/session/session.service";
 
@@ -9,7 +9,8 @@ import {SessionService} from "../../services/session/session.service";
 export class DataStorageResolver implements Resolve<boolean> {
 
     constructor(
-        private sessionService: SessionService
+        private sessionService: SessionService,
+        private router: Router
     ) {
     }
 
