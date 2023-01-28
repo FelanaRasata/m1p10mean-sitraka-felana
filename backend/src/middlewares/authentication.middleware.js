@@ -2,7 +2,7 @@ import pkg from 'jsonwebtoken'
 import { UserService } from '../services/users.service.js'
 import { logger } from '../utils/logger.js'
 import { isEmpty, retrieveTokenData } from '../utils/utils.js'
-
+import createError from 'http-errors'
 
 const { JsonWebTokenError } = pkg
 
@@ -23,8 +23,7 @@ export const authentication = async (request, response, next) => {
 
         } else {
 
-            const error = new Error('Session not found')
-            next(error)
+            next(createError(401, 'Session not found'))
 
         }
 
@@ -33,14 +32,13 @@ export const authentication = async (request, response, next) => {
         if (error instanceof JsonWebTokenError) {
 
             logger.error(error)
-            const err = new Error('Session expired')
-            next(err)
+            next(createError(401, 'Session expired'))
+
 
         } else {
 
             logger.error(error)
-            const err = new Error('Session not found')
-            next(err)
+            next(createError(401, 'Session  not found'))
 
         }
 

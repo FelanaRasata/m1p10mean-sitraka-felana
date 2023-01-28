@@ -23,7 +23,12 @@ const RepairSchema = new mongoose.Schema(
                 message: (props) => `${props.value} is not a valid price.`
             }
         },
-        repairType: [{
+        diagnosisRepairs: [{
+            type: String,
+            ref: 'RepairType',
+            required: true
+        }],
+        selectedRepairs: [{
             type: String,
             ref: 'RepairType',
             required: true

@@ -19,12 +19,16 @@ import { RepairInProgressComponent } from '../modules/workshop/page/repair-in-pr
 import { ExitTicketComponent } from '../modules/workshop/page/exit-ticket/exit-ticket.component'
 import { CarListResolver } from '../modules/customer/core/resolver/car-list/car-list.resolver'
 import { LayoutComponent } from './layout.component'
+import { AuthenticationGuard } from '../modules/public/core/guards/authentication/authentication.guard'
+import { DataStorageResolver } from '../modules/shared/core/resolver/data-storage/data-storage.resolver'
 
 
 const routes: Routes = [
     {
         path: '',
+        resolve: {data: DataStorageResolver},
         component: LayoutComponent,
+        canActivateChild: [AuthenticationGuard],
         children: [
             {
                 path: 'customer',
@@ -159,7 +163,7 @@ const routes: Routes = [
 
                 ],
             },
-        ]
+        ],
     },
 ]
 

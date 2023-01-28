@@ -29,14 +29,12 @@ const routes: Routes = [
     },
     {
         path: '',
-        resolve: {data: DataStorageResolver},
         children: [
             {
                 path: '',
                 loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
             },
         ],
-        canActivateChild: [AuthenticationGuard],
 
     },
     {

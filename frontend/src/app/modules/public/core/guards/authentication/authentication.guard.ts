@@ -53,6 +53,12 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
 
         const urlPart: string = this.sessionService.getUrlPart()
 
+        if (isEmpty(token) || isEmpty(urlPart)) {
+
+            this.router.navigate([''])
+
+        }
+
         return !isEmpty(token) && !isEmpty(urlPart)
 
     }

@@ -7,6 +7,7 @@ import {SignOutModalComponent} from './components/modals/sign-out-modal/sign-out
 import {HTTP_INTERCEPTORS} from '@angular/common/http'
 import {TokenInterceptor} from './core/interceptor/token/token.interceptor'
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { GeneralErrorHandlerInterceptor } from './core/interceptor/error/general-error-handler.interceptor'
 
 
 @NgModule({
@@ -30,7 +31,12 @@ import {MatPaginatorModule} from "@angular/material/paginator";
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
             multi: true
-        }
+        },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: GeneralErrorHandlerInterceptor,
+          multi: true
+        },
     ]
 })
 export class SharedModule {

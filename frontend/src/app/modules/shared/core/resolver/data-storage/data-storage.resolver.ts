@@ -14,6 +14,7 @@ export class DataStorageResolver implements Resolve<boolean> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+
         return new Observable<boolean>(subscriber => {
 
             this.sessionService.getLoggedInUser().subscribe((status) => {
@@ -24,6 +25,7 @@ export class DataStorageResolver implements Resolve<boolean> {
             });
 
         });
+
     }
 
 }
