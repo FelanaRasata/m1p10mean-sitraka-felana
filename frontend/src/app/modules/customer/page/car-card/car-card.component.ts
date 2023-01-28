@@ -21,4 +21,5 @@ export class CarCardComponent {
     openDialog() {
        this.notificationService.confirmBox("test","test","test","test","test")
     }
+    
 }

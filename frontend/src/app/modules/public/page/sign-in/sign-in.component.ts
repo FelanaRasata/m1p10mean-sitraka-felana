@@ -63,8 +63,6 @@ export class SignInComponent {
 
             this.sessionService.signIn({...this.signInForm.value}).subscribe(async (status) => {
 
-                console.log(`${this.sessionService.getUrlPart()}`)
-
                 if (status) await this.router
                     .navigate([`${this.sessionService.getUrlPart()}`])
 

@@ -31,7 +31,6 @@ export class AuthenticationGuard implements CanActivate {
 
         if (isEmpty(token)) {
 
-            console.log('>>>>>>>>>>>> ATO')
             this.sessionService.removeToken()
             this.sessionService.removeUrlPart()
             this.router.navigate(['sign_in'])

@@ -5,6 +5,7 @@ import { SignInComponent } from './modules/public/page/sign-in/sign-in.component
 import { AuthenticationGuard } from './modules/public/core/guards/authentication/authentication.guard'
 import { NotFoundComponent } from './modules/public/page/not-found/not-found.component'
 import { LayoutComponent } from './layout/layout.component'
+import { DataStorageResolver } from './modules/shared/core/resolver/data-storage/data-storage.resolver'
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
     },
     {
         path: '',
+        resolve: {data: DataStorageResolver},
         component: LayoutComponent,
         children: [
             {
@@ -33,7 +35,7 @@ const routes: Routes = [
                 loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
             },
         ],
-        canActivate: [AuthenticationGuard]
+        canActivate: [AuthenticationGuard],
     },
     {
         path: '**',

@@ -9,26 +9,28 @@
         <tr>
             <th>Matricule</th>
             <th>Marque</th>
-            <th></th>
-            <th></th>
         </tr>
         </thead>
         <tfoot>
         <tr>
             <th>Matricule</th>
             <th>Marque</th>
-            <th></th>
-            <th></th>
         </tr>
         </tfoot>
         <tbody>
         <tr *ngFor="let car of carService.cars.value">
-            <td>{{car.carNumber}}</td>
-            <td>{{car.brand}}</td>
-            <td><a class="nav-link" href="{{linkCard}}"> Card </a></td>
-            <td></td>
+            <td><a class="nav-link" href="{{linkCard}}">{{car.carNumber}}</a></td>
+            <td><a class="nav-link" href="{{linkCard}}">{{car.brand}}</a></td>
         </tr>
         </tbody>
     </table>
+
+    <app-paginator
+        [length]="paginationService.paginationData.value.totalItems"
+        [pageSize]="paginationService.paginationData.value.limit"
+        [pageIndex]="paginationService.paginationData.value.page - 1"
+        (page)="setPage($event)"
+    ></app-paginator>
+
 </div>
 
