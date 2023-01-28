@@ -10,12 +10,12 @@ import { CarService } from './cars.service.js'
 export const UPDATE_TYPE = ['DIAGNO', 'INIT', 'PROGRESS', 'REPAIRED', 'PAID', 'TAKEN_BACK']
 
 const REPAIR_ATTRIBUTES = {
-    DIAGNO: { current: 'diagnosedAt', previous: ['carDroppedOffAt'] },
-    INIT: { current: 'initiatedAt', previous: ['diagnosedAt'] },
-    PROGRESS: { current: 'inProgressAt', previous: ['initiatedAt'] },
-    REPAIRED: { current: 'carRepairedAt', previous: ['inProgressAt'] },
-    PAID: { current: 'paidAt', previous: ['diagnosedAt', 'carRepairedAt'] },
-    TAKEN_BACK: { current: 'carTakenBackAt', previous: ['paidAt'] },
+    DIAGNO: {current: 'diagnosedAt', previous: ['carDroppedOffAt']},
+    INIT: {current: 'initiatedAt', previous: ['diagnosedAt']},
+    PROGRESS: {current: 'inProgressAt', previous: ['initiatedAt']},
+    REPAIRED: {current: 'carRepairedAt', previous: ['inProgressAt']},
+    PAID: {current: 'paidAt', previous: ['diagnosedAt', 'carRepairedAt']},
+    TAKEN_BACK: {current: 'carTakenBackAt', previous: ['paidAt']},
 }
 
 const ERROR_MESSAGES = {
@@ -58,7 +58,7 @@ export class RepairService {
 
     async find(query, options) {
 
-        query = Object.assign(isEmpty(query) ? {} : query, { deleted: false })
+        query = Object.assign(isEmpty(query) ? {} : query, {deleted: false})
 
         console.log(query)
 
@@ -78,7 +78,7 @@ export class RepairService {
         if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         return Repair
-            .findOne({ _id: repairId, deleted: false })
+            .findOne({_id: repairId, deleted: false})
             .lean()
 
     }
