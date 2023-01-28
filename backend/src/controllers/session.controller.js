@@ -1,7 +1,7 @@
 import { Router } from 'express'
+import { SignInDto, SignInVS, UserDto, UserVS } from '../dto/users.dto.js'
 import { authentication } from '../middlewares/authentication.middleware.js'
 import { validationMiddleware } from '../middlewares/validation.middleware.js'
-import { SignInDto, SignInVS, UserDto, UserVS } from '../dto/users.dto.js'
 import { UserService } from '../services/users.service.js'
 import { toResponseEntity } from '../utils/utils.js'
 

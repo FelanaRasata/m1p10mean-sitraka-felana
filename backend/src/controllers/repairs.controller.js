@@ -1,22 +1,22 @@
-import {Router} from 'express'
-import {validationMiddleware} from '../middlewares/validation.middleware.js'
-import {isEmpty, toResponseEntity} from '../utils/utils.js'
-import {CarDto, CarVS} from "../dto/cars.dto.js";
-import {RepairService} from "../services/repairs.service.js";
-import {RepairDto, RepairVS} from "../dto/repairs.dto.js";
+import { Router } from 'express'
+import { CarDto, CarVS } from '../dto/cars.dto.js'
+import { RepairDto, RepairVS } from '../dto/repairs.dto.js'
+import { validationMiddleware } from '../middlewares/validation.middleware.js'
+import { RepairService } from '../services/repairs.service.js'
+import { isEmpty, toResponseEntity } from '../utils/utils.js'
 
 
 const router = Router()
 
 const repairService = new RepairService()
 
-router.get('', async (request, response) => {
+router.get('/', async (request, response) => {
 
     try {
 
-        const optionsData = isEmpty(request.params.options) ? {pagination: false} : JSON.parse(request.params.options);
+        const optionsData = isEmpty(request.query.options) ? { pagination: false } : JSON.parse(request.query.options)
 
-        const queryData = isEmpty(request.params.query) ? {} : JSON.parse(request.params.query);
+        const queryData = isEmpty(request.query.query) ? {} : JSON.parse(request.query.query)
 
         const cars = await repairService.find(queryData, optionsData)
 
@@ -30,7 +30,23 @@ router.get('', async (request, response) => {
 
 })
 
-router.post('/create', validationMiddleware(RepairVS, RepairDto), async (request, response) => {
+router.get('/:id', async (request, response) => {
+
+    try {
+
+        const repair = await repairService.find(queryData, optionsData)
+
+        response.status(200).json(toResponseEntity(200, 'Repairs Car.', repair))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
+router.post('/', validationMiddleware(RepairVS, RepairDto), async (request, response) => {
 
     try {
 
@@ -47,13 +63,13 @@ router.post('/create', validationMiddleware(RepairVS, RepairDto), async (request
 
 })
 
-router.put('/update', validationMiddleware(CarVS, CarDto), async (request, response) => {
+router.put('/:repair_id', validationMiddleware(CarVS, CarDto), async (request, response) => {
 
     try {
 
         const repairData = request.body
-        const repairId = request.params.repair_id;
-        const repairState = request.params.repair_state;
+        const repairId = request.params.repair_id
+        const repairState = request.query.repair_state
         const repair = await repairService.update(repairId, repairData, repairState)
 
         response.status(200).json(toResponseEntity(200, 'Repair has updated', repair))
@@ -66,11 +82,11 @@ router.put('/update', validationMiddleware(CarVS, CarDto), async (request, respo
 
 })
 
-router.delete('/delete', async (request, response) => {
+router.delete('/:repair_id', async (request, response) => {
 
     try {
 
-        const repairId = request.params.repair_id;
+        const repairId = request.params.repair_id
         const repair = await repairService.delete(repairId)
 
         response.status(200).json(toResponseEntity(200, 'Repair has deleted', repair))
@@ -83,4 +99,4 @@ router.delete('/delete', async (request, response) => {
 
 })
 
-export {router as RepairRouter}
+export { router as RepairsRouter }

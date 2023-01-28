@@ -2,12 +2,11 @@ import yup from 'yup'
 
 /* VS: Validation Schema */
 export const CarVS = yup.object().shape({
-
     carNumber: yup.string().min(1, 'Car Number must be more than 2 characters').required(),
     brand: yup.string().min(1, 'Brand must be more than 2 characters').required(),
     customer: yup.string().min(1, 'Customer found').required(),
-
 })
+
 
 export class CarDto {
 
@@ -16,6 +15,7 @@ export class CarDto {
     brand
 
     customer
+
 
     constructor({ carNumber, brand, customer }) {
 

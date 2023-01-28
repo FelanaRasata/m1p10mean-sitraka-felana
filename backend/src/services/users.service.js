@@ -34,7 +34,6 @@ export class UserService {
     }
 
 
-    // Create a new user
     async create(userData) {
 
         if (!isEmailValid(userData.emailAddress)) throw new Error('Incorrect email address.')
@@ -50,7 +49,6 @@ export class UserService {
     }
 
 
-    // Get all users with pagination
     async find(query, options) {
 
         query = Object.assign(isEmpty(query) ? {} : query, { deleted: false })
@@ -67,7 +65,6 @@ export class UserService {
     }
 
 
-    // Get a single user by ID
     async findById(userId) {
 
         if (isEmpty(userId)) throw new Error('No user ID found')
@@ -80,7 +77,6 @@ export class UserService {
     }
 
 
-    // Update a user by ID
     async update(userId, userData) {
 
         /**
@@ -98,7 +94,6 @@ export class UserService {
     }
 
 
-    // Delete a user by ID
     async delete(userId) {
 
         if (isEmpty(userId)) throw new Error('No user ID found')

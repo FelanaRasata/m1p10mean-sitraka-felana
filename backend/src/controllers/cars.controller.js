@@ -1,9 +1,9 @@
-import {Router} from 'express'
-import {validationMiddleware} from '../middlewares/validation.middleware.js'
-import {isEmpty, toResponseEntity} from '../utils/utils.js'
-import {CarDto, CarVS} from "../dto/cars.dto.js";
-import {CarService} from "../services/cars.service.js";
-import {authentication} from "../middlewares/authentication.middleware.js";
+import { Router } from 'express'
+import { CarDto, CarVS } from '../dto/cars.dto.js'
+import { authentication } from '../middlewares/authentication.middleware.js'
+import { validationMiddleware } from '../middlewares/validation.middleware.js'
+import { CarService } from '../services/cars.service.js'
+import { isEmpty, toResponseEntity } from '../utils/utils.js'
 
 
 const router = Router()
@@ -15,10 +15,10 @@ router.get('', authentication, async (request, response) => {
 
     try {
 
-        const optionsData = isEmpty(request.params.options) ? {pagination: false} : JSON.parse(request.params.options);
+        const optionsData = isEmpty(request.params.options) ? { pagination: false } : JSON.parse(request.params.options)
 
         const customer = request.user
-        const queryData = {customer: customer._id}
+        const queryData = { customer: customer._id }
 
         // const id = "63cce33697ca556feba7cb69";
 
@@ -57,7 +57,7 @@ router.put('/update/:car_id', validationMiddleware(CarVS, CarDto), async (reques
     try {
 
         const carData = request.body
-        const carId = request.params.car_id;
+        const carId = request.params.car_id
         const car = await carService.update(carId, carData)
 
         response.status(200).json(toResponseEntity(200, 'Car has updated', car))
@@ -74,7 +74,7 @@ router.delete('/delete/:car_id', async (request, response) => {
 
     try {
 
-        const carId = request.params.car_id;
+        const carId = request.params.car_id
         const car = await carService.delete(carId)
 
         response.status(200).json(toResponseEntity(200, 'Car has deleted', car))
@@ -87,4 +87,4 @@ router.delete('/delete/:car_id', async (request, response) => {
 
 })
 
-export {router as CarRouter}
+export { router as CarsRouter }

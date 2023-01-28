@@ -1,10 +1,30 @@
-import {Settings} from '../config/settings.js'
-import {customLabels, isEmpty, toDocumentFormat} from '../utils/utils.js'
-import {CarService} from "./cars.service.js";
-import {Repair} from "../models/repairs.schema.js";
-import {Error} from "mongoose";
-import {ERepairState} from "../utils/static_enums.js";
-import {Car} from "../models/cars.schema.js";
+import * as _ from 'lodash'
+import { Settings } from '../config/settings.js'
+import { Repair } from '../models/repairs.schema.js'
+import { ERepairState } from '../utils/static_enums.js'
+import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
+import { CarService } from './cars.service.js'
+
+
+export const UPDATE_TYPE = ['DIAGNO', 'INIT', 'PROGRESS', 'REPAIRED', 'PAID', 'TAKEN_BACK']
+
+const REPAIR_ATTRIBUTES = {
+    DIAGNO: { current: 'diagnosedAt', previous: ['carDroppedOffAt'] },
+    INIT: { current: 'initiatedAt', previous: ['diagnosedAt'] },
+    PROGRESS: { current: 'inProgressAt', previous: ['initiatedAt'] },
+    REPAIRED: { current: 'carRepairedAt', previous: ['inProgressAt'] },
+    PAID: { current: 'paidAt', previous: ['diagnosedAt', 'carRepairedAt'] },
+    TAKEN_BACK: { current: 'carTakenBackAt', previous: ['paidAt'] },
+}
+
+const ERROR_MESSAGES = {
+    carDroppedOffAt: 'the car has not been dropped off',
+    diagnosedAt: 'the car has not been diagnosed yet',
+    initiatedAt: 'the repair is not initiated',
+    inProgressAt: 'the repairs has not began',
+    carRepairedAt: 'the car was not repaired yet',
+    paidAt: 'the repair has not been paid',
+}
 
 
 export class RepairService {
@@ -17,12 +37,11 @@ export class RepairService {
     }
 
 
-    // Create a new car
     async create(repairData) {
 
-        const car = await this.carService.findById(repairData.car);
+        const car = await this.carService.findById(repairData.car)
 
-        if (isEmpty(car)) throw new Error("Car not found.")
+        if (isEmpty(car)) throw new Error('Car not found.')
 
         if (isEmpty(repairData.carDroppedOffAt))
             repairData.carDroppedOffAt = new Date()
@@ -36,10 +55,9 @@ export class RepairService {
     }
 
 
-    // Get all cars with pagination
     async find(query, options) {
 
-        query = Object.assign(isEmpty(query) ? {} : query, {deleted: false})
+        query = Object.assign(isEmpty(query) ? {} : query, { deleted: false })
 
         console.log(query)
 
@@ -54,91 +72,122 @@ export class RepairService {
     }
 
 
-    // Get a single car by ID
     async findById(repairId) {
 
-        if (isEmpty(repairId)) throw new Error('No car ID found')
+        if (isEmpty(repairId)) throw new Error('No repair ID found')
 
         return Repair
-            .findOne({_id: repairId, deleted: false})
+            .findOne({ _id: repairId, deleted: false })
             .lean()
 
     }
 
 
-    // Update a car by ID
+    applyChangesOnCurrentRepair(currentRepair, repairState, repairData) {
+
+        const stateKey = UPDATE_TYPE.find(item => item === repairState)
+
+        if (isEmpty(stateKey)) throw Error('No state found.')
+
+        const currentField = REPAIR_ATTRIBUTES[stateKey]
+
+        if (isEmpty(currentField)) throw Error('No field found.')
+
+        const errMessages = []
+
+        for (const mustHave of currentField.previous) {
+
+            if (isEmpty(currentRepair[mustHave]))
+                errMessages.push(ERROR_MESSAGES[mustHave])
+
+        }
+
+        if (!isEmpty(errMessages)) {
+
+            const errMessage = errMessages.join(' and ')
+
+            throw new Error(errMessage[0].toUpperCase() + (errMessage.split('').slice(1)).join(''))
+
+        }
+
+        currentRepair[currentField.current] = new Date()
+
+        return currentRepair
+
+    }
+
+
+    // Update a repair by ID
     async update(repairId, repairData, repairState) {
 
-        if (isEmpty(repairId)) throw new Error("No repair ID found")
+        if (isEmpty(repairId)) throw new Error('No repair ID found')
 
-        const repairCurrent = await Car.findById(repairId);
+        let currentRepair = await Repair.findById(repairId)
 
-        if (repairCurrent.deleted) throw new Error("The repair is already deleted")
+        if (isEmpty(currentRepair) || currentRepair?.deleted) throw new Error('No repair found')
 
-        repairCurrent.price = repairData.price
-        repairCurrent.repairType = repairData.repairType
+        currentRepair.price = repairData.price
+        currentRepair.repairType = repairData.repairType
 
-        if (repairState === ERepairState.DIAGNO) {
+        currentRepair = this.applyChangesOnCurrentRepair(currentRepair, repairState, repairData)
+
+        /*if (repairState === ERepairState.DIAGNO) {
 
             if (isEmpty(repairData.diagnosedAt))
-                repairCurrent.carDroppedOffAt = new Date()
+                repairCurrent.diagnosedAt = new Date()
 
             if (isEmpty(repairData.carDroppedOffAt))
-                throw new Error("The car is not dropped off")
+                throw new Error('The car has not been dropped off')
 
         } else if (repairState === ERepairState.INIT) {
 
             if (isEmpty(repairData.initiatedAt))
-                repairCurrent.carDroppedOffAt = new Date()
+                repairCurrent.initiatedAt = new Date()
 
             if (isEmpty(repairData.diagnosedAt))
-                throw new Error("The car has not diagnosed")
+                throw new Error('The car has not diagnosed')
 
         } else if (repairState === ERepairState.PROGRESS) {
 
             if (isEmpty(repairData.inProgressAt))
-                repairCurrent.carDroppedOffAt = new Date()
+                repairCurrent.inProgressAt = new Date()
 
             if (isEmpty(repairData.initiatedAt))
-                throw new Error("The repair has not initiated")
+                throw new Error('The repair has not initiated')
 
         } else if (repairState === ERepairState.REPAIRED) {
 
             if (isEmpty(repairData.carRepairedAt))
-                repairCurrent.carDroppedOffAt = new Date()
+                repairCurrent.carRepairedAt = new Date()
 
             if (isEmpty(repairData.inProgressAt))
-                throw new Error("The repair is not in progress")
+                throw new Error('The repair is not in progress')
 
         } else if (repairState === ERepairState.PAID) {
 
             if (isEmpty(repairData.paidAt))
-                repairCurrent.carDroppedOffAt = new Date()
+                repairCurrent.paidAt = new Date()
 
-            if (isEmpty(repairData.diagnosedAt)
-                || isEmpty(repairData.carRepairedAt)
-            )
-                throw new Error("The car is not diagnosed or repaired")
+            if (isEmpty(repairData.diagnosedAt) || isEmpty(repairData.carRepairedAt))
+                throw new Error('The car is not diagnosed or repaired')
 
         } else if (repairState === ERepairState.TAKEN_BACK) {
 
             if (isEmpty(repairData.carTakenBackAt))
-                repairCurrent.carDroppedOffAt = new Date()
+                repairCurrent.carTakenBackAt = new Date()
 
-            if (isEmpty(repairData.paidAt)
-            )
-                throw new Error("The repair is not paid")
+            if (isEmpty(repairData.paidAt))
+                throw new Error('The repair is not paid')
 
-        }
+        }*/
 
-        await repairCurrent.save()
+        await currentRepair.save()
 
         return await this.findById(repairId)
 
     }
 
 
-    // Delete a car by ID
     async delete(repairId) {
 
         if (isEmpty(repairId)) throw new Error('No repair ID found')

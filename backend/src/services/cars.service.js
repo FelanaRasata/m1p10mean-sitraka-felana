@@ -1,8 +1,7 @@
-import {Settings} from '../config/settings.js'
-import {Car} from '../models/cars.schema.js'
-import {customLabels, isEmpty, toDocumentFormat} from '../utils/utils.js'
-import {User} from "../models/users.schema.js";
-import {UserService} from "./users.service.js";
+import { Settings } from '../config/settings.js'
+import { Car } from '../models/cars.schema.js'
+import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
+import { UserService } from './users.service.js'
 
 
 export class CarService {
@@ -15,12 +14,11 @@ export class CarService {
     }
 
 
-    // Create a new car
     async create(carData) {
 
-        const customer = await this.userService.findById(carData.customer);
+        const customer = await this.userService.findById(carData.customer)
 
-        if (isEmpty(customer)) throw new Error("Customer not found.")
+        if (isEmpty(customer)) throw new Error('Customer not found.')
 
         const createdCar = new Car(toDocumentFormat(carData))
 
@@ -31,12 +29,9 @@ export class CarService {
     }
 
 
-    // Get all cars with pagination
     async find(query, options) {
 
-        query = Object.assign(isEmpty(query) ? {} : query, {deleted: false})
-
-        console.log(query)
+        query = Object.assign(isEmpty(query) ? {} : query, { deleted: false })
 
         options = Object.assign(isEmpty(options) ? {} : options, {
             lean: true,
@@ -49,26 +44,24 @@ export class CarService {
     }
 
 
-    // Get a single car by ID
     async findById(carId) {
 
         if (isEmpty(carId)) throw new Error('No car ID found')
 
         return Car
-            .findOne({_id: carId, deleted: false})
+            .findOne({ _id: carId, deleted: false })
             .lean()
 
     }
 
 
-    // Update a car by ID
     async update(carId, carData) {
 
-        if (isEmpty(carId)) throw new Error("No car ID found")
+        if (isEmpty(carId)) throw new Error('No car ID found')
 
-        const carCurrent = await Car.findById(carId);
+        const carCurrent = await Car.findById(carId)
 
-        if (carCurrent.deleted) throw new Error("The car is already deleted")
+        if (carCurrent.deleted) throw new Error('The car is already deleted')
 
         carCurrent.carNumber = carData.carNumber
         carCurrent.brand = carData.brand
@@ -80,7 +73,6 @@ export class CarService {
     }
 
 
-    // Delete a car by ID
     async delete(carId) {
 
         if (isEmpty(carId)) throw new Error('No car ID found')
