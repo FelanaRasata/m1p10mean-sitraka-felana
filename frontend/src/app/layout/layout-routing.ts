@@ -41,9 +41,9 @@ const routes: Routes = [
                     },
                     {
                         path: 'car_list',
-                        resolve: {
+                        /*resolve: {
                             data: CarListResolver,
-                        },
+                        },*/
                         component: CarListComponent,
                     },
                     {

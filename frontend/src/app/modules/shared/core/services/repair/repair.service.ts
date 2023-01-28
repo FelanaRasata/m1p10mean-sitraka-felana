@@ -14,6 +14,7 @@ import {IRepair} from "../../models/schemas/repairs.schema";
 export class RepairService {
 
     repairs: BehaviorSubject<IRepair[]> = new BehaviorSubject<IRepair[]>([]);
+    repair: BehaviorSubject<IRepair> = new BehaviorSubject<IRepair>({} as IRepair);
 
     constructor(
         private apiService: ApiService,

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import {Component, Input} from '@angular/core'
+import {RepairService} from "../../../core/services/repair/repair.service";
 
 
 @Component({
@@ -7,5 +8,10 @@ import { Component } from '@angular/core'
     styleUrls: ['./repairs-table.component.scss'],
 })
 export class RepairsTableComponent {
+    @Input('title') title: string = '';
 
+    constructor(
+        public repairService : RepairService
+    ) {
+    }
 }

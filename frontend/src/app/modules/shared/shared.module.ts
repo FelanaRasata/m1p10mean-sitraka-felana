@@ -8,6 +8,9 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http'
 import {TokenInterceptor} from './core/interceptor/token/token.interceptor'
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { GeneralErrorHandlerInterceptor } from './core/interceptor/error/general-error-handler.interceptor'
+import { CarItemComponent } from './components/others/car-item/car-item.component';
+import { RepairItemComponent } from './components/others/repair-item/repair-item.component';
+import { RepairDiagnoItemComponent } from './components/others/repair-diagno-item/repair-diagno-item.component';
 
 
 @NgModule({
@@ -16,11 +19,17 @@ import { GeneralErrorHandlerInterceptor } from './core/interceptor/error/general
         RepairsTableComponent,
         PaginatorComponent,
         SignOutModalComponent,
+        CarItemComponent,
+        RepairItemComponent,
+        RepairDiagnoItemComponent,
     ],
     exports: [
         CarsTableComponent,
         SignOutModalComponent,
         RepairsTableComponent,
+        CarItemComponent,
+        RepairItemComponent,
+        RepairDiagnoItemComponent,
     ],
     imports: [
         MatPaginatorModule,
