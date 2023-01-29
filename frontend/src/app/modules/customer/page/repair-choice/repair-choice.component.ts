@@ -47,12 +47,16 @@ export class RepairChoiceComponent {
 
             this.repairService.initRepair(repairDto._id, repairDto).subscribe((status) => {
 
-                this.router.navigate([`/customer/cars/${repairDto.car._id}`]).then(() => {
+                if (status) {
 
-                    this.loaderService.hydrate(false)
-                    this.notificationService.alert('Repair', 'Repair initiated', 'success')
+                    this.router.navigate([`/customer/cars/${repairDto.car._id}`]).then(() => {
 
-                })
+                        this.loaderService.hydrate(false)
+                        this.notificationService.alert('Repair', 'Repair initiated', 'success')
+                        
+                    })
+
+                }
 
             })
 
