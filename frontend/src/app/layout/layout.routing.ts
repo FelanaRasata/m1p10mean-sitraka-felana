@@ -17,6 +17,7 @@ import { RepairInProgressComponent } from '../modules/workshop/page/repair-in-pr
 import { ExitTicketComponent } from '../modules/workshop/page/exit-ticket/exit-ticket.component'
 import { CarListResolver } from '../modules/customer/core/resolver/car-list/car-list.resolver'
 import { CarCardResolver } from '../modules/customer/core/resolver/car-card/car-card.resolver'
+import { RepairTypeListResolver } from '../modules/workshop/core/resolver/repair-type-list/repair-type-list.resolver'
 
 
 const routes: Routes = [
@@ -63,27 +64,27 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'statistics',
+                redirectTo: 'dashboard',
                 pathMatch: 'full',
             },
             {
-                path: 'statistics',
+                path: 'dashboard',
                 component: StatisticsComponent,
             },
             {
-                path: 'repairs_initiated',
+                path: 'repairs/initiated',
                 component: RepairsInitiatedComponent,
             },
             {
-                path: 'repair_initiated',
+                path: 'repair/:repair_id/initiated',
                 component: RepairInitiatedComponent,
             },
             {
-                path: 'repairs_paid',
+                path: 'repairs/paid',
                 component: RepairsPaidComponent,
             },
             {
-                path: 'repair_paid',
+                path: 'repair/:repair_id/paid',
                 component: RepairPaidComponent,
             },
         ],
@@ -93,23 +94,26 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'filtered_repairs',
+                redirectTo: 'repairs',
                 pathMatch: 'full',
             },
             {
-                path: 'filtered_repairs',
+                path: 'repairs',
                 component: RepairsFilteredComponent,
             },
             {
-                path: 'car_diagnosis',
+                path: 'car/:repair_id/diagnosis',
+                resolve: {
+                    data: RepairTypeListResolver,
+                },
                 component: CarDiagnosisComponent,
             },
             {
-                path: 'repair_in_progress',
+                path: 'repair/:repair_id/in_progress',
                 component: RepairInProgressComponent,
             },
             {
-                path: 'exit_ticket',
+                path: 'repair/:repair_id/exit',
                 component: ExitTicketComponent,
             },
         ],

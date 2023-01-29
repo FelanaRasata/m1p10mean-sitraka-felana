@@ -5,6 +5,8 @@ import {ExitTicketComponent} from './page/exit-ticket/exit-ticket.component'
 import {RepairsFilteredComponent} from './page/repairs-filtered/repairs-filtered.component'
 import {RepairInProgressComponent} from './page/repair-in-progress/repair-in-progress.component'
 import {SharedModule} from "../shared/shared.module";
+import { RepairTypeModalComponent } from './component/modals/repair-type-modal/repair-type-modal.component';
+import { RepairTypeListComponent } from './component/others/repair-type-list/repair-type-list.component'
 
 
 @NgModule({
@@ -13,6 +15,9 @@ import {SharedModule} from "../shared/shared.module";
         ExitTicketComponent,
         RepairsFilteredComponent,
         RepairInProgressComponent,
+        RepairTypeModalComponent,
+        RepairTypeListComponent,
+
     ],
     imports: [
         CommonModule,

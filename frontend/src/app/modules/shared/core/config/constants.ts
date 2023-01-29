@@ -20,6 +20,10 @@ export const API_ENDPOINTS = {
         list: 'repairs',
         init: 'repairs/init/:car_id'
     },
+    user: 'users',
+    car: 'cars',
+    repairs_car: '',
+    repair_types:'repair_types',
     session: {
         sign_in: 'auth/sign_in',
         sign_up: 'auth/sign_up',
@@ -65,7 +69,7 @@ export const CUSTOMER_ROUTES: RouteInfo[] = [
 
 export const WORKSHOP_ROUTES: RouteInfo[] = [
     {
-        path: 'workshop/filtered_repairs',
+        path: 'workshop/repairs',
         title: 'Repair List',
         class: '',
         icon: faTruckFast,
@@ -80,13 +84,13 @@ export const FINANCIAL_ROUTES: RouteInfo[] = [
         icon: faList,
     },
     {
-        path: 'financial/repairs_initiated',
+        path: 'financial/repairs/initiated',
         title: 'Repairs Initiated',
         class: '',
         icon: faUserShield,
     },
     {
-        path: 'financial/repairs_paid',
+        path: 'financial/repairs/paid',
         title: 'Repairs Paid',
         class: '',
         icon: faDolly,
