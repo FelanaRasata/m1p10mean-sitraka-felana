@@ -50,7 +50,16 @@
             <span class="text">Exit voucher</span>
         </a>
     </div>
-    <div *ngIf="showProgressBar">
-        <mat-progress-bar mode="determinate" [value]="percentageNow"></mat-progress-bar>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <p>Repair Progress</p>
+            <div *ngIf="showProgressBar">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" [style.width]="progressWidth" [attr.aria-valuenow]="percentageNow" aria-valuemin="0" aria-valuemax="100">{{percentageNow}}%</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
     </div>
 </div>

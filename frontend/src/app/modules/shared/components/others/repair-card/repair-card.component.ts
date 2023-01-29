@@ -45,7 +45,9 @@ export class RepairCardComponent {
 
         this.financialValidatePurchase = repair.initiatedAt && !repair.inProgressAt && this.sessionService.onlineUser.value?.type === EUserType.FIM
 
-        this.showProgressBar = repair.inProgressAt && !repair.carRepairedAt
+        this.showProgressBar = !!repair.inProgressAt
+
+        this.calculateProgress()
     }
 
 
@@ -54,14 +56,16 @@ export class RepairCardComponent {
     }
 
 
-    percentageNow = 0
-
-
+    percentageNow = 0;
+    progressWidth = '';
     calculateProgress() {
         const max = this.repairService.repair.value.selectedRepairs.length
         const now = this.repairService.repair.value.selectedRepairs.filter(element => element.checked).length
 
         this.percentageNow = (now * 100) / max
+
+        this.progressWidth = this.percentageNow  + "%";
+
     }
 
 }
