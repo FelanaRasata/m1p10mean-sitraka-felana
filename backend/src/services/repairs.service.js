@@ -2,8 +2,10 @@ import createError from 'http-errors'
 import { Settings } from '../config/settings.js'
 import { Repair } from '../models/repairs.schema.js'
 import { EXPENSES } from '../utils/constants.js'
-import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
+import { customLabels, isEmpty, sendEmail, toDocumentFormat } from '../utils/utils.js'
 import { CarService } from './cars.service.js'
+import { UserService } from './users.service.js'
+import { exit_ticket } from '../utils/html_formatter.js'
 
 
 export class RepairService {
@@ -12,6 +14,7 @@ export class RepairService {
 
         this.settings = new Settings()
         this.carService = new CarService()
+        this.userService = new UserService()
 
     }
 
@@ -97,6 +100,49 @@ export class RepairService {
 
         return await this.findById(repairId)
     }
+
+
+    async paidRepair(repairId) {
+
+        let currentRepair = await Repair.findById(repairId)
+
+        if (!currentRepair.diagnosedAt) {
+            throw new createError(409, 'The car has not been diagnosed')
+        } else if (!currentRepair.carRepairedAt) {
+            throw new createError(409, 'The car is not not repaired yet')
+        }
+
+        currentRepair.paidAt = new Date()
+
+        await currentRepair.save()
+
+        return await this.findById(repairId)
+    }
+
+
+    async validateExitCar(repairId) {
+
+        let currentRepair = await Repair.findById(repairId)
+
+        // if (!currentRepair.paidAt) {
+        //     throw new createError(409, 'The repair is not not paid')
+        // }
+        currentRepair.carTakenBackAt = new Date()
+
+        await currentRepair.save()
+
+        let repair = await this.findById(repairId)
+
+        let user = await this.userService.findById(repair.car.customer)
+
+        console.log(user)
+
+        await sendEmail(["rasatadiamondra@gmail.com"], 'Exit Voucher', exit_ticket(repair.car.carNumber, user), true)
+
+        return repair
+    }
+
+
     async dropOffCar(carId) {
 
         const car = await this.carService.findById(carId)

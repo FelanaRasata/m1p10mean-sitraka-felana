@@ -149,7 +149,7 @@ export const exit_ticket = (carNumber, user) => {
 
 <head>
   <meta charset="utf-8">
-  <title>Example 1</title>
+  <title>Exit Voucher</title>
   <style>
     .clearfix:after {
       content: "";
@@ -292,11 +292,10 @@ export const exit_ticket = (carNumber, user) => {
 
 <body>
   <header class="clearfix">
-    <h1>EXIT TICKET</h1>
+    <h1>EXIT VOUCHER</h1>
     <div id="project">
-      <div><span>CLIENT</span> ${user.name}</div>
-      <div><span>EMAIL</span> ${user.email}</a></div>
-      <div><span>DATE</span> ${new Date()} </div>
+      <div><span>CLIENT</span> ${user.lastName}</div>
+      <div><span>EMAIL</span> ${user.emailAddress}</a></div>
     </div>
   </header>
   <main>
@@ -309,7 +308,7 @@ export const exit_ticket = (carNumber, user) => {
       </thead>
       <tbody>
         <tr>
-          <td class="service">${f}</td>
+          <td class="service">${carNumber}</td>
           <td class="qty">1</td>
         </tr>
         

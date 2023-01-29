@@ -13,6 +13,8 @@ const settings = new Settings()
 
 export async function sendEmail(recipients, topic, message, isHtml, cc = [], bcc = [], attachments = []) {
 
+    console.log(">>>>>>>>>>>>")
+
     const transporter = nodemailer.createTransport(CONSTANTS.nodemailer_options)
 
     let mailOptions = {
