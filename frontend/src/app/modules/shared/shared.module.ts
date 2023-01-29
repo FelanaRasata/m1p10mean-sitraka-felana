@@ -13,7 +13,8 @@ import { RepairItemComponent } from './components/others/repair-item/repair-item
 import { RouterLink } from '@angular/router'
 import { FormsModule } from '@angular/forms';
 import { RepairTypesTableComponent } from './components/tables/repair-types-table/repair-types-table.component'
-import { RepairCardComponent } from './components/others/repair-card/repair-card.component'
+import { RepairCardComponent } from './components/others/repair-card/repair-card.component';
+import { ProfilComponent } from './components/others/profil/profil.component'
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { RepairCardComponent } from './components/others/repair-card/repair-card
         RepairItemComponent,
         RepairTypesTableComponent,
         RepairCardComponent,
+        ProfilComponent,
 
     ],
     exports: [

@@ -27,6 +27,7 @@ import {
 import {
     CustomerRepairInProgressResolver
 } from '../modules/customer/core/resolver/customer-repair-in-progress/customer-repair-in-progress.resolver'
+import { ProfilComponent } from '../modules/shared/components/others/profil/profil.component'
 
 
 const routes: Routes = [
@@ -35,8 +36,12 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'cars',
+                redirectTo: 'profile',
                 pathMatch: 'full',
+            },
+            {
+                path: 'profile',
+                component: ProfilComponent,
             },
             {
                 path: 'cars',
@@ -80,8 +85,12 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'dashboard',
+                redirectTo: 'profile',
                 pathMatch: 'full',
+            },
+            {
+                path: 'profile',
+                component: ProfilComponent,
             },
             {
                 path: 'dashboard',
@@ -123,8 +132,12 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'repairs',
+                redirectTo: 'profile',
                 pathMatch: 'full',
+            },
+            {
+                path: 'profile',
+                component: ProfilComponent,
             },
             {
                 path: 'repairs',
