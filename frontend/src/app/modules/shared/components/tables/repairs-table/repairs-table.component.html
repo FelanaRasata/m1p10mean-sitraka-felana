@@ -9,6 +9,7 @@
             <th>Car Dropped Off</th>
             <th>Car Taken Back</th>
             <th>Price</th>
+            <th *ngIf="goCard"></th>
         </tr>
         </thead>
         <tfoot>
@@ -16,6 +17,7 @@
             <th>Car Dropped Off</th>
             <th>Car Taken Back</th>
             <th>Price</th>
+            <th *ngIf="goCard"></th>
         </tr>
         </tfoot>
         <tbody>
@@ -23,7 +25,9 @@
             <td>{{repair.carDroppedOffAt}}</td>
             <td>{{repair.carTakenBackAt || 'N/A'}}</td>
             <td>{{repair.price}}</td>
-         </tr>
+            <td *ngIf="goCard"><a class="nav-link" [routerLink]="['/workshop/car',repair._id,'diagnosis']">
+                Diagnosis</a></td>
+        </tr>
         </tbody>
     </table>
 

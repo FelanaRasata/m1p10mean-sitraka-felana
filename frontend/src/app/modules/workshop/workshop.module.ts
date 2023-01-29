@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module'
 import { RepairTypeModalComponent } from './component/modals/repair-type-modal/repair-type-modal.component'
 import { MatDialogModule } from '@angular/material/dialog'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MatTabsModule } from '@angular/material/tabs'
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
         MatDialogModule,
         ReactiveFormsModule,
         FormsModule,
+        MatTabsModule,
     ],
 })
 export class WorkshopModule {

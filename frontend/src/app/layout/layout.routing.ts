@@ -18,6 +18,7 @@ import { ExitTicketComponent } from '../modules/workshop/page/exit-ticket/exit-t
 import { CarListResolver } from '../modules/customer/core/resolver/car-list/car-list.resolver'
 import { CarCardResolver } from '../modules/customer/core/resolver/car-card/car-card.resolver'
 import { RepairTypeListResolver } from '../modules/workshop/core/resolver/repair-type-list/repair-type-list.resolver'
+import { RepairListResolver } from '../modules/workshop/core/resolver/repair-list/repair-list.resolver'
 
 
 const routes: Routes = [
@@ -99,6 +100,9 @@ const routes: Routes = [
             },
             {
                 path: 'repairs',
+                resolve: {
+                    data: RepairListResolver,
+                },
                 component: RepairsFilteredComponent,
             },
             {

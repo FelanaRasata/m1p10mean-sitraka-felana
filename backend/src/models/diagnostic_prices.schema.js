@@ -2,19 +2,19 @@ import mongoose from 'mongoose'
 import paginate from 'mongoose-paginate-v2'
 
 
-const RentSchema = new mongoose.Schema(
+const DiagnosticPriceSchema = new mongoose.Schema(
     {
         _id: {
             type: String,
             required: true,
             unique: true
         },
-        price: {
+        percentage: {
             type: Number,
             required: true,
             validate: {
-                validator: (value) => value > 0,
-                message: (props) => `${props.value} is not a valid price.`
+                validator: (value) => value >= 0 && value <= 1,
+                message: (props) => `${props.value} is not a valid percentage.`
             }
         }
     },
@@ -24,6 +24,6 @@ const RentSchema = new mongoose.Schema(
     }
 )
 
-RentSchema.plugin(paginate)
+DiagnosticPriceSchema.plugin(paginate)
 
-export const Rent = mongoose.model('Rent', RentSchema, 'rents')
+export const Rent = mongoose.model('DiagnosticPrice', DiagnosticPriceSchema, 'diagnostic_prices')
