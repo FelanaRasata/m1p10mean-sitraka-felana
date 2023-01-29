@@ -14,29 +14,13 @@ router.get('/', async (request, response) => {
 
     try {
 
-        const optionsData = isEmpty(request.query.options) ? { pagination: false } : JSON.parse(request.query.options)
+        const optionsData = isEmpty(request.query.options) ? {pagination: false} : JSON.parse(request.query.options)
 
         const queryData = isEmpty(request.query.query) ? {} : JSON.parse(request.query.query)
 
         const cars = await repairService.find(queryData, optionsData)
 
         response.status(200).json(toResponseEntity(200, 'Repairs Car.', cars))
-
-    } catch (error) {
-
-        response.status(200).json(toResponseEntity(409, String(error)))
-
-    }
-
-})
-
-router.get('/:id', async (request, response) => {
-
-    try {
-
-        const repair = await repairService.find(queryData, optionsData)
-
-        response.status(200).json(toResponseEntity(200, 'Repairs Car.', repair))
 
     } catch (error) {
 
