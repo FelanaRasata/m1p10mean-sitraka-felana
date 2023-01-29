@@ -123,6 +123,8 @@ export class RepairService {
     }
 
 
+
+
     applyChangesOnCurrentRepair(currentRepair, repairState, repairData) {
 
         const stateKey = UPDATE_TYPE.find(item => item === repairState)

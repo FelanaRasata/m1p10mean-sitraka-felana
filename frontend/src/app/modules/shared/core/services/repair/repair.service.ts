@@ -138,42 +138,5 @@ export class RepairService {
 
     }
 
-    fetchRepairById(repairId: string): Observable<IResponseType<any>> {
-
-        const url = baseUrl(`${API_ENDPOINTS.repairs.list}/${repairId}`)
-
-        return this.apiService
-            .get<any>(url)
-
-    }
-
-    getRepairById(repairId: string): Observable<boolean> {
-
-        return new Observable<boolean>((subscriber) => {
-
-            // const url = baseUrl(`${API_ENDPOINTS.repairs}/${repairId}`)
-
-            this.fetchRepairById(repairId)
-                .subscribe((result) => {
-
-                    if (result.status !== 200) {
-
-                        this.notificationService.alert('No data found', result.message, 'error')
-                        subscriber.next(false)
-
-                    } else {
-
-                        this.repair.next(result.data)
-                        subscriber.next(true)
-
-                    }
-
-                    subscriber.complete()
-
-                })
-
-        })
-
-    }
 
 }

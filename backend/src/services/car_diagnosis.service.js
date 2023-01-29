@@ -4,6 +4,7 @@ import createError from 'http-errors'
 import { Car } from '../models/cars.schema.js'
 import { CarDiagnosis } from '../models/car_diagnosis.schema.js'
 import { RepairService } from './repairs.service.js'
+import { DiagnosisPercentageService } from './diagnosis_percentage.service.js'
 
 
 export class CarDiagnosisService {
@@ -12,6 +13,7 @@ export class CarDiagnosisService {
 
         this.settings = new Settings()
         this.repairService = new RepairService()
+        this.diagnosisPercentageService = new DiagnosisPercentageService()
 
     }
 
@@ -48,12 +50,22 @@ export class CarDiagnosisService {
 
         // Calcul price par rapport %
 
+        await this.calculatePriceOfDiagnostic(carDiagnosis)
+
         const currentCarDiagnosis = await this.create(carDiagnosis)
 
         await this.repairService.carDiagnosis(carDiagnosis.repair, carDiagnosis.price)
 
         return currentCarDiagnosis
 
+    }
+
+
+    async calculatePriceOfDiagnostic(carDiagnosis) {
+        const price = carDiagnosis.price
+
+        const diagnosisPercentage = await this.diagnosisPercentageService.findOne()
+        carDiagnosis.price = price * diagnosisPercentage.percentage
     }
 
 

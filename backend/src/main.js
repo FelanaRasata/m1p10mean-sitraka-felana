@@ -13,6 +13,7 @@ import { SessionRouter } from './controllers/session.controller.js'
 import { errorHandlerMiddleware } from './middlewares/error_handler.middleware.js'
 import { RepairTypesRouter } from './controllers/repair_types.controller.js'
 import { CarDiagnosisRouter } from './controllers/car_diagnosis.controller.js'
+import { DiagnosisPercentageRouter } from './controllers/diagnosis_percentage.controller.js'
 
 
 class Server {
@@ -77,6 +78,7 @@ const server = new Server([
     { path: '/repairs', router: RepairsRouter },
     { path: '/repair_types', router: RepairTypesRouter },
     { path: '/car_diagnosis', router: CarDiagnosisRouter },
+    { path: '/diagnosis_percentage', router: DiagnosisPercentageRouter },
 ])
 
 server.run()
