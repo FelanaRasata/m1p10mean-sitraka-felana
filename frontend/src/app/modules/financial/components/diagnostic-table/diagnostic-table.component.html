@@ -17,25 +17,19 @@
             </tr>
             </tfoot>
             <tbody>
-            <!--<tr *ngFor="let repairType of repairTypeService.repairTypes.value">
-                <td>{{repairType.name}}</td>
-                <td>{{repairType.repairCost}}</td>
-                <td>
+            <tr *ngFor="let repairTypeItem of repairService.repair.value.selectedRepairs"
+            >
+                <td *ngIf="repairTypeItem.repairType.carPart">{{repairTypeItem.repairType.name}}</td>
+                <td *ngIf="repairTypeItem.repairType.carPart">{{repairTypeItem.repairType.repairCost}}</td>
+                <!--<td>
                     <span class="input-group">
                         <button class="btn btn-outline-secondary" type="button" (click)="addRepairItem(repairType)"
                                 id="button-addon2">Add to Diagnostic</button>
                     </span>
-                </td>
-            </tr>-->
+                </td>-->
+            </tr>
             </tbody>
         </table>
-
-        <!--<app-paginator
-            [length]="paginationService.paginationData.value.totalItems"
-            [pageSize]="paginationService.paginationData.value.limit"
-            [pageIndex]="paginationService.paginationData.value.page - 1"
-            (page)="setPage($event)"
-        ></app-paginator>-->
 
     </div>
 </div>

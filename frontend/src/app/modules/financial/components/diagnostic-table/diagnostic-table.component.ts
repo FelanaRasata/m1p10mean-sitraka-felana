@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core'
-import { IRepair } from '../../../shared/core/models/schemas/repairs.schema'
+import { Component } from '@angular/core'
+import { RepairService } from '../../../shared/core/services/repair/repair.service'
+
 
 @Component({
   selector: 'app-diagnostic-table',
@@ -7,5 +8,8 @@ import { IRepair } from '../../../shared/core/models/schemas/repairs.schema'
   styleUrls: ['./diagnostic-table.component.scss']
 })
 export class DiagnosticTableComponent {
-    @Input() repair = {} as IRepair
+    constructor(
+        public repairService: RepairService
+    ) {
+    }
 }
