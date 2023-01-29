@@ -1,18 +1,16 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import {
-    Router, Resolve,
-    RouterStateSnapshot,
-    ActivatedRouteSnapshot
-} from '@angular/router'
-import { Observable, of } from 'rxjs'
-import { RepairTypeService } from '../../../../shared/core/services/repair-type/repair-type.service'
+  Router, Resolve,
+  RouterStateSnapshot,
+  ActivatedRouteSnapshot
+} from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { RepairService } from '../../../../shared/core/services/repair/repair.service'
 
-
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class RepairListResolver implements Resolve<boolean> {
+export class RepairsInitiatedResolver implements Resolve<boolean> {
     constructor(
         private repairService: RepairService
     ) {
@@ -24,7 +22,10 @@ export class RepairListResolver implements Resolve<boolean> {
 
             this.repairService
                 .getRepairs(
-                    {},
+                    {
+                        initiatedAt : { $ne : null},
+                        inProgressAt : { $eq : null},
+                    },
                     {
                         page: 1,
                         limit: 10,
