@@ -21,7 +21,9 @@ export const validationMiddleware = (schema, Class) => {
 
             })
 
-            res.status(400).json({ errors })
+            console.log({ errors })
+
+            res.status(407).json({ errors })
 
         }
     }

@@ -43,13 +43,24 @@ export class CarListComponent {
 
             if (!isEmpty(result)) {
 
-                // this.carService.createUser(result.data).subscribe(() => {
-                //
-                //     this.loaderService.hydrate(false)
-                //
-                // })
-                console.log('>>>>>>>>>>>', result)
-                this.loaderService.hydrate(false)
+                this.carService.createCar(result.data).subscribe(() => {
+
+                    this.carService.getCars(
+                        {
+                            customer: this.sessionService.onlineUser.value?._id
+                        },
+                        {
+                        page: 1,
+                        limit: 10,
+                        sort: '-createdAt'
+                    }
+                    ).subscribe(() => {
+
+                        this.loaderService.hydrate(false)
+
+                    })
+
+                })
 
             } else {
 

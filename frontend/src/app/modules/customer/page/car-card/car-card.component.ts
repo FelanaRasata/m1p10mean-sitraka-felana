@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { CarService } from '../../../shared/core/services/car/car.service'
 import { NotificationService } from '../../../shared/core/services/notification/notification.service'
 import { RepairService } from '../../../shared/core/services/repair/repair.service'
+import { LoaderService } from '../../../shared/core/services/loader/loader.service'
 
 
 @Component({
@@ -12,12 +13,15 @@ import { RepairService } from '../../../shared/core/services/repair/repair.servi
 export class CarCardComponent {
 
     title = 'Car Card'
+
     repairUrlPath = '/customer/repairs/:id/selection'
+
 
     constructor(
         public carService: CarService,
         public repairService: RepairService,
         private notificationService: NotificationService,
+        private loaderService: LoaderService,
     ) {
     }
 
@@ -34,10 +38,29 @@ export class CarCardComponent {
 
         if (initRepair) {
 
+            this.loaderService.hydrate(true)
+
             this.repairService.dropOffCar(carId).subscribe((status) => {
 
-                if (status)
-                    this.notificationService.alert('Init success', `Car ${this.repairService.repair.value.car.carNumber}`, 'success')
+                if (status) {
+
+                    this.repairService.getRepairs(
+                        {
+                            car: carId
+                        },
+                        {
+                            page: 1,
+                            limit: 10,
+                            sort: '-createdAt',
+                        }
+                        ).subscribe(() => {
+
+                        this.notificationService.alert('Init success', `Car ${this.repairService.repair.value.car.carNumber}`, 'success')
+                        this.loaderService.hydrate(false)
+
+                    })
+
+                }
 
             })
 

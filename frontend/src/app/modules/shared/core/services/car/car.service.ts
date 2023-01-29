@@ -103,4 +103,35 @@ export class CarService {
 
     }
 
+
+    createCar(carDto: any): Observable<boolean> {
+
+        return new Observable<boolean>((subscriber) => {
+
+            const url = baseUrl(`${API_ENDPOINTS.cars}`)
+
+            this.apiService
+                .post<any>(url, { ...carDto })
+                .subscribe((result) => {
+
+                    if (result.status !== 200) {
+
+                        this.notificationService.alert('Car not saved', result.message, 'error')
+                        subscriber.next(false)
+
+                    } else {
+
+                        this.car.next(result.data)
+                        subscriber.next(true)
+
+                    }
+
+                    subscriber.complete()
+
+                })
+
+        })
+
+    }
+
 }

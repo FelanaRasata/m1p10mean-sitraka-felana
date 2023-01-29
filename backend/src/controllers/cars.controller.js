@@ -49,14 +49,14 @@ router.get('/:car_id', authentication, async (request, response) => {
 
 })
 
-router.post('/', validationMiddleware(CarVS, CarDto), async (request, response) => {
+router.post('/', authentication, validationMiddleware(CarVS, CarDto), async (request, response) => {
 
     try {
 
         const carData = request.body
         const car = await carService.create(carData)
 
-        response.status(200).json(toResponseEntity(200, 'Car has created', car))
+        response.status(200).json(toResponseEntity(200, 'Car has been created', car))
 
     } catch (error) {
 

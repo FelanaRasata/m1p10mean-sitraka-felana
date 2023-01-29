@@ -6,7 +6,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import { connectWithMongoose } from './config/mongo_db.js'
 import { Settings } from './config/settings.js'
-import { CarDiagnosisRouter } from './controllers/car_diagnosis.controller.js'
+import { CarDiagnosesRouter } from './controllers/car_diagnoses.controller.js'
 import { CarsRouter } from './controllers/cars.controller.js'
 import { DefaultRouter } from './controllers/default.controller.js'
 import { RepairTypesRouter } from './controllers/repair_types.controller.js'
@@ -76,7 +76,7 @@ const server = new Server([
     { path: '/cars', router: CarsRouter },
     { path: '/repairs', router: RepairsRouter },
     { path: '/repair_types', router: RepairTypesRouter },
-    { path: '/car_diagnosis', router: CarDiagnosisRouter },
+    { path: '/car_diagnosis', router: CarDiagnosesRouter },
 ])
 
 server.run()
