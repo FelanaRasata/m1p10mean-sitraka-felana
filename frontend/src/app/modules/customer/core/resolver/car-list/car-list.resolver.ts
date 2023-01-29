@@ -1,8 +1,7 @@
-import {Injectable} from '@angular/core'
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router'
-import {EMPTY, Observable} from 'rxjs'
-import {ICar} from '../../../../shared/core/models/schemas/cars.schema'
-import {CarService} from "../../../../shared/core/services/car/car.service";
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router'
+import { Observable } from 'rxjs'
+import { CarService } from '../../../../shared/core/services/car/car.service'
 
 
 @Injectable({

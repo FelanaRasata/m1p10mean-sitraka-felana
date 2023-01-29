@@ -13,11 +13,9 @@ import {
 
 export const API_ENDPOINTS = {
     user: 'users',
-    delivery_men: 'users/delivery_men',
-    order: 'orders',
-    benefits: 'orders/benefits',
     car: 'cars',
     repairs_car: '',
+    repair_types:'repair_types',
     session: {
         sign_in: 'auth/sign_in',
         sign_up: 'auth/sign_up',
