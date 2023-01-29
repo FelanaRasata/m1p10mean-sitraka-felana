@@ -21,6 +21,9 @@ import { RepairTypeListResolver } from '../modules/workshop/core/resolver/repair
 import { RepairListResolver } from '../modules/workshop/core/resolver/repair-list/repair-list.resolver'
 import { RepairResolver } from '../modules/workshop/core/resolver/repair/repair.resolver'
 import { DiagnosisResolver } from '../modules/customer/core/resolver/diagnosis/diagnosis.resolver'
+import {
+    RepairsInitiatedResolver
+} from '../modules/financial/core/resolver/repairs-initiated/repairs-initiated.resolver'
 
 
 const routes: Routes = [
@@ -77,6 +80,9 @@ const routes: Routes = [
             },
             {
                 path: 'repairs/initiated',
+                resolve: {
+                    data: RepairsInitiatedResolver
+                },
                 component: RepairsInitiatedComponent,
             },
             {
