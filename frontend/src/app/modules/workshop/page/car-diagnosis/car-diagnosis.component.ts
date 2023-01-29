@@ -7,6 +7,7 @@ import { CarDiagnosisService } from '../../../shared/core/services/car-diagnosis
 import { RepairService } from '../../../shared/core/services/repair/repair.service'
 import { ICarDiagnosisCreate, ICarDiagnosisCreateItem } from '../../../shared/core/models/api/car_diagnosis.dto'
 import { Router } from '@angular/router'
+import { LoaderService } from '../../../shared/core/services/loader/loader.service'
 
 
 @Component({
@@ -22,7 +23,8 @@ export class CarDiagnosisComponent {
         private notificationService: NotificationService,
         private carDiagnosisService: CarDiagnosisService,
         public repairService: RepairService,
-        private router: Router
+        private router: Router,
+        private loaderService: LoaderService
     ) {
         this.carDiagnosisCreate.diagnosisRepairs = []
     }
@@ -63,9 +65,13 @@ export class CarDiagnosisComponent {
 
 
     sendCarDiagnosis() {
+        this.loaderService.hydrate(true)
         this.carDiagnosisCreate.repair = this.repairService.repair.value._id
         this.carDiagnosisService.createCarDiagnosis(this.carDiagnosisCreate).subscribe({
-            next: () => this.router.navigate(["workshop/repairs"])
+            next: () => {
+                this.loaderService.hydrate(false)
+                this.router.navigate(['/workshop/repairs'])
+            }
         })
     }
 }
