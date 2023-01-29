@@ -82,6 +82,40 @@ router.put('/finance/validate/:repair_id', async (request, response) => {
 
 })
 
+router.put('/paid/:repair_id', async (request, response) => {
+
+    try {
+
+        const repairId = request.params.repair_id
+        const repair = await repairService.paidRepair(repairId)
+
+        response.status(200).json(toResponseEntity(200, 'Repair is paid', repair))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
+router.put('/car_back/:repair_id', async (request, response) => {
+
+    try {
+
+        const repairId = request.params.repair_id
+        const repair = await repairService.validateExitCar(repairId)
+
+        response.status(200).json(toResponseEntity(200, 'Car is taken back', repair))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
 router.put('/init/:repair_id', authentication, async (request, response) => {
 
     try {
