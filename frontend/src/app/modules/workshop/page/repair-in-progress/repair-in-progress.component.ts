@@ -4,6 +4,7 @@ import { NotificationService } from '../../../shared/core/services/notification/
 import { RepairService } from '../../../shared/core/services/repair/repair.service'
 import { IRepairTypeItem } from '../../../shared/core/models/schemas/repairs.schema'
 import { LoaderService } from '../../../shared/core/services/loader/loader.service'
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -17,20 +18,17 @@ export class RepairInProgressComponent {
 
     done: any = []
 
-    allDone: boolean = true
-
 
     constructor(
         private repairService: RepairService,
         private notificationService: NotificationService,
         private loaderService: LoaderService,
+        private router: Router,
     ) {
 
         this.todo = repairService.repair.value.selectedRepairs.filter(item => !item.checked)
 
         this.done = repairService.repair.value.selectedRepairs.filter(item => item.checked)
-
-        this.allDone = this.todo.length == 0
 
     }
 
@@ -63,6 +61,8 @@ export class RepairInProgressComponent {
 
     async validateChanges() {
 
+        this.loaderService.hydrate(true)
+
         const validate: boolean = await this.notificationService.confirmBox(
             `Validate Changes?`,
             'Check repairs',
@@ -78,28 +78,43 @@ export class RepairInProgressComponent {
                 return item
             })
 
-            const repairDto = { ...this.repairService.repair.value }
+            const repairDto: any = { ...this.repairService.repair.value }
             repairDto.selectedRepairs = [ ...this.todo, ...this.done ]
 
-            this.repairService.proceedRepair(repairDto._id, repairDto).subscribe((status) => {
+            if (this.todo.length == 0) {
 
-                if (status) {
+                repairDto.carRepairedAt = new Date().getTime()
 
-                    this.notificationService.alert('Changes applied!', '', 'success')
-                    this.allDone = this.todo.length == 0
+                this.repairService.finishRepair(repairDto._id, repairDto).subscribe((status) => {
 
-                }
+                    this.loaderService.hydrate(false)
 
-            })
+                    if (status) {
+
+                        this.notificationService.alert('Repair finished!', '', 'success')
+                        this.router.navigate(['/workshop/repairs']).then()
+
+                    }
+
+                })
+
+            } else {
+
+                this.repairService.proceedRepair(repairDto._id, repairDto).subscribe((status) => {
+
+                    this.loaderService.hydrate(false)
+
+                    if (status) {
+
+                        this.notificationService.alert('Changes applied!', '', 'success')
+
+                    }
+
+                })
+
+            }
 
         }
-
-    }
-
-
-    finishRepair() {
-
-        this.notificationService.alert('Finish repair?', '', 'warning')
 
     }
 
