@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core'
-import {RepairService} from "../../../core/services/repair/repair.service";
+import { Component, Input } from '@angular/core'
+import { RepairService } from '../../../core/services/repair/repair.service'
+import { PaginationService } from '../../../core/services/pagination/pagination.service'
+import { PageEvent } from '@angular/material/paginator'
 
 
 @Component({
@@ -8,10 +10,35 @@ import {RepairService} from "../../../core/services/repair/repair.service";
     styleUrls: ['./repairs-table.component.scss'],
 })
 export class RepairsTableComponent {
-    @Input('title') title: string = '';
+    @Input('title') title: string = ''
+
 
     constructor(
-        public repairService : RepairService
+        public repairService: RepairService,
+        public paginationService: PaginationService
     ) {
+    }
+
+
+    setPage($event: PageEvent): void {
+
+        this.repairService.repairs.next([])
+
+        this.paginationService.paginationData.next({
+            ...this.paginationService.paginationData.value,
+            page: $event.pageIndex + 1,
+            limit: $event.pageSize,
+        })
+
+        this.repairService.getRepairOfCar(
+            {},
+            {
+                page: $event.pageIndex + 1,
+                limit: $event.pageSize,
+                sort: '-updatedAt',
+            },
+        ).subscribe(() => {
+        })
+
     }
 }

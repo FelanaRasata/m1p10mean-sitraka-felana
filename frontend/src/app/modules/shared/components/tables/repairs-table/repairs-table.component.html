@@ -9,7 +9,6 @@
             <th>Car Dropped Off</th>
             <th>Car Taken Back</th>
             <th>Price</th>
-            <th></th>
         </tr>
         </thead>
         <tfoot>
@@ -17,7 +16,6 @@
             <th>Car Dropped Off</th>
             <th>Car Taken Back</th>
             <th>Price</th>
-            <th></th>
         </tr>
         </tfoot>
         <tbody>
@@ -25,9 +23,14 @@
             <td>{{repair.carDroppedOffAt}}</td>
             <td>{{repair.carTakenBackAt}}</td>
             <td>{{repair.price}}</td>
-            <td></td>
         </tr>
         </tbody>
     </table>
+    <app-paginator
+        [length]="paginationService.paginationData.value.totalItems"
+        [pageSize]="paginationService.paginationData.value.limit"
+        [pageIndex]="paginationService.paginationData.value.page - 1"
+        (page)="setPage($event)"
+    ></app-paginator>
 </div>
 
