@@ -6,14 +6,13 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import { connectWithMongoose } from './config/mongo_db.js'
 import { Settings } from './config/settings.js'
+import { CarDiagnosisRouter } from './controllers/car_diagnosis.controller.js'
 import { CarsRouter } from './controllers/cars.controller.js'
 import { DefaultRouter } from './controllers/default.controller.js'
+import { RepairTypesRouter } from './controllers/repair_types.controller.js'
 import { RepairsRouter } from './controllers/repairs.controller.js'
 import { SessionRouter } from './controllers/session.controller.js'
 import { errorHandlerMiddleware } from './middlewares/error_handler.middleware.js'
-import { RepairTypesRouter } from './controllers/repair_types.controller.js'
-import { CarDiagnosisRouter } from './controllers/car_diagnosis.controller.js'
-import { DiagnosisPercentageRouter } from './controllers/diagnosis_percentage.controller.js'
 
 
 class Server {
@@ -78,7 +77,6 @@ const server = new Server([
     { path: '/repairs', router: RepairsRouter },
     { path: '/repair_types', router: RepairTypesRouter },
     { path: '/car_diagnosis', router: CarDiagnosisRouter },
-    { path: '/diagnosis_percentage', router: DiagnosisPercentageRouter },
 ])
 
 server.run()

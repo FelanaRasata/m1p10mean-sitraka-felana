@@ -30,4 +30,10 @@ export const CONSTANTS = {
     }
 }
 
-const temp = 'rasatadiamondra@gmail.com'
+export const EXPENSES = {
+    diagnosis: 70000,
+    salaries: 7000000,
+    others: 2000000,
+    rent: 700000,
+    manpower: 0.05
+}
