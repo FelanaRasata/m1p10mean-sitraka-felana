@@ -8,5 +8,5 @@ import { Component } from '@angular/core'
 })
 export class RepairListComponent {
     title = ''
-    cardUrlPath = '/customer/repairs/:repair_id'
+    cardUrlPath = '/customer/repairs/:id'
 }

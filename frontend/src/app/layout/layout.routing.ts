@@ -136,6 +136,9 @@ const routes: Routes = [
             },
             {
                 path: 'repair/:repair_id/in_progress',
+                resolve: {
+                    repair: RepairResolver
+                },
                 component: RepairInProgressComponent,
             },
             {
