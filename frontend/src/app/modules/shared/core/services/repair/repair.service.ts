@@ -104,6 +104,7 @@ export class RepairService {
 
     }
 
+
     getRepairById(repairId: string): Observable<boolean> {
 
         return new Observable<boolean>((subscriber) => {
@@ -173,7 +174,47 @@ export class RepairService {
 
     }
 
-    financeValidate(repairId: string){
+
+    financeValidate(repairId: string): Observable<boolean> {
+
+        return new Observable<boolean>((subscriber) => {
+
+            const url = `${API_ENDPOINTS.repairs.in_progress}/${repairId}`
+            this.apiService
+                .put<IRepair>(
+                    baseUrl(url)
+                    ,
+                    {}
+                )
+                .subscribe((result) => {
+
+                    if (result.status != 200) {
+
+                        this.notificationService.alert('Update failed!', result.message, 'error')
+                        subscriber.next(false)
+                        subscriber.complete()
+
+                    } else {
+
+                        this.getRepairs(
+                            {},
+                            {
+                                page: 1,
+                                limit: 10,
+                                sort: '-updatedAt'
+                            }
+                        ).subscribe((status) => {
+
+                            subscriber.next(status)
+                            subscriber.complete()
+
+                        })
+
+                    }
+
+                })
+
+        })
 
     }
 
