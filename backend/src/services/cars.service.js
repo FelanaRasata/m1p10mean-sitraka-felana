@@ -1,6 +1,7 @@
 import createError from 'http-errors'
 import { Settings } from '../config/settings.js'
 import { Car } from '../models/cars.schema.js'
+import { Repair } from '../models/repairs.schema.js'
 import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
 import { UserService } from './users.service.js'
 
@@ -49,9 +50,19 @@ export class CarService {
 
         if (isEmpty(carId)) throw createError(409, 'No car ID found')
 
-        return Car
+        const foundCar = await Car
             .findOne({ _id: carId, deleted: false })
             .lean()
+
+        if (isEmpty(foundCar)) throw createError(409, 'No car found')
+
+        const repairsInProgress = await Repair
+            .findOne({ car: carId, paidAt: null, carTakenBackAt: null })
+            .lean()
+
+        Object.assign(foundCar, { beingRepaired: !isEmpty(repairsInProgress) })
+
+        return foundCar
 
     }
 

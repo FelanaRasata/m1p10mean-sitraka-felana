@@ -18,7 +18,6 @@ export class CarService {
 
     car: BehaviorSubject<ICar> = new BehaviorSubject<ICar>({} as ICar)
 
-
     constructor(
         private apiService: ApiService,
         private notificationService: NotificationService,
