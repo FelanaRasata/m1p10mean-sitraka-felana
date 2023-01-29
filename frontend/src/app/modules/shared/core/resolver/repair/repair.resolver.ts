@@ -5,10 +5,10 @@ import {
     ActivatedRouteSnapshot
 } from '@angular/router'
 import { forkJoin, Observable, of } from 'rxjs'
-import { isEmpty, reqDataToObservable } from '../../../../shared/core/services/utils/utils'
-import { CarService } from '../../../../shared/core/services/car/car.service'
-import { RepairService } from '../../../../shared/core/services/repair/repair.service'
-import { PaginationService } from '../../../../shared/core/services/pagination/pagination.service'
+import { isEmpty, reqDataToObservable } from '../../services/utils/utils'
+import { CarService } from '../../services/car/car.service'
+import { RepairService } from '../../services/repair/repair.service'
+import { PaginationService } from '../../services/pagination/pagination.service'
 
 
 @Injectable({

@@ -29,7 +29,7 @@ export class CarDiagnosisService {
     }
 
 
-    async carDiagnosis(carDiagnosisCreateData) {
+    async createDiagnosis(carDiagnosisCreateData) {
         let carDiagnosis = {}
 
         carDiagnosis.diagnosisRepairs = []
@@ -54,7 +54,7 @@ export class CarDiagnosisService {
 
         const currentCarDiagnosis = await this.create(carDiagnosis)
 
-        await this.repairService.carDiagnosis(carDiagnosis.repair, carDiagnosis.price)
+        await this.repairService.updateDiagnosisState(carDiagnosis.repair, carDiagnosis.price)
 
         return currentCarDiagnosis
 

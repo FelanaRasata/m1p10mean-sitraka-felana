@@ -5,6 +5,7 @@ import { CarDiagnosis } from '../models/car_diagnosis.schema.js'
 import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
 import { CarService } from './cars.service.js'
 
+
 const temp = CarDiagnosis
 
 export const UPDATE_TYPE = ['DIAGNO', 'INIT', 'PROGRESS', 'REPAIRED', 'PAID', 'TAKEN_BACK']
@@ -103,7 +104,7 @@ export class RepairService {
         if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         return Repair
-            .findOne({ _id: repairId, deleted: false })
+            .findOne({_id: repairId, deleted: false})
             .populate('car')
             .populate({
                 path: 'car_diagnosis',
@@ -116,7 +117,8 @@ export class RepairService {
 
     }
 
-    async carDiagnosis(repairId , price){
+
+    async updateDiagnosisState(repairId, price) {
 
         let currentRepair = await Repair.findById(repairId)
         if (!currentRepair['carDroppedOffAt'] || currentRepair['carDroppedOffAt'] === null || typeof currentRepair['carDroppedOffAt'] === 'undefined')
@@ -132,6 +134,16 @@ export class RepairService {
     }
 
 
+    async financeValidate(repairId) {
+
+        let currentRepair = await Repair.findById(repairId)
+
+        currentRepair.inProgressAt = new Date()
+
+        await currentRepair.save()
+
+        return await this.findById(repairId)
+    }
 
 
     applyChangesOnCurrentRepair(currentRepair, repairState, repairData) {
