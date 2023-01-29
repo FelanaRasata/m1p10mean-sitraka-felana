@@ -1,5 +1,6 @@
 <div>
     <app-repair-item></app-repair-item>
-    <app-diagnostic-table  ></app-diagnostic-table>
-    <a class="btn btn-facebook btn-block" (click)="validateFinance()" > Send Car Diagnosis </a>
+    <app-diagnostic-table></app-diagnostic-table>
+    <a class="btn btn-facebook btn-block" (click)="validateFinance()" *ngIf="!repairService.repair.value.inProgressAt">
+        Validate Purchase </a>
 </div>

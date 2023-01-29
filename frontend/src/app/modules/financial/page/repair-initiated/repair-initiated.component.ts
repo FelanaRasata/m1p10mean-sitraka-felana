@@ -10,7 +10,7 @@ import { logMessages } from '@angular-devkit/build-angular/src/builders/browser-
 })
 export class RepairInitiatedComponent {
     constructor(
-        private repairService: RepairService
+        public repairService: RepairService
     ) {
     }
 

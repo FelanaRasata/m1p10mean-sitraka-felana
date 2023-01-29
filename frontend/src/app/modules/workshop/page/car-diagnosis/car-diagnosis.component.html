@@ -1,5 +1,5 @@
 <div>
-    <app-car-item></app-car-item>
+    <app-repair-item></app-repair-item>
 
 
     <mat-tab-group>
@@ -38,7 +38,7 @@
                 </table>
 
             </div>
-            <a class="btn btn-facebook btn-block" (click)="sendCarDiagnosis()" > Send Car Diagnosis </a>
+            <a class="btn btn-facebook btn-block" (click)="sendCarDiagnosis()" *ngIf="!repairService.repair.value.diagnosedAt"> Send Car Diagnosis </a>
         </mat-tab>
     </mat-tab-group>
     <hr>
