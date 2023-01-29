@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { RepairService } from '../../../shared/core/services/repair/repair.service'
 import { BehaviorSubject } from 'rxjs'
 import { NotificationService } from '../../../shared/core/services/notification/notification.service'
+import { Router } from '@angular/router'
 
 
 @Component({
@@ -17,6 +18,7 @@ export class RepairChoiceComponent {
     constructor(
         public repairService: RepairService,
         public notificationService: NotificationService,
+        private router: Router,
     ) {
     }
 
@@ -25,27 +27,29 @@ export class RepairChoiceComponent {
 
         if (this.selectedList.value.length > 0) {
 
-            const repairDto: any = { ...this.repairService.repair.value }
-
-            console.log('>>>>>>>>>>', repairDto)
+            const repairDto: any = {...this.repairService.repair.value}
 
             repairDto.selectedRepairs = []
-            repairDto.initiatedAt = new Date()
+            repairDto.initiatedAt = new Date().getTime()
 
             for (const selectedRepair of this.selectedList.value) {
 
                 repairDto.selectedRepairs.push({
                     repairType: selectedRepair,
-                    checked: false
+                    checked: false,
                 })
 
             }
 
-            // this.repairService.initRepair(repairDto._id, repairDto).subscribe((status) => {
-            //
-            //     this.notificationService.alert('Repair', 'Repair initiated', 'success')
-            //
-            // })
+            this.repairService.initRepair(repairDto._id, repairDto).subscribe((status) => {
+
+                this.router.navigate([`/customers/cars/${repairDto.car._id}`]).then(() => {
+
+                    this.notificationService.alert('Repair', 'Repair initiated', 'success')
+
+                })
+
+            })
 
         } else {
 

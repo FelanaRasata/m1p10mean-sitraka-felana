@@ -65,7 +65,7 @@ export class RepairService {
         return new Observable<boolean>((subscriber) => {
 
             this.apiService
-                .post<any>(
+                .put<any>(
                     baseUrl(API_ENDPOINTS.repairs.init.replace(':repair_id', repairId)),
                     {
                         ...repairDto

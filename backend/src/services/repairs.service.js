@@ -1,13 +1,9 @@
 import createError from 'http-errors'
 import { Settings } from '../config/settings.js'
-import { CarDiagnosis } from '../models/car_diagnosis.schema.js'
 import { Repair } from '../models/repairs.schema.js'
 import { EXPENSES } from '../utils/constants.js'
 import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
 import { CarService } from './cars.service.js'
-
-
-const temp = CarDiagnosis
 
 
 export class RepairService {
@@ -30,13 +26,21 @@ export class RepairService {
             lean: true,
             allowDiskUse: true,
             customLabels: customLabels(),
-            populate: {
-                path: 'car_diagnosis',
-                populate: {
-                    path: 'diagnosisRepairs.repairType',
+            populate: [
+                {
+                    path: 'car'
+                },
+                {
+                    path: 'car_diagnosis',
+                    populate: {
+                        path: 'diagnosisRepairs.repairType',
+                    }
+                },
+                {
+                    path: 'selectedRepairs.repairType',
                     model: 'RepairType'
                 }
-            }
+            ]
         })
 
         return await Repair.paginate(query, options)
@@ -57,6 +61,10 @@ export class RepairService {
                     path: 'diagnosisRepairs.repairType',
                     model: 'RepairType'
                 }
+            })
+            .populate({
+                path: 'selectedRepairs.repairType',
+                model: 'RepairType'
             })
             .lean()
 
@@ -128,7 +136,7 @@ export class RepairService {
         }
 
         currentRepair.price = price
-        currentRepair.initiatedAt = repairData.initiatedAt
+        currentRepair.initiatedAt = new Date(repairData.initiatedAt)
 
         await currentRepair.save()
 
