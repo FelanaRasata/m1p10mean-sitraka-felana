@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRouting } from './app-routing'
 import { AppComponent } from './app.component'
@@ -19,19 +18,16 @@ import { FinancialModule } from './modules/financial/financial.module'
         AppComponent,
     ],
     imports: [
-        PublicModule,
-        SharedModule,
-        LayoutModule,
-
-        BrowserModule,
         AppRouting,
-        FormsModule,
-        HttpClientModule,
-
         BrowserAnimationsModule,
         CustomerModule,
+        FinancialModule,
+        FormsModule,
+        HttpClientModule,
+        LayoutModule,
+        PublicModule,
+        SharedModule,
         WorkshopModule,
-        FinancialModule
     ],
     providers: [],
     bootstrap: [AppComponent],

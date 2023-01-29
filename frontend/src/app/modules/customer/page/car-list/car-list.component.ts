@@ -1,7 +1,4 @@
 import { Component } from '@angular/core'
-import {CarService} from "../../../shared/core/services/car/car.service";
-import {SessionService} from "../../../shared/core/services/session/session.service";
-import {isEmpty} from "../../../shared/core/services/utils/utils";
 
 
 @Component({
@@ -11,22 +8,13 @@ import {isEmpty} from "../../../shared/core/services/utils/utils";
 })
 export class CarListComponent {
 
-    constructor(
-        private sessionService: SessionService
-    ) {
+    constructor() {
     }
+
 
     get title(): any {
 
-        if (isEmpty(this.sessionService.onlineUser.value)) {
-
-            return 'Your Cars';
-
-        } else {
-
-            return `${ this.sessionService.onlineUser.value?.lastName } your cars`
-
-        }
+        return 'Your Cars'
 
     }
 

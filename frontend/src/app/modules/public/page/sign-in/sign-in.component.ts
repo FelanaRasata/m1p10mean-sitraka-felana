@@ -36,7 +36,7 @@ export class SignInComponent {
         const path = this.route.snapshot.url[0].path
 
         switch (path) {
-            
+
             case 'workshop':
             case 'finance':
                 this.signUp = false
@@ -62,8 +62,6 @@ export class SignInComponent {
         if (this.signInForm.valid) {
 
             this.sessionService.signIn({...this.signInForm.value}).subscribe(async (status) => {
-
-                console.log(`${this.sessionService.getUrlPart()}`)
 
                 if (status) await this.router
                     .navigate([`${this.sessionService.getUrlPart()}`])
