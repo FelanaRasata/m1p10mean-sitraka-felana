@@ -9,7 +9,8 @@ import { RepairPaymentComponent } from './page/repair-payment/repair-payment.com
 import { ComponentsModule } from '../../components/components.module'
 import { SharedModule } from '../shared/shared.module'
 import { MatDialogModule } from '@angular/material/dialog'
-import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DiagnosisComponent } from './components/diagnosis/diagnosis.component'
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
         RepairListComponent,
         CarListComponent,
         RepairPaymentComponent,
+        DiagnosisComponent,
     ],
     exports: [
         CarListComponent,

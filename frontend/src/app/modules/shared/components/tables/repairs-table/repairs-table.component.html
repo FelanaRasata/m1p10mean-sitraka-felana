@@ -9,7 +9,7 @@
             <th>Car Dropped Off</th>
             <th>Car Taken Back</th>
             <th>Price</th>
-            <th *ngIf="goCard"></th>
+            <th *ngIf="cardUrlPath"></th>
         </tr>
         </thead>
         <tfoot>
@@ -17,16 +17,22 @@
             <th>Car Dropped Off</th>
             <th>Car Taken Back</th>
             <th>Price</th>
-            <th *ngIf="goCard"></th>
+            <th *ngIf="cardUrlPath"></th>
         </tr>
         </tfoot>
         <tbody>
         <tr *ngFor="let repair of repairService.repairs.value">
-            <td>{{repair.carDroppedOffAt}}</td>
-            <td>{{repair.carTakenBackAt || 'N/A'}}</td>
+            <td>{{repair.carDroppedOffAt | date:"d MMM. y"}}</td>
+            <td>{{(repair.carTakenBackAt | date:"d MMM. y") || 'N/A'}}</td>
             <td>{{repair.price}}</td>
-            <td *ngIf="goCard"><a class="nav-link" [routerLink]="['/workshop/car',repair._id,'diagnosis']">
-                Diagnosis</a></td>
+            <td *ngIf="cardUrlPath">
+                <a [routerLink]="[cardUrlPath.replace(':id', repair._id)]" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Diagnosis</span>
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import paginate from 'mongoose-paginate-v2'
 
 
-const DiagnosticPriceSchema = new mongoose.Schema(
+const DiagnosisPercentageSchema = new mongoose.Schema(
     {
         _id: {
             type: String,
@@ -24,6 +24,6 @@ const DiagnosticPriceSchema = new mongoose.Schema(
     }
 )
 
-DiagnosticPriceSchema.plugin(paginate)
+DiagnosisPercentageSchema.plugin(paginate)
 
-export const Rent = mongoose.model('DiagnosticPrice', DiagnosticPriceSchema, 'diagnostic_prices')
+export const DiagnosisPercentage = mongoose.model('DiagnosisPercentage', DiagnosisPercentageSchema, 'diagnosis_percentage')

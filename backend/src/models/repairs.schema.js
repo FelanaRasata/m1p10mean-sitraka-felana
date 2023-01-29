@@ -75,4 +75,11 @@ const RepairSchema = new mongoose.Schema(
 
 RepairSchema.plugin(paginate)
 
+RepairSchema.virtual('car_diagnosis', {
+    ref: 'CarDiagnosis',
+    localField: '_id',
+    foreignField: 'repair',
+    justOne: true
+});
+
 export const Repair = mongoose.model('Repair', RepairSchema, 'repairs')

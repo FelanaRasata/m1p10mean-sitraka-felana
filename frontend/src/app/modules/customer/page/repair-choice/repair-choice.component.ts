@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { RepairService } from '../../../shared/core/services/repair/repair.service'
 
 
 @Component({
@@ -8,4 +9,9 @@ import { Component } from '@angular/core'
 })
 export class RepairChoiceComponent {
 
+
+    constructor(
+        public repairService: RepairService
+    ) {
+    }
 }

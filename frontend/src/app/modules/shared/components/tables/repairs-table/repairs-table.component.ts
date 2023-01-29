@@ -14,7 +14,7 @@ export class RepairsTableComponent {
 
     @Input('car_id') carId: string = ''
 
-    @Input('go_card') goCard = false
+    @Input('card_url_path') cardUrlPath: string | null = null
 
 
     constructor(

@@ -9,7 +9,7 @@ async function connectWithMongoose(databaseUri) {
 
         await mongoose.connect(databaseUri, {
             useNewUrlParser: true,
-            useUnifiedTopology: true,
+            useUnifiedTopology: true
         })
 
         console.log('MongoDB Connected...')

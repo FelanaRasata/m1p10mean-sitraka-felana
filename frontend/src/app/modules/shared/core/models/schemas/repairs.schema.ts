@@ -1,49 +1,53 @@
 import { BaseSchema } from './bases.schema'
 import { ICar } from './cars.schema'
+import { IRepairType } from './repair_types.schema'
+import { ICarDiagnosis } from './car-diagnosis.schema'
 
 
 export interface IRepair extends BaseSchema {
-    car: string;
+    car: string
 
-    price: number;
+    price: number
 
-    repairType: string[];
+    repairType: string[]
 
-    carDroppedOffAt: Date;
+    carDroppedOffAt: Date
 
-    diagnosedAt: Date;
+    diagnosedAt: Date
 
-    initiatedAt: Date;
+    initiatedAt: Date
 
-    inProgressAt: Date;
+    inProgressAt: Date
 
-    carRepairedAt: Date;
+    carRepairedAt: Date
 
-    paidAt: Date;
+    paidAt: Date
 
-    carTakenBackAt: Date;
+    carTakenBackAt: Date
 
 }
 
+
 export interface IFullRepair extends BaseSchema {
-    car: ICar;
+    car: ICar
 
-    price: number;
+    price: number
 
-    repairType: string[];
+    selectedRepairs: IRepairType[]
 
-    carDroppedOffAt: Date;
+    carDroppedOffAt: Date
 
-    diagnosedAt: Date;
+    diagnosedAt: Date
 
-    initiatedAt: Date;
+    initiatedAt: Date
 
-    inProgressAt: Date;
+    inProgressAt: Date
 
-    carRepairedAt: Date;
+    carRepairedAt: Date
 
-    paidAt: Date;
+    paidAt: Date
 
-    carTakenBackAt: Date;
+    carTakenBackAt: Date
 
+    car_diagnosis: ICarDiagnosis
 }
