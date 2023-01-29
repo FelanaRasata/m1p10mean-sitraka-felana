@@ -38,6 +38,24 @@ export class RepairService {
     }
 
 
+    async initRepair(carId) {
+
+        const car = await this.carService.findById(carId)
+
+        if (isEmpty(car)) throw createError(409, 'Car not found.')
+
+        const createdRepair = new Repair(toDocumentFormat({
+            car: car._id,
+            carDroppedOffAt: new Date()
+        }))
+
+        await createdRepair.save()
+
+        return await this.findById(createdRepair._id)
+
+    }
+
+
     async create(repairData) {
 
         const car = await this.carService.findById(repairData.car)
@@ -77,6 +95,7 @@ export class RepairService {
 
         return Repair
             .findOne({_id: repairId, deleted: false})
+            .populate('car')
             .lean()
 
     }

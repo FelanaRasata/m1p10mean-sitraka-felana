@@ -31,8 +31,7 @@ router.get('', authentication, async (request, response) => {
 
 })
 
-router.get('/:car_id', async (request, response) => {
-// router.get('', async (request, response) => {
+router.get('/:car_id', authentication, async (request, response) => {
 
     try {
 
@@ -40,7 +39,7 @@ router.get('/:car_id', async (request, response) => {
 
         const car = await carService.findById(carId)
 
-        response.status(200).json(toResponseEntity(200, 'Getting car.', cars))
+        response.status(200).json(toResponseEntity(200, 'Getting car.', car))
 
     } catch (error) {
 

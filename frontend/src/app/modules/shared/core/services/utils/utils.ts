@@ -1,5 +1,6 @@
 import { environment } from '../../../../../../environments/environment'
 import * as CryptoJS from 'crypto-js'
+import { map, Observable, of } from 'rxjs'
 
 
 export const encrypt: (value: string) => string = (value: string): string => {
@@ -36,5 +37,20 @@ export const isEmpty = (value: any): boolean => {
         (Array.isArray(value) && value.length === 0) || // check for empty array
         (typeof value === 'object' && Object.keys(value).length === 0) // check for empty object
     )
+
+}
+
+
+export const reqDataToObservable = (data: object | Observable<any>) => {
+
+    if (data instanceof Observable) {
+
+        return data.pipe(map(d => d.data))
+
+    } else {
+
+        return of(data)
+
+    }
 
 }

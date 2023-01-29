@@ -18,8 +18,9 @@ const RepairSchema = new mongoose.Schema(
         price: {
             type: Number,
             required: true,
+            default: 0,
             validate: {
-                validator: (value) => value > 0,
+                validator: (value) => value >= 0,
                 message: (props) => `${props.value} is not a valid price.`
             }
         },

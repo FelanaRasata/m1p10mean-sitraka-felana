@@ -16,6 +16,7 @@ import { CarDiagnosisComponent } from '../modules/workshop/page/car-diagnosis/ca
 import { RepairInProgressComponent } from '../modules/workshop/page/repair-in-progress/repair-in-progress.component'
 import { ExitTicketComponent } from '../modules/workshop/page/exit-ticket/exit-ticket.component'
 import { CarListResolver } from '../modules/customer/core/resolver/car-list/car-list.resolver'
+import { CarCardResolver } from '../modules/customer/core/resolver/car-card/car-card.resolver'
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
             },
             {
                 path: 'cars/:car_id',
+                resolve: {data: CarCardResolver},
                 component: CarCardComponent,
             },
             {

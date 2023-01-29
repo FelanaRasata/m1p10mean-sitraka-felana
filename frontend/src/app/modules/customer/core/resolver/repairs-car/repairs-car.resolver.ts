@@ -27,9 +27,9 @@ export class RepairsCarResolver implements Resolve<boolean> {
             } else {
 
                 this.repairService
-                    .getRepairOfCar(
+                    .getRepairs(
                         {
-                            car: carId,
+                            cars: carId,
                         },
                         {
                             page: 1,

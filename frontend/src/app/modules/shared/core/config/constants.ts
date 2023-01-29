@@ -12,12 +12,14 @@ import {
 
 
 export const API_ENDPOINTS = {
-    user: 'users',
-    delivery_men: 'users/delivery_men',
-    order: 'orders',
+    users: 'users',
+    orders: 'orders',
     benefits: 'orders/benefits',
-    car: 'cars',
-    repairs_car: '',
+    cars: 'cars',
+    repairs: {
+        list: 'repairs',
+        init: 'repairs/init/:car_id'
+    },
     session: {
         sign_in: 'auth/sign_in',
         sign_up: 'auth/sign_up',

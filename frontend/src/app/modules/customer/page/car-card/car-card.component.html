@@ -1,12 +1,14 @@
 <div>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{title}}</h1>
-        <a (click)="openDialog()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            Dropped Off
+        <a (click)="confirmRepair(carService.car.value._id)" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            Drop Off
         </a>
     </div>
     <app-car-item></app-car-item>
 
-    <app-repairs-table>
+    <app-repairs-table
+        [car_id]="carService.car.value._id"
+    >
     </app-repairs-table>
 </div>

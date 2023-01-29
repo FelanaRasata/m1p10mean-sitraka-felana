@@ -23,11 +23,19 @@
         <tbody>
         <tr *ngFor="let repair of repairService.repairs.value">
             <td>{{repair.carDroppedOffAt}}</td>
-            <td>{{repair.carTakenBackAt}}</td>
+            <td>{{repair.carTakenBackAt || 'N/A'}}</td>
             <td>{{repair.price}}</td>
             <td></td>
         </tr>
         </tbody>
     </table>
+
+    <app-paginator
+        [length]="paginationService.paginationData.value.totalItems"
+        [pageSize]="paginationService.paginationData.value.limit"
+        [pageIndex]="paginationService.paginationData.value.page - 1"
+        (page)="setPage($event)"
+    ></app-paginator>
+
 </div>
 

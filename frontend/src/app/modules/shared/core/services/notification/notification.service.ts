@@ -45,13 +45,7 @@ export class NotificationService {
         // first alert content
         text?: string,
         icon?: string,
-        // confirm alert content
-        confirmText?: string,
-        confirmIcon?: string,
-        // cancel alert content
-        cancelText?: string,
-        cancelIcon?: string,
-    ) {
+    ): Promise<boolean> {
 
         const sweetalert2Options: any = {
             title: title,
@@ -62,21 +56,22 @@ export class NotificationService {
             cancelButtonText: cancelButtonText,
         }
 
-        sweetalert2
-            .fire(sweetalert2Options)
-            .then((result) => {
+        return new Promise((resolve, reject) => {
 
-                if (result.value) {
+            sweetalert2
+                .fire(sweetalert2Options)
+                .then((result) => {
 
-                    this.alert(confirmTitle, confirmText, confirmIcon)
+                    resolve(result.value || !(result.dismiss === sweetalert2.DismissReason.cancel))
 
-                } else if (result.dismiss === sweetalert2.DismissReason.cancel) {
+                })
+                .catch((error) => {
 
-                    this.alert(cancelTitle, cancelText, cancelIcon)
+                    reject(error)
 
-                }
+                })
 
-            })
+        })
 
     }
 

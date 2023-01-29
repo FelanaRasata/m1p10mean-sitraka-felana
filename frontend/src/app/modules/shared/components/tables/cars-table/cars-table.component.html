@@ -19,8 +19,8 @@
         </tfoot>
         <tbody>
         <tr *ngFor="let car of carService.cars.value">
-            <td><a class="nav-link" [routerLink]="['/cars', car._id]">{{car.carNumber}}</a></td>
-            <td><a class="nav-link" [routerLink]="['/cars', car._id]">{{car.brand}}</a></td>
+            <td><a class="nav-link" [routerLink]="['/customer/cars', car._id]">{{car.carNumber}}</a></td>
+            <td><a class="nav-link" [routerLink]="['/customer/cars', car._id]">{{car.brand}}</a></td>
         </tr>
         </tbody>
     </table>

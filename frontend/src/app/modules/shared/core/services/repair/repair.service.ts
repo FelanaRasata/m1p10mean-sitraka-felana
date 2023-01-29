@@ -1,11 +1,12 @@
-import {Injectable} from '@angular/core'
-import {BehaviorSubject, Observable} from "rxjs";
-import {baseUrl} from "../utils/utils";
-import {API_ENDPOINTS} from "../../config/constants";
-import {ApiService} from "../api/api.service";
-import {NotificationService} from "../notification/notification.service";
-import {PaginationService} from "../pagination/pagination.service";
-import {IRepair} from "../../models/schemas/repairs.schema";
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { baseUrl } from '../utils/utils'
+import { API_ENDPOINTS } from '../../config/constants'
+import { ApiService } from '../api/api.service'
+import { NotificationService } from '../notification/notification.service'
+import { PaginationService } from '../pagination/pagination.service'
+import { IFullRepair, IRepair } from '../../models/schemas/repairs.schema'
+import { IResponseType } from '../../models/global/global'
 
 
 @Injectable({
@@ -13,47 +14,90 @@ import {IRepair} from "../../models/schemas/repairs.schema";
 })
 export class RepairService {
 
-    repairs: BehaviorSubject<IRepair[]> = new BehaviorSubject<IRepair[]>([]);
-    repair: BehaviorSubject<IRepair> = new BehaviorSubject<IRepair>({} as IRepair);
+    repairs: BehaviorSubject<IRepair[]> = new BehaviorSubject<IRepair[]>([])
+
+    repair: BehaviorSubject<IFullRepair> = new BehaviorSubject<IFullRepair>({} as IFullRepair)
+
 
     constructor(
         private apiService: ApiService,
         private notificationService: NotificationService,
-        private paginationService: PaginationService
+        private paginationService: PaginationService,
     ) {
     }
 
-    getRepairOfCar(query: any, options: any): Observable<boolean> {
+
+    initRepair(carId: string) {
 
         return new Observable<boolean>((subscriber) => {
 
             this.apiService
-                .get<any>(
-                    baseUrl(API_ENDPOINTS.repairs_car)
-                    , {
-                        params: {query: JSON.stringify(query), options: JSON.stringify(options)}
-                    }
+                .post<any>(
+                    baseUrl(API_ENDPOINTS.repairs.init.replace(':car_id', carId)),
+                    {},
                 )
                 .subscribe((result) => {
 
                     if (result.status != 200) {
 
-                        this.notificationService.alert('No data found', result.message, 'error');
-                        subscriber.next(false);
+                        this.notificationService.alert('Init error', result.message, 'error')
+                        subscriber.next(false)
 
                     } else {
 
-                        this.repairs.next(result.data.items);
-                        this.paginationService.setPaginationData(result.data.paginator);
-                        subscriber.next(true);
+                        const repair = result.data
+                        this.repair.next(repair)
+                        subscriber.next(true)
 
                     }
 
                     subscriber.complete()
 
-                });
+                })
 
-        });
+        })
+
+    }
+
+
+    fetchRepairs(query: any, options: any): Observable<IResponseType<any>> {
+
+        return this.apiService
+            .get<any>(
+                baseUrl(API_ENDPOINTS.repairs.list)
+                , {
+                    params: {query: JSON.stringify(query), options: JSON.stringify(options)},
+                },
+            )
+
+    }
+
+
+    getRepairs(query: any, options: any): Observable<boolean> {
+
+        return new Observable<boolean>((subscriber) => {
+
+            this.fetchRepairs(query, options)
+                .subscribe((result) => {
+
+                    if (result.status !== 200) {
+
+                        this.notificationService.alert('No data found', result.message, 'error')
+                        subscriber.next(false)
+
+                    } else {
+
+                        this.repairs.next(result.data.items)
+                        this.paginationService.setPaginationData(result.data.paginator)
+                        subscriber.next(true)
+
+                    }
+
+                    subscriber.complete()
+
+                })
+
+        })
 
     }
 

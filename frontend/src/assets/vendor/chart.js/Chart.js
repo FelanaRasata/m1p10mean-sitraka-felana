@@ -10178,7 +10178,7 @@
                     hidden: null,			// See isDatasetVisible() comment
                     xAxisID: null,
                     yAxisID: null,
-                    order: dataset.order || 0,
+                    orders: dataset.order || 0,
                     index: datasetIndex
                 }
             }
