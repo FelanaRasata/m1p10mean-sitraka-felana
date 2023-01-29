@@ -191,7 +191,7 @@ export class RepairService {
         currentRepair.price = price
         currentRepair.initiatedAt = new Date(repairData.initiatedAt)
 
-        if (allNotPart) currentRepair.inProgressAt = new Date()
+        if (allNotPart===1) currentRepair.inProgressAt = new Date()
 
         await currentRepair.save()
 
