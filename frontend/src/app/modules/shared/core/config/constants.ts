@@ -56,13 +56,13 @@ export interface RouteInfo {
 export const CUSTOMER_ROUTES: RouteInfo[] = [
     {
         path: 'customer/cars',
-        title: 'Your cars',
+        title: 'My cars',
         class: '',
         icon: faBasketShopping,
     },
     {
         path: 'customer/repairs',
-        title: 'Your repairs',
+        title: 'Repairs in progress',
         class: '',
         icon: faBasketShopping,
     },

@@ -43,7 +43,7 @@ export class RepairChoiceComponent {
 
             this.repairService.initRepair(repairDto._id, repairDto).subscribe((status) => {
 
-                this.router.navigate([`/customers/cars/${repairDto.car._id}`]).then(() => {
+                this.router.navigate([`/customer/cars/${repairDto.car._id}`]).then(() => {
 
                     this.notificationService.alert('Repair', 'Repair initiated', 'success')
 
