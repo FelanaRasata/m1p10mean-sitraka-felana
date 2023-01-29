@@ -11,6 +11,7 @@ import { DefaultRouter } from './controllers/default.controller.js'
 import { RepairsRouter } from './controllers/repairs.controller.js'
 import { SessionRouter } from './controllers/session.controller.js'
 import { errorHandlerMiddleware } from './middlewares/error_handler.middleware.js'
+import { RepairTypesRouter } from './controllers/repair_types.controller.js'
 
 
 class Server {
@@ -73,6 +74,7 @@ const server = new Server([
     { path: '/auth', router: SessionRouter },
     { path: '/cars', router: CarsRouter },
     { path: '/repairs', router: RepairsRouter },
+    { path: '/repair_types', router: RepairTypesRouter },
 ])
 
 server.run()

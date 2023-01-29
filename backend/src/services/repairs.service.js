@@ -60,8 +60,6 @@ export class RepairService {
 
         query = Object.assign(isEmpty(query) ? {} : query, {deleted: false})
 
-        console.log(query)
-
         options = Object.assign(isEmpty(options) ? {} : options, {
             lean: true,
             allowDiskUse: true,

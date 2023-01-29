@@ -50,7 +50,7 @@ router.get('/:car_id', async (request, response) => {
 
 })
 
-router.post('/create', validationMiddleware(CarVS, CarDto), async (request, response) => {
+router.post('/', validationMiddleware(CarVS, CarDto), async (request, response) => {
 
     try {
 
@@ -67,7 +67,7 @@ router.post('/create', validationMiddleware(CarVS, CarDto), async (request, resp
 
 })
 
-router.put('/update/:car_id', validationMiddleware(CarVS, CarDto), async (request, response) => {
+router.put('/:car_id', validationMiddleware(CarVS, CarDto), async (request, response) => {
 
     try {
 
@@ -85,7 +85,7 @@ router.put('/update/:car_id', validationMiddleware(CarVS, CarDto), async (reques
 
 })
 
-router.delete('/delete/:car_id', async (request, response) => {
+router.delete('/:car_id', async (request, response) => {
 
     try {
 
