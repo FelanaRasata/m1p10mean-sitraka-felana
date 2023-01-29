@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { LoaderService } from './modules/shared/core/services/loader/loader.service'
+import { NavigationCancel, NavigationEnd, NavigationStart, Router } from '@angular/router'
 
 
 @Component({
@@ -12,7 +13,30 @@ export class AppComponent {
 
 
     constructor(
-        public loaderService: LoaderService
+        public loaderService: LoaderService,
+        private router: Router,
     ) {
     }
+
+
+    ngOnInit() {
+
+        this.router.events.subscribe(event => {
+
+            if (event instanceof NavigationStart) {
+
+                this.loaderService.hydrate(true)
+
+            }
+
+            if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
+
+                this.loaderService.hydrate(false)
+
+            }
+
+        })
+
+    }
+
 }

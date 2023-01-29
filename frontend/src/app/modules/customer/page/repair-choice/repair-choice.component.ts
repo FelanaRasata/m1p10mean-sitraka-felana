@@ -3,6 +3,7 @@ import { RepairService } from '../../../shared/core/services/repair/repair.servi
 import { BehaviorSubject } from 'rxjs'
 import { NotificationService } from '../../../shared/core/services/notification/notification.service'
 import { Router } from '@angular/router'
+import { LoaderService } from '../../../shared/core/services/loader/loader.service'
 
 
 @Component({
@@ -18,12 +19,15 @@ export class RepairChoiceComponent {
     constructor(
         public repairService: RepairService,
         public notificationService: NotificationService,
+        public loaderService: LoaderService,
         private router: Router,
     ) {
     }
 
 
     initiateRepair(): void {
+
+        this.loaderService.hydrate(true)
 
         if (this.selectedList.value.length > 0) {
 
@@ -45,6 +49,7 @@ export class RepairChoiceComponent {
 
                 this.router.navigate([`/customer/cars/${repairDto.car._id}`]).then(() => {
 
+                    this.loaderService.hydrate(false)
                     this.notificationService.alert('Repair', 'Repair initiated', 'success')
 
                 })
