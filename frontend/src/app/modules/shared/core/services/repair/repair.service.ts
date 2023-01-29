@@ -5,7 +5,7 @@ import { API_ENDPOINTS } from '../../config/constants'
 import { ApiService } from '../api/api.service'
 import { NotificationService } from '../notification/notification.service'
 import { PaginationService } from '../pagination/pagination.service'
-import { IFullRepair, IRepair } from '../../models/schemas/repairs.schema'
+import { IRepair } from '../../models/schemas/repairs.schema'
 import { IResponseType } from '../../models/global/global'
 
 
@@ -16,7 +16,7 @@ export class RepairService {
 
     repairs: BehaviorSubject<IRepair[]> = new BehaviorSubject<IRepair[]>([])
 
-    repair: BehaviorSubject<IFullRepair> = new BehaviorSubject<IFullRepair>({} as IFullRepair)
+    repair: BehaviorSubject<IRepair> = new BehaviorSubject<IRepair>({} as IRepair)
 
 
     constructor(
@@ -137,6 +137,5 @@ export class RepairService {
         })
 
     }
-
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { RepairService } from '../../../shared/core/services/repair/repair.service'
+import { BehaviorSubject } from 'rxjs'
 
 
 @Component({
@@ -9,9 +10,11 @@ import { RepairService } from '../../../shared/core/services/repair/repair.servi
 })
 export class RepairChoiceComponent {
 
+    selectedList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([])
+
 
     constructor(
-        public repairService: RepairService
+        public repairService: RepairService,
     ) {
     }
 }
