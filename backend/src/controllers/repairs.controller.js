@@ -1,7 +1,5 @@
 import { Router } from 'express'
-import { CarDto, CarVS } from '../dto/cars.dto.js'
 import { authentication } from '../middlewares/authentication.middleware.js'
-import { validationMiddleware } from '../middlewares/validation.middleware.js'
 import { RepairService } from '../services/repairs.service.js'
 import { isEmpty, toResponseEntity } from '../utils/utils.js'
 
@@ -14,7 +12,7 @@ router.get('/', async (request, response) => {
 
     try {
 
-        const optionsData = isEmpty(request.query.options) ? {pagination: false} : JSON.parse(request.query.options)
+        const optionsData = isEmpty(request.query.options) ? { pagination: false } : JSON.parse(request.query.options)
 
         const queryData = isEmpty(request.query.query) ? {} : JSON.parse(request.query.query)
 
@@ -146,12 +144,12 @@ router.put('/init/:repair_id', authentication, async (request, response) => {
 
     } catch (error) {
 
+        console.log('>>>>>>>>>>>', error)
         response.status(200).json(toResponseEntity(409, String(error)))
 
     }
 
 })
-
 
 
 router.delete('/:repair_id', async (request, response) => {

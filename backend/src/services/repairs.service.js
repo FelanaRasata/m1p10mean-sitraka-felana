@@ -170,17 +170,23 @@ export class RepairService {
 
         if (isEmpty(currentRepair) || currentRepair?.deleted) throw createError(409, 'No repair found')
 
+        console.log('<<<<<<<<<<<<', repairData.selectedRepairs)
+
         currentRepair.selectedRepairs = repairData.selectedRepairs
         let price = repairData.car_diagnosis.price
         let allNotPart = 1
 
         for (const repairItem of repairData.selectedRepairs) {
 
-            const repairType = repairData.car_diagnosis.diagnosisRepairs.find(element => element.repairType._id === repairItem)
+            const repairType = repairData.car_diagnosis.diagnosisRepairs.find(element => element.repairType._id === repairItem.repairType)
 
-            price += isEmpty(repairType) ? 0 : (repairType.repairCost * (1 + EXPENSES.manpower))
+            if (isEmpty(repairType)) {
 
-            allNotPart *= repairType.repairType.carPart ? 0 : 1
+                price += repairType.repairCost * (1 + EXPENSES.manpower)
+
+                allNotPart *= repairType.repairType.carPart ? 0 : 1
+
+            }
 
         }
 

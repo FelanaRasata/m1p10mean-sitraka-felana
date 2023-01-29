@@ -51,13 +51,14 @@ export class RepairChoiceComponent {
 
                     this.router.navigate([`/customer/cars/${repairDto.car._id}`]).then(() => {
 
-                        this.loaderService.hydrate(false)
                         this.notificationService.alert('Repair', 'Repair initiated', 'success')
 
                     })
 
                 }
 
+                this.loaderService.hydrate(false)
+                
             })
 
         } else {
