@@ -25,9 +25,11 @@
             <td>{{repair.repairType.name}}</td>
             <td>{{repair.repairType.repairCost}}</td>
             <td>{{repair.quantity}}</td>
-            <th>
-                <input class="form-check-input" type="checkbox" (change)="updateSelectedList(repair.repairType._id)">
-            </th>
+            <td>
+                <div class="checkbox-wrapper-2">
+                    <input type="checkbox" class="sc-gJwTLC ikxBAC" (change)="updateSelectedList(repair.repairType._id)">
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
