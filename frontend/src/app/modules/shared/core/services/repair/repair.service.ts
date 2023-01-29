@@ -5,7 +5,7 @@ import { API_ENDPOINTS } from '../../config/constants'
 import { ApiService } from '../api/api.service'
 import { NotificationService } from '../notification/notification.service'
 import { PaginationService } from '../pagination/pagination.service'
-import { IFullRepair, IRepair } from '../../models/schemas/repairs.schema'
+import { IRepair } from '../../models/schemas/repairs.schema'
 import { IResponseType } from '../../models/global/global'
 
 
@@ -16,7 +16,7 @@ export class RepairService {
 
     repairs: BehaviorSubject<IRepair[]> = new BehaviorSubject<IRepair[]>([])
 
-    repair: BehaviorSubject<IFullRepair> = new BehaviorSubject<IFullRepair>({} as IFullRepair)
+    repair: BehaviorSubject<IRepair> = new BehaviorSubject<IRepair>({} as IRepair)
 
 
     constructor(
@@ -126,44 +126,6 @@ export class RepairService {
 
                         this.repairs.next(result.data.items)
                         this.paginationService.setPaginationData(result.data.paginator)
-                        subscriber.next(true)
-
-                    }
-
-                    subscriber.complete()
-
-                })
-
-        })
-
-    }
-
-    fetchRepairById(repairId: string): Observable<IResponseType<any>> {
-
-        const url = baseUrl(`${API_ENDPOINTS.repairs.list}/${repairId}`)
-
-        return this.apiService
-            .get<any>(url)
-
-    }
-
-    getRepairById(repairId: string): Observable<boolean> {
-
-        return new Observable<boolean>((subscriber) => {
-
-            // const url = baseUrl(`${API_ENDPOINTS.repairs}/${repairId}`)
-
-            this.fetchRepairById(repairId)
-                .subscribe((result) => {
-
-                    if (result.status !== 200) {
-
-                        this.notificationService.alert('No data found', result.message, 'error')
-                        subscriber.next(false)
-
-                    } else {
-
-                        this.repair.next(result.data)
                         subscriber.next(true)
 
                     }

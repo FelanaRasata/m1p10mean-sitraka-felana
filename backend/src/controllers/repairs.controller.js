@@ -36,6 +36,8 @@ router.get('/:repair_id', async (request, response) => {
 
         const repair = await repairService.findById(request.params.repair_id)
 
+        console.log('>>>>>>>>>>', repair.car_diagnosis)
+
         response.status(200).json(toResponseEntity(200, 'Repairs Car.', repair))
 
     } catch (error) {
