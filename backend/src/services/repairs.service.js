@@ -76,12 +76,21 @@ export class RepairService {
 
     async find(query, options) {
 
-        query = Object.assign(isEmpty(query) ? {} : query, {deleted: false})
+        query = Object.assign(isEmpty(query) ? {} : query, {
+            deleted: false
+        })
 
         options = Object.assign(isEmpty(options) ? {} : options, {
             lean: true,
             allowDiskUse: true,
-            customLabels: customLabels()
+            customLabels: customLabels(),
+            populate: {
+                path: 'car_diagnosis',
+                populate: {
+                    path: 'diagnosisRepairs.repairType',
+                    model: 'RepairType'
+                }
+            }
         })
 
         return await Repair.paginate(query, options)
