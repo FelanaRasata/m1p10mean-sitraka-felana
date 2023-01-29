@@ -12,7 +12,7 @@ import { RepairService } from '../../../shared/core/services/repair/repair.servi
 export class CarCardComponent {
 
     title = 'Car Card'
-
+    repairUrlPath = 'repairs/:id/selection'
 
     constructor(
         public carService: CarService,

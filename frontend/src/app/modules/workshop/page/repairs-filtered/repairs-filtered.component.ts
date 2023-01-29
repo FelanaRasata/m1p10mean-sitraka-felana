@@ -9,5 +9,6 @@ import { Component } from '@angular/core'
 export class RepairsFilteredComponent {
     title = 'List of repair'
 
-    goCard = true
+    repairUrlPath = '/workshop/car/:id/diagnosis'
+
 }

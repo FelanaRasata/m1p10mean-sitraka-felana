@@ -18,9 +18,25 @@ router.get('/', async (request, response) => {
 
         const queryData = isEmpty(request.query.query) ? {} : JSON.parse(request.query.query)
 
-        const cars = await repairService.find(queryData, optionsData)
+        const repairs = await repairService.find(queryData, optionsData)
 
-        response.status(200).json(toResponseEntity(200, 'Repairs Car.', cars))
+        response.status(200).json(toResponseEntity(200, 'Repairs Car.', repairs))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
+router.get('/:repair_id', async (request, response) => {
+
+    try {
+
+        const repair = await repairService.findById(request.params.repair_id)
+
+        response.status(200).json(toResponseEntity(200, 'Repairs Car.', repair))
 
     } catch (error) {
 

@@ -1,11 +1,11 @@
 import createError from 'http-errors'
-import * as _ from 'lodash'
 import { Settings } from '../config/settings.js'
 import { Repair } from '../models/repairs.schema.js'
-import { ERepairState } from '../utils/static_enums.js'
+import { CarDiagnosis } from '../models/car_diagnosis.schema.js'
 import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
 import { CarService } from './cars.service.js'
 
+const temp = CarDiagnosis
 
 export const UPDATE_TYPE = ['DIAGNO', 'INIT', 'PROGRESS', 'REPAIRED', 'PAID', 'TAKEN_BACK']
 
@@ -94,8 +94,15 @@ export class RepairService {
         if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         return Repair
-            .findOne({_id: repairId, deleted: false})
+            .findOne({ _id: repairId, deleted: false })
             .populate('car')
+            .populate({
+                path: 'car_diagnosis',
+                populate: {
+                    path: 'diagnosisRepairs.repairType',
+                    model: 'RepairType'
+                }
+            })
             .lean()
 
     }

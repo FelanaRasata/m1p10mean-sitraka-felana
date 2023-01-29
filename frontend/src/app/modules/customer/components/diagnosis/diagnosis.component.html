@@ -1,0 +1,35 @@
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">{{title}}</h1>
+
+<!--<div>-->
+<!--    <p><b>Car Number : </b> {{repairService.repair.value.car.carNumber}} </p>-->
+<!--    <p><b>Brand : </b> {{repairService.repair.value.car.brand}} </p>-->
+<!--</div>-->
+
+<!-- DataTales Example -->
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Repair Cost</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Repair Cost</th>
+            <th>Quantity</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        <tr *ngFor="let repair of repairService.repair.value.car_diagnosis.diagnosisRepairs">
+            <td>{{repair.repairType.name}}</td>
+            <td>{{repair.repairType.repairCost}}</td>
+            <td>{{repair.quantity}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -35,12 +35,12 @@ export class CarCardResolver implements Resolve<boolean> {
 
                 this.fetchData(carId).subscribe(data => {
 
-                    this.carService.car.next(data.car);
+                    this.carService.car.next(data.car)
                     this.repairService.repairs.next(data.repairs.items)
                     this.paginationService.setPaginationData(data.repairs.paginator)
 
-                    subscriber.next(true);
-                    subscriber.complete();
+                    subscriber.next(true)
+                    subscriber.complete()
 
                 })
 

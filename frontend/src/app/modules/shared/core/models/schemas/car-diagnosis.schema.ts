@@ -1,8 +1,9 @@
 import { BaseSchema } from './bases.schema'
+import { IRepairType } from './repair_types.schema'
 
 
 export interface ICarDiagnosisItem {
-    repairType: string;
+    repairType: IRepairType;
 
     quantity: number;
 }
