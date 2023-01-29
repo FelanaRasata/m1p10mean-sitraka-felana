@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { LoaderService } from './modules/shared/core/services/loader/loader.service'
 
 
 @Component({
@@ -8,4 +9,10 @@ import { Component } from '@angular/core'
 })
 export class AppComponent {
     title = 'm1p10mean-sitraka-felana-front'
+
+
+    constructor(
+        public loaderService: LoaderService
+    ) {
+    }
 }

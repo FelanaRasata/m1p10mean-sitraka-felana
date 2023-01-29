@@ -1,0 +1,35 @@
+<h4 mat-dialog-title>
+    {{data.title}}
+</h4>
+
+<hr>
+
+<mat-dialog-content [formGroup]="userForm">
+
+    <div class="form-group">
+        <input type="hidden" class="form-control form-control-user"
+               formControlName="userId" autocomplete="off">
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control form-control-user"
+               placeholder="Car Number" formControlName="carNumber" autocomplete="off">
+    </div>
+
+    <div class="form-group">
+        <input type="email" class="form-control form-control-user"
+               placeholder="Brand" formControlName="brand" autocomplete="off">
+    </div>
+
+</mat-dialog-content>
+
+<hr>
+
+<mat-dialog-actions>
+    <button class="btn btn-success btn-block" (click)="submit()">
+        Save
+    </button>
+    <button class="btn btn-dark btn-block" (click)="close()">
+        cancel
+    </button>
+</mat-dialog-actions>

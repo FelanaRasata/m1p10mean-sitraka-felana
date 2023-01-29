@@ -9,8 +9,10 @@ import { RepairPaymentComponent } from './page/repair-payment/repair-payment.com
 import { ComponentsModule } from '../../components/components.module'
 import { SharedModule } from '../shared/shared.module'
 import { MatDialogModule } from '@angular/material/dialog'
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { DiagnosisComponent } from './components/diagnosis/diagnosis.component'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { DiagnosisItemsTableComponent } from './components/tables/diagnosis-items-table/diagnosis-items-table.component';
+import { CarCreationComponent } from './components/modals/car-creation/car-creation.component'
+import { ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { DiagnosisComponent } from './components/diagnosis/diagnosis.component'
         RepairListComponent,
         CarListComponent,
         RepairPaymentComponent,
-        DiagnosisComponent,
+        DiagnosisItemsTableComponent,
+        CarCreationComponent,
     ],
     exports: [
         CarListComponent,
@@ -31,7 +34,8 @@ import { DiagnosisComponent } from './components/diagnosis/diagnosis.component'
         ComponentsModule,
         SharedModule,
         MatDialogModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        ReactiveFormsModule,
     ],
 })
 export class CustomerModule {

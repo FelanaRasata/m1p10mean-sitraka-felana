@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core'
+import { Component } from '@angular/core'
 import { CarService } from '../../../core/services/car/car.service'
 import { PaginationService } from '../../../core/services/pagination/pagination.service'
 import { PageEvent } from '@angular/material/paginator'
-import { Router } from '@angular/router'
+import { MatDialog } from '@angular/material/dialog'
 
 
 @Component({
@@ -11,9 +11,6 @@ import { Router } from '@angular/router'
     styleUrls: ['./cars-table.component.scss'],
 })
 export class CarsTableComponent {
-
-    @Input('title') title: string = ''
-
 
     constructor(
         public carService: CarService,

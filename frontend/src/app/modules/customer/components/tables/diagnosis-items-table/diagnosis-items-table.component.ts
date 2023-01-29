@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core'
-import { RepairService } from '../../../shared/core/services/repair/repair.service'
 import { BehaviorSubject } from 'rxjs'
+import { RepairService } from '../../../../shared/core/services/repair/repair.service'
 
 
 @Component({
-    selector: 'app-diagnosis',
-    templateUrl: './diagnosis.component.html',
-    styleUrls: ['./diagnosis.component.scss'],
+    selector: 'app-diagnosis-items-table',
+    templateUrl: './diagnosis-items-table.component.html',
+    styleUrls: ['./diagnosis-items-table.component.scss'],
 })
-export class DiagnosisComponent {
+export class DiagnosisItemsTableComponent {
 
     @Input('title') title: string = ''
 

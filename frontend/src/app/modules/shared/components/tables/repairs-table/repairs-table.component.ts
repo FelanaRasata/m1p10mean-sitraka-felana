@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core'
 import { RepairService } from '../../../core/services/repair/repair.service'
 import { PaginationService } from '../../../core/services/pagination/pagination.service'
 import { PageEvent } from '@angular/material/paginator'
+import { SessionService } from '../../../core/services/session/session.service'
+import { EUserType } from '../../../core/models/global/static_enums'
 
 
 @Component({
@@ -17,9 +19,12 @@ export class RepairsTableComponent {
     @Input('card_url_path') cardUrlPath: string | null = null
 
 
+    userType = EUserType.FIM
+
     constructor(
         public repairService: RepairService,
         public paginationService: PaginationService,
+        public sessionService: SessionService,
     ) {
     }
 
