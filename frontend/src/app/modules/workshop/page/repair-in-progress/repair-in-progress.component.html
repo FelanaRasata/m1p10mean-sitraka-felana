@@ -1,12 +1,18 @@
 <div>
     <app-repair-item></app-repair-item>
     <hr>
-<!--    <app-repair-type-list></app-repair-type-list>-->
     <hr>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of checkedItems" cdkDrag>{{item}}</div>
+    </div>
+
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of uncheckedItems" cdkDrag>{{item}}</div>
+    </div>
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 50%" aria-valuenow="50"
              aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <hr>
-    <a href="#" class="btn btn-facebook btn-block"> Update Tasks </a>
+    <a (click)="finishRepair()" class="btn btn-primary btn-block">Finish repair</a>
 </div>

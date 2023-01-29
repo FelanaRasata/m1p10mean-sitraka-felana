@@ -16,6 +16,24 @@ export class SignInComponent {
     signUp: boolean = true
 
 
+    userCredentials = {
+        customer: {
+            email: 'jean-ba@example.com',
+            password: '1234_viva_l_galleried',
+        },
+        workshopManager: {
+            email: 'jgolsby1@amazonaws.com',
+            password: '1234_viva_l_galleried',
+        },
+        financialManager: {
+            email: 'tgarmey0@joomla.org',
+            password: '1234_viva_l_galleried',
+        },
+    }
+
+    currentCredentials: any = null
+
+
     constructor(
         private formBuilder: FormBuilder,
         private sessionService: SessionService,
@@ -23,27 +41,23 @@ export class SignInComponent {
         private route: ActivatedRoute,
     ) {
 
-        this.signInForm = formBuilder.group({
-            'emailAddress': ['jean-ba@example.com', Validators.required],
-            'password': ['1234_viva_l_galleried', Validators.required],
-        })
-
-    }
-
-
-    ngOnInit(): void {
-
         const path = this.route.snapshot.url[0].path
 
         switch (path) {
 
             case 'workshop':
+                this.signUp = false
+                this.currentCredentials = this.userCredentials.workshopManager
+                break
+
             case 'finance':
                 this.signUp = false
+                this.currentCredentials = this.userCredentials.financialManager
                 break
 
             case 'sign_in':
                 this.signUp = true
+                this.currentCredentials = this.userCredentials.customer
                 break
 
             default:
@@ -52,6 +66,15 @@ export class SignInComponent {
 
         }
 
+        this.signInForm = formBuilder.group({
+            'emailAddress': [this.currentCredentials.email, Validators.required],
+            'password': [this.currentCredentials.password, Validators.required],
+        })
+
+    }
+
+
+    ngOnInit(): void {
     }
 
 

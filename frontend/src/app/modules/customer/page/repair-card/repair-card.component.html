@@ -1,4 +1,16 @@
 <div>
+    <div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">{{title}}</h1>
+        </div>
+    </div>
     <app-repair-item></app-repair-item>
-<!--    <app-diagnosis-items-card></app-diagnosis-items-card>-->
+    <div>
+        <a *ngIf="workshopProgressButtonActive" [routerLink]="['/workshop/repairs/:id/in_progress'.replace(':id', repairService.repair.value._id)]" class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-wrench"></i>
+                                        </span>
+            <span class="text">Process repair</span>
+        </a>
+    </div>
 </div>
