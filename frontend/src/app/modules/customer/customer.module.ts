@@ -14,6 +14,7 @@ import { DiagnosisItemsTableComponent } from './components/tables/diagnosis-item
 import { CarCreationComponent } from './components/modals/car-creation/car-creation.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { SelectedItemsTableComponent } from './components/tables/selected-items-table/selected-items-table.component'
+import { RouterLink } from '@angular/router'
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { SelectedItemsTableComponent } from './components/tables/selected-items-
         MatDialogModule,
         MatFormFieldModule,
         ReactiveFormsModule,
+        RouterLink,
     ],
 })
 export class CustomerModule {

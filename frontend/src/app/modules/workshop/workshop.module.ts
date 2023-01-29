@@ -9,6 +9,7 @@ import { RepairTypeModalComponent } from './component/modals/repair-type-modal/r
 import { MatDialogModule } from '@angular/material/dialog'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatTabsModule } from '@angular/material/tabs'
+import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop'
 
 
 @NgModule({
@@ -27,6 +28,8 @@ import { MatTabsModule } from '@angular/material/tabs'
         ReactiveFormsModule,
         FormsModule,
         MatTabsModule,
+        CdkDropList,
+        CdkDrag,
     ],
 })
 export class WorkshopModule {

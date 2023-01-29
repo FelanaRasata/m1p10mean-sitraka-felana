@@ -127,6 +127,13 @@ const routes: Routes = [
                 component: RepairsFilteredComponent,
             },
             {
+                path: 'repairs/:repair_id',
+                resolve: {
+                    data: RepairResolver,
+                },
+                component: RepairCardComponent,
+            },
+            {
                 path: 'car/:repair_id/diagnosis',
                 resolve: {
                     data: RepairTypeListResolver,
@@ -135,7 +142,7 @@ const routes: Routes = [
                 component: CarDiagnosisComponent,
             },
             {
-                path: 'repair/:repair_id/in_progress',
+                path: 'repairs/:repair_id/in_progress',
                 resolve: {
                     repair: RepairResolver
                 },
