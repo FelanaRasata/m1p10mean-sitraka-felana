@@ -4,11 +4,41 @@
 
     <mat-tab-group>
         <mat-tab label="Repair Type List">
-            <app-repair-types-table></app-repair-types-table>
+            <app-repair-types-table (repairTypeEvent)="addRepairItem($event)"  ></app-repair-types-table>
         </mat-tab>
         <mat-tab label="Diagnosis List">
-            Content 2
-            <a href="#" class="btn btn-facebook btn-block"> Send Car Diagnosis </a>
+            <div class="table-responsive mt-2">
+                <table class="table table-bordered" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr *ngFor="let repairTypeItem of carDiagnosisCreate.diagnosisRepairs">
+                        <td>{{repairTypeItem.repairType.name}}</td>
+                        <td>{{repairTypeItem.quantity}}</td>
+                        <td>
+                    <span class="input-group">
+                        <button class="btn btn-outline-secondary" type="button" (click)="removeRepairItem(repairTypeItem)"
+                                id="button-addon2">Remove to Diagnostic</button>
+                    </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <a class="btn btn-facebook btn-block" (click)="sendCarDiagnosis()" > Send Car Diagnosis </a>
         </mat-tab>
     </mat-tab-group>
     <hr>

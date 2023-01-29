@@ -14,13 +14,31 @@ router.get('/', async (request, response) => {
 
     try {
 
-        const optionsData = isEmpty(request.query.options) ? { pagination: false } : JSON.parse(request.query.options)
+        const optionsData = isEmpty(request.query.options) ? {pagination: false} : JSON.parse(request.query.options)
 
         const queryData = isEmpty(request.query.query) ? {} : JSON.parse(request.query.query)
 
         const cars = await repairService.find(queryData, optionsData)
 
         response.status(200).json(toResponseEntity(200, 'Repairs Car.', cars))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
+router.get('/:repair_id', async (request, response) => {
+
+    try {
+
+        const repairId = request.params.repair_id
+
+        const cars = await repairService.findById(repairId)
+
+        response.status(200).json(toResponseEntity(200, 'Repair Card.', cars))
 
     } catch (error) {
 
@@ -47,7 +65,24 @@ router.post('/init/:car_id/', authentication, async (request, response) => {
 
 })
 
-router.put('/:repair_id', validationMiddleware(CarVS, CarDto), async (request, response) => {
+router.put('/diagno/:repair_id', async (request, response) => {
+
+    try {
+
+        const carId = request.params.car_id
+        const repair = await repairService.initRepair(carId)
+
+        response.status(200).json(toResponseEntity(200, 'Repair has created', repair))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
+router.put('/:repair_id', async (request, response) => {
 
     try {
 
@@ -65,6 +100,8 @@ router.put('/:repair_id', validationMiddleware(CarVS, CarDto), async (request, r
     }
 
 })
+
+
 
 router.delete('/:repair_id', async (request, response) => {
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, Output } from '@angular/core'
 import { RepairTypeService } from '../../../core/services/repair-type/repair-type.service'
 import { MatDialog } from '@angular/material/dialog'
 import { PaginationService } from '../../../core/services/pagination/pagination.service'
@@ -8,6 +8,7 @@ import {
 } from '../../../../workshop/component/modals/repair-type-modal/repair-type-modal.component'
 import { PageEvent } from '@angular/material/paginator'
 import { ICarDiagnosis, ICarDiagnosisItem } from '../../../core/models/schemas/car-diagnosis.schema'
+import { NotificationService } from '../../../core/services/notification/notification.service'
 
 
 @Component({
@@ -17,13 +18,11 @@ import { ICarDiagnosis, ICarDiagnosisItem } from '../../../core/models/schemas/c
 })
 export class RepairTypesTableComponent {
 
-    carDiagnosis = {} as ICarDiagnosis
-
 
     constructor(
         public repairTypeService: RepairTypeService,
         private dialog: MatDialog,
-        public paginationService: PaginationService
+        public paginationService: PaginationService,
     ) {
     }
 
@@ -59,8 +58,10 @@ export class RepairTypesTableComponent {
 
     }
 
+    @Output() repairTypeEvent = new EventEmitter<IRepairType>();
 
     addRepairItem(repairType: IRepairType) {
-        let repairTypeItem = {} as ICarDiagnosisItem;
+
+        this.repairTypeEvent.emit(repairType);
     }
 }

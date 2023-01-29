@@ -14,6 +14,6 @@ export interface ICarDiagnosis extends BaseSchema {
 
     repair: string;
 
-    repairType: ICarDiagnosisItem[];
+    diagnosisRepairs: ICarDiagnosisItem[];
 
 }

@@ -22,6 +22,7 @@
         </tfoot>
         <tbody>
         <tr *ngFor="let repair of repairService.repairs.value">
+            <td>{{repair.car}}</td>
             <td>{{repair.carDroppedOffAt}}</td>
             <td>{{repair.carTakenBackAt || 'N/A'}}</td>
             <td>{{repair.price}}</td>

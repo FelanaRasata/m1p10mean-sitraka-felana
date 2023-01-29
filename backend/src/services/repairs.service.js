@@ -100,6 +100,21 @@ export class RepairService {
 
     }
 
+    async carDiagnosis(repairId , price){
+
+        let currentRepair = await Repair.findById(repairId)
+        if (!currentRepair['carDroppedOffAt'] || currentRepair['carDroppedOffAt'] === null || typeof currentRepair['carDroppedOffAt'] === 'undefined')
+            throw createError(409, 'The car has not been dropped off')
+
+        currentRepair.price = price
+
+        currentRepair.diagnosedAt = new Date()
+
+        await currentRepair.save()
+
+        return await this.findById(repairId)
+    }
+
 
     applyChangesOnCurrentRepair(currentRepair, repairState, repairData) {
 

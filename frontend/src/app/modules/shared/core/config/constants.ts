@@ -20,6 +20,7 @@ export const API_ENDPOINTS = {
         list: 'repairs',
         init: 'repairs/init/:car_id'
     },
+    car_diagnosis: 'car_diagnosis',
     user: 'users',
     car: 'cars',
     repairs_car: '',

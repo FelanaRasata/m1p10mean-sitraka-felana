@@ -19,6 +19,7 @@ import { CarListResolver } from '../modules/customer/core/resolver/car-list/car-
 import { CarCardResolver } from '../modules/customer/core/resolver/car-card/car-card.resolver'
 import { RepairTypeListResolver } from '../modules/workshop/core/resolver/repair-type-list/repair-type-list.resolver'
 import { RepairListResolver } from '../modules/workshop/core/resolver/repair-list/repair-list.resolver'
+import { RepairResolver } from '../modules/workshop/core/resolver/repair/repair.resolver'
 
 
 const routes: Routes = [
@@ -109,6 +110,7 @@ const routes: Routes = [
                 path: 'car/:repair_id/diagnosis',
                 resolve: {
                     data: RepairTypeListResolver,
+                    repair: RepairResolver
                 },
                 component: CarDiagnosisComponent,
             },

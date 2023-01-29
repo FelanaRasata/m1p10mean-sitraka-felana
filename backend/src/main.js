@@ -12,6 +12,7 @@ import { RepairsRouter } from './controllers/repairs.controller.js'
 import { SessionRouter } from './controllers/session.controller.js'
 import { errorHandlerMiddleware } from './middlewares/error_handler.middleware.js'
 import { RepairTypesRouter } from './controllers/repair_types.controller.js'
+import { CarDiagnosisRouter } from './controllers/car_diagnosis.controller.js'
 
 
 class Server {
@@ -75,6 +76,7 @@ const server = new Server([
     { path: '/cars', router: CarsRouter },
     { path: '/repairs', router: RepairsRouter },
     { path: '/repair_types', router: RepairTypesRouter },
+    { path: '/car_diagnosis', router: CarDiagnosisRouter },
 ])
 
 server.run()
