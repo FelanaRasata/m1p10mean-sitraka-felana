@@ -24,6 +24,9 @@ import { DiagnosisResolver } from '../modules/customer/core/resolver/diagnosis/d
 import {
     RepairsInitiatedResolver
 } from '../modules/financial/core/resolver/repairs-initiated/repairs-initiated.resolver'
+import {
+    CustomerRepairInProgressResolver
+} from '../modules/customer/core/resolver/customer-repair-in-progress/customer-repair-in-progress.resolver'
 
 
 const routes: Routes = [
@@ -49,10 +52,16 @@ const routes: Routes = [
             },
             {
                 path: 'repairs',
+                resolve: {
+                    data: CustomerRepairInProgressResolver
+                } ,
                 component: RepairListComponent,
             },
             {
                 path: 'repairs/:repair_id',
+                resolve: {
+                    data: RepairResolver
+                } ,
                 component: RepairCardComponent,
             },
             {

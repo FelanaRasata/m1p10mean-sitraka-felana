@@ -29,17 +29,37 @@
             <td>{{(repair.carTakenBackAt | date:"d MMM. y") || 'N/A'}}</td>
             <td>{{repair.price}}</td>
             <td>
-                <a *ngIf="cardUrlPath && repair.car_diagnosis && !repair.initiatedAt" [routerLink]="[cardUrlPath.replace(':id', repair._id)]" class="btn btn-sm btn-primary btn-icon-split">
+                <a *ngIf="cardUrlPath && repair.car_diagnosis && !repair.initiatedAt && sessionService.onlineUser.value?.type == customer && repair.initiatedAt"
+                   [routerLink]="[cardUrlPath.replace(':id', repair._id)]"
+                   class="btn btn-sm btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-eye"></i>
                     </span>
                     <span class="text">Diagnosis</span>
                 </a>
-                <a *ngIf="cardUrlPath && repair.initiatedAt && !repair.inProgressAt && sessionService.onlineUser.value?.type == userType" [routerLink]="[cardUrlPath.replace(':repair_id', repair._id)]" class="btn btn-sm btn-success btn-icon-split">
+                <a *ngIf="cardUrlPath && !repair.car_diagnosis && !repair.initiatedAt"
+                   [routerLink]="[cardUrlPath.replace(':id', repair._id)]"
+                   class="btn btn-sm btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Start Diagnosis</span>
+                </a>
+                <a *ngIf="cardUrlPath && repair.initiatedAt && !repair.inProgressAt && sessionService.onlineUser.value?.type == financial"
+                   [routerLink]="[cardUrlPath.replace(':repair_id', repair._id)]"
+                   class="btn btn-sm btn-success btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
                     </span>
-                    <span class="text">Validate</span>
+                    <span class="text">Validate Purchase</span>
+                </a>
+                <a *ngIf="cardUrlPath && sessionService.onlineUser.value?.type != financial && repair.initiatedAt"
+                   [routerLink]="[cardUrlPath.replace(':id', repair._id)]"
+                   class="btn btn-sm btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Card</span>
                 </a>
             </td>
         </tr>

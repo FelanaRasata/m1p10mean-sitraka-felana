@@ -19,7 +19,8 @@ export class RepairsTableComponent {
     @Input('card_url_path') cardUrlPath: string | null = null
 
 
-    userType = EUserType.FIM
+    financial = EUserType.FIM
+    customer = EUserType.CUS
 
     constructor(
         public repairService: RepairService,

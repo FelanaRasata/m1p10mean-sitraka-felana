@@ -10,9 +10,10 @@ import { ComponentsModule } from '../../components/components.module'
 import { SharedModule } from '../shared/shared.module'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import { DiagnosisItemsTableComponent } from './components/tables/diagnosis-items-table/diagnosis-items-table.component';
+import { DiagnosisItemsTableComponent } from './components/tables/diagnosis-items-table/diagnosis-items-table.component'
 import { CarCreationComponent } from './components/modals/car-creation/car-creation.component'
 import { ReactiveFormsModule } from '@angular/forms'
+import { SelectedItemsTableComponent } from './components/tables/selected-items-table/selected-items-table.component'
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms'
         RepairPaymentComponent,
         DiagnosisItemsTableComponent,
         CarCreationComponent,
+        SelectedItemsTableComponent,
     ],
     exports: [
         CarListComponent,

@@ -16,7 +16,6 @@ export class RepairCardComponent {
     }
 
     confirm(){
-        // this.notificationService.confirmBox("test","test","test","test","test");
-        this.notificationService.alert("test","test","test");
+        this.notificationService.confirmBox("test","test","test","test","test");
     }
 }
