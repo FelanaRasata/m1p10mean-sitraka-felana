@@ -19,7 +19,8 @@ export const API_ENDPOINTS = {
     repairs: {
         list: 'repairs',
         drop_off_car: 'repairs/drop_off_car/:car_id',
-        init: 'repairs/init/:repair_id'
+        init: 'repairs/init/:repair_id',
+        in_progress: 'repairs/finance/validate'
     },
     car_diagnosis: 'car_diagnosis',
     user: 'users',

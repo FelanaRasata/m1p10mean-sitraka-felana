@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { RepairService } from '../../../shared/core/services/repair/repair.service'
+import { logMessages } from '@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild'
 
 
 @Component({
@@ -9,6 +10,13 @@ import { RepairService } from '../../../shared/core/services/repair/repair.servi
 })
 export class RepairInitiatedComponent {
     constructor(
+        private repairService: RepairService
     ) {
+    }
+
+    validateFinance(){
+        this.repairService.financeValidate(this.repairService.repair.value._id).subscribe({
+            next:() => console.log("SUCCESS")
+        })
     }
 }
