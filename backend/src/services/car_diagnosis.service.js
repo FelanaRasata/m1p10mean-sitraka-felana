@@ -28,8 +28,7 @@ export class CarDiagnosisService {
     }
 
 
-    async carDiagnosis(carDiagnosisCreateData) {
-
+    async createDiagnosis(carDiagnosisCreateData) {
         let carDiagnosis = {}
 
         carDiagnosis.diagnosisRepairs = []

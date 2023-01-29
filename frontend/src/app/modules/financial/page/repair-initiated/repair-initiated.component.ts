@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { RepairService } from '../../../shared/core/services/repair/repair.service'
 
 
 @Component({
@@ -7,5 +8,7 @@ import { Component } from '@angular/core'
     styleUrls: ['./repair-initiated.component.scss'],
 })
 export class RepairInitiatedComponent {
-
+    constructor(
+    ) {
+    }
 }

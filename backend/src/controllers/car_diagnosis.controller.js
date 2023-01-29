@@ -15,7 +15,7 @@ router.post('/', validationMiddleware(CarDiagnosisCreateVS, CarDiagnosisCreateDt
 
         const carDiagnosisCreateData = request.body
 
-        const carDiagnosis = await carDiagnosisService.carDiagnosis(carDiagnosisCreateData)
+        const carDiagnosis = await carDiagnosisService.createDiagnosis(carDiagnosisCreateData)
 
         response.status(200).json(toResponseEntity(200, 'Car Diagnosis has created', carDiagnosis))
 

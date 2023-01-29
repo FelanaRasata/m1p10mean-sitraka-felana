@@ -173,4 +173,8 @@ export class RepairService {
 
     }
 
+    financeValidate(repairId: string){
+
+    }
+
 }

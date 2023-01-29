@@ -53,7 +53,7 @@ export class RepairService {
         if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         return Repair
-            .findOne({ _id: repairId, deleted: false })
+            .findOne({_id: repairId, deleted: false})
             .populate('car')
             .populate({
                 path: 'car_diagnosis',
@@ -87,6 +87,16 @@ export class RepairService {
     }
 
 
+    async financeValidate(repairId) {
+
+        let currentRepair = await Repair.findById(repairId)
+
+        currentRepair.inProgressAt = new Date()
+
+        await currentRepair.save()
+
+        return await this.findById(repairId)
+    }
     async dropOffCar(carId) {
 
         const car = await this.carService.findById(carId)
