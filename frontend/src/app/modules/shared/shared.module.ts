@@ -11,7 +11,8 @@ import { GeneralErrorHandlerInterceptor } from './core/interceptor/error/general
 import { CarItemComponent } from './components/others/car-item/car-item.component'
 import { RepairItemComponent } from './components/others/repair-item/repair-item.component'
 import { RouterLink } from '@angular/router'
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { RepairTypesTableComponent } from './components/tables/repair-types-table/repair-types-table.component'
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms'
         SignOutModalComponent,
         CarItemComponent,
         RepairItemComponent,
+        RepairTypesTableComponent,
     ],
     exports: [
         CarsTableComponent,
@@ -29,6 +31,8 @@ import { FormsModule } from '@angular/forms'
         RepairsTableComponent,
         CarItemComponent,
         RepairItemComponent,
+        PaginatorComponent,
+        RepairTypesTableComponent
     ],
     imports: [
         MatPaginatorModule,

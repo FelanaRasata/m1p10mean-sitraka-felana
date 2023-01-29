@@ -36,7 +36,7 @@ router.post('/', validationMiddleware(RepairTypeVS, RepairTypeDto), async (reque
         const repairData = request.body
         const repair = await repairTypeService.create(repairData)
 
-        response.status(200).json(toResponseEntity(200, 'Repair has created', repair))
+        response.status(200).json(toResponseEntity(200, 'Repair Type has created', repair))
 
     } catch (error) {
 

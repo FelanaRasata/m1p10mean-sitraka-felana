@@ -27,7 +27,7 @@ import { FinancialModule } from './modules/financial/financial.module'
         LayoutModule,
         PublicModule,
         SharedModule,
-        WorkshopModule,
+        WorkshopModule
     ],
     providers: [],
     bootstrap: [AppComponent],

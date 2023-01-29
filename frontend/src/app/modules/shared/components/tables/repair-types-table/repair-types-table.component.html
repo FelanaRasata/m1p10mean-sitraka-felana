@@ -1,0 +1,36 @@
+<a (click)="openModalAdd()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    class="fas fa-download fa-sm text-white-50"></i> Add Repair Type</a>
+
+<div class="table-responsive mt-2">
+    <table class="table table-bordered" id="dataTable">
+        <thead>
+        <tr>
+            <th>Matricule</th>
+            <th>Marque</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Matricule</th>
+            <th>Marque</th>
+            <th></th>
+        </tr>
+        </tfoot>
+        <tbody>
+        <tr *ngFor="let repairType of repairTypeService.repairTypes.value">
+            <td>{{repairType.name}}</td>
+            <td>{{repairType.repairCost}}</td>
+            <td><button class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <app-paginator
+        [length]="paginationService.paginationData.value.totalItems"
+        [pageSize]="paginationService.paginationData.value.limit"
+        [pageIndex]="paginationService.paginationData.value.page - 1"
+        (page)="setPage($event)"
+    ></app-paginator>
+
+</div>

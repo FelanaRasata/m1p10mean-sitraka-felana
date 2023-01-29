@@ -1,1 +1,37 @@
-<p>repair-type-modal works!</p>
+<h4 mat-dialog-title>
+    Add Repair Type
+</h4>
+
+<hr>
+
+<mat-dialog-content >
+
+    <div class="form-group">
+        <input type="text" class="form-control form-control-user"
+               placeholder="Name" [(ngModel)]="repairType.name" autocomplete="off" >
+    </div>
+
+    <div class="form-group">
+        <input type="number" class="form-control form-control-user" min="1000"
+               placeholder="Cost price" [(ngModel)]="repairType.repairCost" autocomplete="off">
+    </div>
+
+    <div class="form-group ">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck" [(ngModel)]="repairType.carPart">
+            <label class="custom-control-label" for="customCheck">Car Part?</label>
+        </div>
+    </div>
+
+</mat-dialog-content>
+
+<hr>
+
+<mat-dialog-actions>
+    <button class="btn btn-success btn-block" (click)="submit()">
+        Save
+    </button>
+    <button class="btn btn-dark btn-block" (click)="close()">
+        cancel
+    </button>
+</mat-dialog-actions>

@@ -23,10 +23,12 @@ export class RepairTypeService {
 
     async create(repairTypeData) {
 
+        console.log(JSON.stringify(repairTypeData))
         if (isEmpty(repairTypeData.carPart))
             repairTypeData.carPart = false
 
-        const createdRepair = new Repair(toDocumentFormat(repairTypeData))
+
+        const createdRepair = new RepairType(toDocumentFormat(repairTypeData))
 
         await createdRepair.save()
 
