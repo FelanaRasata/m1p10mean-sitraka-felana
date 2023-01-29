@@ -53,7 +53,7 @@ export class RepairChoiceComponent {
 
                         this.loaderService.hydrate(false)
                         this.notificationService.alert('Repair', 'Repair initiated', 'success')
-                        
+
                     })
 
                 }

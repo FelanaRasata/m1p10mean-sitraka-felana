@@ -196,6 +196,24 @@ export class RepairService {
     }
 
 
+    // Update a repair by ID
+    async proceedRepair(repairId, repairData) {
+
+        if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
+
+        let currentRepair = await Repair.findById(repairId)
+
+        if (isEmpty(currentRepair) || currentRepair?.deleted) throw createError(409, 'No repair found')
+
+        currentRepair.selectedRepairs = repairData.selectedRepairs
+
+        await currentRepair.save()
+
+        return await this.findById(repairId)
+
+    }
+
+
     async delete(repairId) {
 
         if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
