@@ -42,12 +42,20 @@
             <span class="text">Validate Purchase</span>
         </a>
 
-        <a *ngIf="customerExitCar"
+        <a *ngIf="customerExitCar" (click)="exitVoucher()"
            class="btn btn-primary btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-wrench"></i>
                                         </span>
             <span class="text">Exit voucher</span>
+        </a>
+
+        <a *ngIf="workshopConfirmTakeCar" (click)="takeBackCar()"
+           class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-wrench"></i>
+                                        </span>
+            <span class="text">Validate Take Car back</span>
         </a>
     </div>
     <div class="row">
@@ -56,7 +64,9 @@
             <p>Repair Progress</p>
             <div *ngIf="showProgressBar">
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" [style.width]="progressWidth" [attr.aria-valuenow]="percentageNow" aria-valuemin="0" aria-valuemax="100">{{percentageNow}}%</div>
+                    <div class="progress-bar" role="progressbar" [style.width]="progressWidth"
+                         [attr.aria-valuenow]="percentageNow" aria-valuemin="0" aria-valuemax="100">{{percentageNow}}%
+                    </div>
                 </div>
             </div>
         </div>

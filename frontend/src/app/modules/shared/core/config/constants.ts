@@ -23,6 +23,8 @@ export const API_ENDPOINTS = {
         in_progress: 'repairs/finance/validate',
         proceed: 'repairs/proceed/:repair_id',
         finish: 'repairs/finish/:repair_id',
+        paid:'repairs/paid',
+        car_back:'repairs/car_back',
     },
     car_diagnosis: 'car_diagnosis',
     user: 'users',

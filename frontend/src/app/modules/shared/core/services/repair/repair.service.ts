@@ -245,11 +245,36 @@ export class RepairService {
     }
 
 
+    paidRepair(repairId: string): Observable<boolean> {
+
+        const url = `${API_ENDPOINTS.repairs.paid}/${repairId}`
+
+        return this.updateRepair(repairId, url)
+
+    }
+
+
     financeValidate(repairId: string): Observable<boolean> {
+
+        const url = `${API_ENDPOINTS.repairs.in_progress}/${repairId}`
+
+        return this.updateRepair(repairId, url)
+
+    }
+
+    takenCarBack(repairId: string): Observable<boolean> {
+
+        const url = `${API_ENDPOINTS.repairs.car_back}/${repairId}`
+
+        return this.updateRepair(repairId, url)
+
+    }
+
+
+    updateRepair(repairId: string, url: string): Observable<boolean> {
 
         return new Observable<boolean>((subscriber) => {
 
-            const url = `${API_ENDPOINTS.repairs.in_progress}/${repairId}`
             this.apiService
                 .put<IRepair>(
                     baseUrl(url)
@@ -287,48 +312,5 @@ export class RepairService {
         })
 
     }
-
-    /*financeValidate(repairId: string): Observable<boolean> {
-
-        return new Observable<boolean>((subscriber) => {
-
-            const url = `${API_ENDPOINTS.repairs.in_progress}/${repairId}`
-            this.apiService
-                .put<IRepair>(
-                    baseUrl(url)
-                    ,
-                    {}
-                )
-                .subscribe((result) => {
-
-                    if (result.status != 200) {
-
-                        this.notificationService.alert('Update failed!', result.message, 'error')
-                        subscriber.next(false)
-                        subscriber.complete()
-
-                    } else {
-
-                        this.getRepairs(
-                            {},
-                            {
-                                page: 1,
-                                limit: 10,
-                                sort: '-updatedAt'
-                            }
-                        ).subscribe((status) => {
-
-                            subscriber.next(status)
-                            subscriber.complete()
-
-                        })
-
-                    }
-
-                })
-
-        })
-
-    }*/
 
 }
