@@ -61,27 +61,27 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'statistics',
+                redirectTo: 'dashboard',
                 pathMatch: 'full',
             },
             {
-                path: 'statistics',
+                path: 'dashboard',
                 component: StatisticsComponent,
             },
             {
-                path: 'repairs_initiated',
+                path: 'repairs/initiated',
                 component: RepairsInitiatedComponent,
             },
             {
-                path: 'repair_initiated',
+                path: 'repair/:repair_id/initiated',
                 component: RepairInitiatedComponent,
             },
             {
-                path: 'repairs_paid',
+                path: 'repairs/paid',
                 component: RepairsPaidComponent,
             },
             {
-                path: 'repair_paid',
+                path: 'repair/:repair_id/paid',
                 component: RepairPaidComponent,
             },
         ],
@@ -91,23 +91,23 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'filtered_repairs',
+                redirectTo: 'repairs',
                 pathMatch: 'full',
             },
             {
-                path: 'filtered_repairs',
+                path: 'repairs',
                 component: RepairsFilteredComponent,
             },
             {
-                path: 'car_diagnosis',
+                path: 'car/:repair_id/diagnosis',
                 component: CarDiagnosisComponent,
             },
             {
-                path: 'repair_in_progress',
+                path: 'repair/:repair_id/in_progress',
                 component: RepairInProgressComponent,
             },
             {
-                path: 'exit_ticket',
+                path: 'repair/:repair_id/exit',
                 component: ExitTicketComponent,
             },
         ],
