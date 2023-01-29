@@ -1,4 +1,4 @@
-import {Component} from '@angular/core'
+import { Component } from '@angular/core'
 
 
 @Component({
@@ -7,5 +7,7 @@ import {Component} from '@angular/core'
     styleUrls: ['./repairs-filtered.component.scss'],
 })
 export class RepairsFilteredComponent {
-    title = "List of repair"
+    title = 'List of repair'
+
+    goCard = true
 }

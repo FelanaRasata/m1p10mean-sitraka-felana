@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core'
-import {RepairService} from "../../../core/services/repair/repair.service";
+import { Component, Input } from '@angular/core'
+import { RepairService } from '../../../core/services/repair/repair.service'
 import { PaginationService } from '../../../core/services/pagination/pagination.service'
 import { PageEvent } from '@angular/material/paginator'
 
@@ -10,12 +10,16 @@ import { PageEvent } from '@angular/material/paginator'
     styleUrls: ['./repairs-table.component.scss'],
 })
 export class RepairsTableComponent {
-    @Input('title') title: string = '';
-    @Input('car_id') carId: string = '';
+    @Input('title') title: string = ''
+
+    @Input('car_id') carId: string = ''
+
+    @Input('go_card') goCard = false
+
 
     constructor(
-        public repairService : RepairService,
-        public paginationService : PaginationService,
+        public repairService: RepairService,
+        public paginationService: PaginationService,
     ) {
     }
 
@@ -43,4 +47,5 @@ export class RepairsTableComponent {
         })
 
     }
+
 }
