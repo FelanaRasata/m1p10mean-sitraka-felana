@@ -13,6 +13,7 @@ import { RepairItemComponent } from './components/others/repair-item/repair-item
 import { RouterLink } from '@angular/router'
 import { FormsModule } from '@angular/forms';
 import { RepairTypesTableComponent } from './components/tables/repair-types-table/repair-types-table.component'
+import { RepairCardComponent } from './components/others/repair-card/repair-card.component'
 
 
 @NgModule({
@@ -24,6 +25,8 @@ import { RepairTypesTableComponent } from './components/tables/repair-types-tabl
         CarItemComponent,
         RepairItemComponent,
         RepairTypesTableComponent,
+        RepairCardComponent,
+
     ],
     exports: [
         CarsTableComponent,

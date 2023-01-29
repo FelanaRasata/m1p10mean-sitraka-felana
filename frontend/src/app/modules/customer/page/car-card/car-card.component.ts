@@ -14,7 +14,7 @@ export class CarCardComponent {
 
     title = 'Car Card'
 
-    repairUrlPath = '/customer/repairs/:id/selection'
+    repairUrlPath = '/customer/repairs/:id'
 
 
     constructor(

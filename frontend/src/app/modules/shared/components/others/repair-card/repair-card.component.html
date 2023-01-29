@@ -1,0 +1,53 @@
+<div>
+    <div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">{{title}}</h1>
+        </div>
+    </div>
+    <app-repair-item></app-repair-item>
+    <div>
+        <a *ngIf="workshopProgressButtonActive"
+           [routerLink]="['/workshop/repairs/:id/in_progress'.replace(':id', repairService.repair.value._id)]"
+           class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-wrench"></i>
+                                        </span>
+            <span class="text">Process repair</span>
+        </a>
+
+        <a *ngIf="customerRepairSelect"
+           [routerLink]="['/customer/repairs/:id/selection'.replace(':id', repairService.repair.value._id)]"
+           class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-wrench"></i>
+                                        </span>
+            <span class="text">Validate diagnosis</span>
+        </a>
+
+        <a *ngIf="workshopStartDiagnosis"
+           [routerLink]="['/workshop/car/:id/diagnosis'.replace(':id', repairService.repair.value._id)]"
+           class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-wrench"></i>
+                                        </span>
+            <span class="text">Start diagnosis</span>
+        </a>
+
+        <a *ngIf="financialValidatePurchase"
+           [routerLink]="['/financial/repair/:id/initiated'.replace(':id', repairService.repair.value._id)]"
+           class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-wrench"></i>
+                                        </span>
+            <span class="text">Validate Purchase</span>
+        </a>
+
+        <a *ngIf="customerExitCar"
+           class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-wrench"></i>
+                                        </span>
+            <span class="text">Exit voucher</span>
+        </a>
+    </div>
+</div>

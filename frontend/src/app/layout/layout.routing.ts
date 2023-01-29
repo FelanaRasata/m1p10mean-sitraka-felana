@@ -5,7 +5,7 @@ import { CarCardComponent } from '../modules/customer/page/car-card/car-card.com
 import { RepairListComponent } from '../modules/customer/page/repair-list/repair-list.component'
 import { RepairChoiceComponent } from '../modules/customer/page/repair-choice/repair-choice.component'
 import { RepairPaymentComponent } from '../modules/customer/page/repair-payment/repair-payment.component'
-import { RepairCardComponent } from '../modules/customer/page/repair-card/repair-card.component'
+import { RepairCardComponent } from '../modules/shared/components/others/repair-card/repair-card.component'
 import { StatisticsComponent } from '../modules/financial/page/statistics/statistics.component'
 import { RepairsInitiatedComponent } from '../modules/financial/page/repairs-initiated/repairs-initiated.component'
 import { RepairInitiatedComponent } from '../modules/financial/page/repair-initiated/repair-initiated.component'
@@ -93,6 +93,13 @@ const routes: Routes = [
                     data: RepairsInitiatedResolver
                 },
                 component: RepairsInitiatedComponent,
+            },
+            {
+                path: 'repairs/:repair_id',
+                resolve: {
+                    data: RepairResolver
+                } ,
+                component: RepairCardComponent,
             },
             {
                 path: 'repair/:repair_id/initiated',
