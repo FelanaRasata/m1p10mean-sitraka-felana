@@ -22,6 +22,7 @@ export const API_ENDPOINTS = {
         init: 'repairs/init/:repair_id',
         in_progress: 'repairs/finance/validate',
         proceed: 'repairs/proceed/:repair_id',
+        finish: 'repairs/finish/:repair_id',
     },
     car_diagnosis: 'car_diagnosis',
     user: 'users',

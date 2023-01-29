@@ -58,7 +58,7 @@ export class RepairChoiceComponent {
                 }
 
                 this.loaderService.hydrate(false)
-                
+
             })
 
         } else {

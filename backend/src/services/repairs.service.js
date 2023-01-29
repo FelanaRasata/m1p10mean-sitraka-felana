@@ -170,8 +170,6 @@ export class RepairService {
 
         if (isEmpty(currentRepair) || currentRepair?.deleted) throw createError(409, 'No repair found')
 
-        console.log('<<<<<<<<<<<<', repairData.selectedRepairs)
-
         currentRepair.selectedRepairs = repairData.selectedRepairs
         let price = repairData.car_diagnosis.price
         let allNotPart = 1
@@ -212,6 +210,25 @@ export class RepairService {
         if (isEmpty(currentRepair) || currentRepair?.deleted) throw createError(409, 'No repair found')
 
         currentRepair.selectedRepairs = repairData.selectedRepairs
+
+        await currentRepair.save()
+
+        return await this.findById(repairId)
+
+    }
+
+
+    // Update a repair by ID
+    async finishRepair(repairId, repairData) {
+
+        if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
+
+        let currentRepair = await Repair.findById(repairId)
+
+        if (isEmpty(currentRepair) || currentRepair?.deleted) throw createError(409, 'No repair found')
+
+        currentRepair.selectedRepairs = repairData.selectedRepairs
+        currentRepair.carRepairedAt = new Date(repairData.carRepairedAt)
 
         await currentRepair.save()
 

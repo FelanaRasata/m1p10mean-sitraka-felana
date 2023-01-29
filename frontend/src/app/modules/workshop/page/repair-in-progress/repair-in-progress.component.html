@@ -51,7 +51,6 @@
     </div>
 
     <hr>
-    <a *ngIf="!allDone" (click)="validateChanges()" class="btn btn-success btn-block">Validate changes</a>
-    <a *ngIf="allDone" (click)="finishRepair()" class="btn btn-primary btn-block">Finish repair</a>
+    <a (click)="validateChanges()" class="btn btn-success btn-block">Validate changes</a>
 
 </div>
