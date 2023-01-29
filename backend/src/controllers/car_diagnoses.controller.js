@@ -27,4 +27,4 @@ router.post('/', validationMiddleware(CarDiagnosisCreateVS, CarDiagnosisCreateDt
 
 })
 
-export { router as CarDiagnosisRouter }
+export { router as CarDiagnosesRouter }

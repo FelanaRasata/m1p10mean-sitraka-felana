@@ -22,15 +22,11 @@ export class CarCreationComponent {
     ) {
 
         this.userForm = formBuilder.group({
-            'userId': [data.userId, Validators.required],
+            'customer': [data.userId, Validators.required],
             'carNumber': ['', Validators.required],
             'brand': ['', Validators.required],
         })
 
-    }
-
-
-    ngOnInit(): void {
     }
 
 
