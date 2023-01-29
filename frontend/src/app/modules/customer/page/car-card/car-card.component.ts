@@ -34,7 +34,7 @@ export class CarCardComponent {
 
         if (initRepair) {
 
-            this.repairService.initRepair(carId).subscribe((status) => {
+            this.repairService.dropOffCar(carId).subscribe((status) => {
 
                 if (status)
                     this.notificationService.alert('Init success', `Car ${this.repairService.repair.value.car.carNumber}`, 'success')

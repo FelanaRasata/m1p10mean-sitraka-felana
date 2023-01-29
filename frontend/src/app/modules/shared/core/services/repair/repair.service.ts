@@ -27,14 +27,49 @@ export class RepairService {
     }
 
 
-    initRepair(carId: string) {
+    dropOffCar(carId: string) {
 
         return new Observable<boolean>((subscriber) => {
 
             this.apiService
                 .post<any>(
-                    baseUrl(API_ENDPOINTS.repairs.init.replace(':car_id', carId)),
+                    baseUrl(API_ENDPOINTS.repairs.drop_off_car.replace(':car_id', carId)),
                     {},
+                )
+                .subscribe((result) => {
+
+                    if (result.status != 200) {
+
+                        this.notificationService.alert('Process error', result.message, 'error')
+                        subscriber.next(false)
+
+                    } else {
+
+                        const repair = result.data
+                        this.repair.next(repair)
+                        subscriber.next(true)
+
+                    }
+
+                    subscriber.complete()
+
+                })
+
+        })
+
+    }
+
+
+    initRepair(repairId: string, repairDto: any) {
+
+        return new Observable<boolean>((subscriber) => {
+
+            this.apiService
+                .post<any>(
+                    baseUrl(API_ENDPOINTS.repairs.init.replace(':repair_id', repairId)),
+                    {
+                        ...repairDto
+                    },
                 )
                 .subscribe((result) => {
 

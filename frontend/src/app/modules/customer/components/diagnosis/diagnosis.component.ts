@@ -35,8 +35,6 @@ export class DiagnosisComponent {
 
         }
 
-        console.log('>>>>>>>>>>>>>>>>>>', this.selectedList.value)
-
     }
 
 }

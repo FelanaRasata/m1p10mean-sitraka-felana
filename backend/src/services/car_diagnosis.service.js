@@ -1,10 +1,10 @@
-import { Settings } from '../config/settings.js'
-import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
 import createError from 'http-errors'
-import { Car } from '../models/cars.schema.js'
+import { Settings } from '../config/settings.js'
 import { CarDiagnosis } from '../models/car_diagnosis.schema.js'
+import { Car } from '../models/cars.schema.js'
+import { EXPENSES } from '../utils/constants.js'
+import { customLabels, isEmpty, toDocumentFormat } from '../utils/utils.js'
 import { RepairService } from './repairs.service.js'
-import { DiagnosisPercentageService } from './diagnosis_percentage.service.js'
 
 
 export class CarDiagnosisService {
@@ -13,7 +13,6 @@ export class CarDiagnosisService {
 
         this.settings = new Settings()
         this.repairService = new RepairService()
-        this.diagnosisPercentageService = new DiagnosisPercentageService()
 
     }
 
@@ -34,12 +33,10 @@ export class CarDiagnosisService {
 
         carDiagnosis.diagnosisRepairs = []
 
-        carDiagnosis.price = 0
+        carDiagnosis.price = EXPENSES.diagnosis
         carDiagnosis.repair = carDiagnosisCreateData.repair
 
         for (let diagnosisRepair of carDiagnosisCreateData.diagnosisRepairs) {
-
-            carDiagnosis.price += diagnosisRepair.quantity * diagnosisRepair.repairType.repairCost
 
             carDiagnosis.diagnosisRepairs.push({
                 repairType: diagnosisRepair.repairType._id,
@@ -47,10 +44,6 @@ export class CarDiagnosisService {
             })
 
         }
-
-        // Calcul price par rapport %
-
-        await this.calculatePriceOfDiagnostic(carDiagnosis)
 
         const currentCarDiagnosis = await this.create(carDiagnosis)
 
@@ -61,17 +54,9 @@ export class CarDiagnosisService {
     }
 
 
-    async calculatePriceOfDiagnostic(carDiagnosis) {
-        const price = carDiagnosis.price
-
-        const diagnosisPercentage = await this.diagnosisPercentageService.findOne()
-        carDiagnosis.price = price * diagnosisPercentage.percentage
-    }
-
-
     async find(query, options) {
 
-        query = Object.assign(isEmpty(query) ? {} : query, {deleted: false})
+        query = Object.assign(isEmpty(query) ? {} : query, { deleted: false })
 
         options = Object.assign(isEmpty(options) ? {} : options, {
             lean: true,
@@ -89,7 +74,7 @@ export class CarDiagnosisService {
         if (isEmpty(carId)) throw createError(409, 'No car ID found')
 
         return Car
-            .findOne({_id: carId, deleted: false})
+            .findOne({ _id: carId, deleted: false })
             .lean()
 
     }

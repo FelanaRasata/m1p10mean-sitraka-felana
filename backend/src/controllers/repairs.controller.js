@@ -34,22 +34,6 @@ router.get('/:repair_id', async (request, response) => {
 
     try {
 
-        const repair = await repairService.findById(request.params.repair_id)
-
-        response.status(200).json(toResponseEntity(200, 'Repairs Car.', repair))
-
-    } catch (error) {
-
-        response.status(200).json(toResponseEntity(409, String(error)))
-
-    }
-
-})
-
-router.get('/:repair_id', async (request, response) => {
-
-    try {
-
         const repairId = request.params.repair_id
 
         const cars = await repairService.findById(repairId)
@@ -64,12 +48,12 @@ router.get('/:repair_id', async (request, response) => {
 
 })
 
-router.post('/init/:car_id/', authentication, async (request, response) => {
+router.post('/drop_off_car/:car_id/', authentication, async (request, response) => {
 
     try {
 
         const carId = request.params.car_id
-        const repair = await repairService.initRepair(carId)
+        const repair = await repairService.dropOffCar(carId)
 
         response.status(200).json(toResponseEntity(200, 'Repair has created', repair))
 
@@ -98,14 +82,13 @@ router.put('/finance/validate/:repair_id', async (request, response) => {
 
 })
 
-router.put('/:repair_id', async (request, response) => {
+router.put('/init/:repair_id', authentication, async (request, response) => {
 
     try {
 
         const repairData = request.body
         const repairId = request.params.repair_id
-        const repairState = request.query.repair_state
-        const repair = await repairService.update(repairId, repairData, repairState)
+        const repair = await repairService.initRepair(repairId, repairData)
 
         response.status(200).json(toResponseEntity(200, 'Repair has updated', repair))
 

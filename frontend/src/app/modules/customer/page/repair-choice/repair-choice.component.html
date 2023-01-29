@@ -4,5 +4,6 @@
     <app-diagnosis
     [selected_list]="selectedList"
     ></app-diagnosis>
-    <a href="#" class="btn btn-primary btn-block"> Validate Diagnosis </a>
+    <a (click)="initiateRepair()" class="btn btn-primary btn-block">Initiate repair</a>
+    <a (click)="payDiagnosis()" class="btn btn-danger btn-block">Cancel & Pay diagnosis</a>
 </div>
