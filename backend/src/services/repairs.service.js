@@ -126,6 +126,7 @@ export class RepairService {
 
         currentRepair.selectedRepairs = repairData.selectedRepairs
         let price = repairData.car_diagnosis.price
+        let allNotPart = 1
 
         for (const repairItem of repairData.selectedRepairs) {
 
@@ -133,10 +134,14 @@ export class RepairService {
 
             price += isEmpty(repairType) ? 0 : (repairType.repairCost * (1 + EXPENSES.manpower))
 
+            allNotPart *= repairType.repairType.carPart ? 0 : 1
+
         }
 
         currentRepair.price = price
         currentRepair.initiatedAt = new Date(repairData.initiatedAt)
+
+        if (allNotPart) currentRepair.inProgressAt = new Date()
 
         await currentRepair.save()
 
