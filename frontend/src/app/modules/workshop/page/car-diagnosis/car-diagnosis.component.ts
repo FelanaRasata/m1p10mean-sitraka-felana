@@ -64,7 +64,6 @@ export class CarDiagnosisComponent {
 
     sendCarDiagnosis() {
         this.carDiagnosisCreate.repair = this.repairService.repair.value._id
-        console.log(JSON.stringify(this.carDiagnosisCreate))
         this.carDiagnosisService.createCarDiagnosis(this.carDiagnosisCreate).subscribe({
             next: () => this.router.navigate(["workshop/repairs"])
         })
