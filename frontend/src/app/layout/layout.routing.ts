@@ -24,34 +24,34 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'car_list',
+                redirectTo: 'cars',
                 pathMatch: 'full',
             },
             {
-                path: 'car_list',
+                path: 'cars',
                 resolve: {
                     data: CarListResolver,
                 },
                 component: CarListComponent,
             },
             {
-                path: 'car_card',
+                path: 'cars/:car_id',
                 component: CarCardComponent,
             },
             {
-                path: 'repair_list',
+                path: 'repairs',
                 component: RepairListComponent,
             },
             {
-                path: 'repair_card',
+                path: 'repairs/:repair_id',
                 component: RepairCardComponent,
             },
             {
-                path: 'repair_choice',
+                path: 'repairs/:repair_id/selection',
                 component: RepairChoiceComponent,
             },
             {
-                path: 'repair_payment',
+                path: 'repairs/:repair_id/pay',
                 component: RepairPaymentComponent,
             },
         ],

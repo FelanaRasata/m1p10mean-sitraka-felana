@@ -10,12 +10,8 @@ import { PageEvent } from '@angular/material/paginator'
     styleUrls: ['./cars-table.component.scss'],
 })
 export class CarsTableComponent {
-    private query: any
 
     @Input('title') title: string = ''
-
-    @Input('linkCard') linkCard: string = ''
-
 
     constructor(
         public carService: CarService,
@@ -40,7 +36,8 @@ export class CarsTableComponent {
                 limit: $event.pageSize,
                 sort: '-createdAt',
             },
-        ).subscribe(() => {})
+        ).subscribe(() => {
+        })
 
     }
 
