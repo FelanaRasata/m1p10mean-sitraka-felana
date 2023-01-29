@@ -95,6 +95,41 @@ export class RepairService {
     }
 
 
+    proceedRepair(repairId: string, repairDto: any) {
+
+        return new Observable<boolean>((subscriber) => {
+
+            this.apiService
+                .put<any>(
+                    baseUrl(API_ENDPOINTS.repairs.proceed.replace(':repair_id', repairId)),
+                    {
+                        ...repairDto
+                    },
+                )
+                .subscribe((result) => {
+
+                    if (result.status != 200) {
+
+                        this.notificationService.alert('Repair error', result.message, 'error')
+                        subscriber.next(false)
+
+                    } else {
+
+                        const repair = result.data
+                        this.repair.next(repair)
+                        subscriber.next(true)
+
+                    }
+
+                    subscriber.complete()
+
+                })
+
+        })
+
+    }
+
+
     fetchRepairById(repairId: string): Observable<IResponseType<any>> {
 
         return this.apiService

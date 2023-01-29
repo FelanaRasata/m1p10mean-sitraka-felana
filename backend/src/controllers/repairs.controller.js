@@ -65,6 +65,24 @@ router.post('/drop_off_car/:car_id/', authentication, async (request, response) 
 
 })
 
+router.post('/proceed/:repair_id/', authentication, async (request, response) => {
+
+    try {
+
+        const repairId = request.params.repair_id
+        const repairDto = request.body
+        const repair = await repairService.proceedRepair(repairId, repairDto)
+
+        response.status(200).json(toResponseEntity(200, 'Repair proceeded', repair))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
 router.put('/finance/validate/:repair_id', async (request, response) => {
 
     try {
