@@ -50,4 +50,7 @@
             <span class="text">Exit voucher</span>
         </a>
     </div>
+    <div *ngIf="showProgressBar">
+        <mat-progress-bar mode="determinate" [value]="percentageNow"></mat-progress-bar>
+    </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { NotificationService } from '../../../core/services/notification/notification.service'
 import { RepairService } from '../../../core/services/repair/repair.service'
 import { SessionService } from '../../../core/services/session/session.service'
@@ -24,6 +24,8 @@ export class RepairCardComponent {
 
     financialValidatePurchase = false
 
+    showProgressBar = false
+
 
     constructor(
         private notificationService: NotificationService,
@@ -43,11 +45,23 @@ export class RepairCardComponent {
 
         this.financialValidatePurchase = repair.initiatedAt && !repair.inProgressAt && this.sessionService.onlineUser.value?.type === EUserType.FIM
 
+        this.showProgressBar = repair.inProgressAt && !repair.carRepairedAt
     }
 
 
     confirm() {
         this.notificationService.confirmBox('test', 'test', 'test', 'test', 'test')
+    }
+
+
+    percentageNow = 0
+
+
+    calculateProgress() {
+        const max = this.repairService.repair.value.selectedRepairs.length
+        const now = this.repairService.repair.value.selectedRepairs.filter(element => element.checked).length
+
+        this.percentageNow = (now * 100) / max
     }
 
 }
