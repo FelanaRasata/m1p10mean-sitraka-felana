@@ -11,6 +11,7 @@ import { GeneralErrorHandlerInterceptor } from './core/interceptor/error/general
 import { CarItemComponent } from './components/others/car-item/car-item.component';
 import { RepairItemComponent } from './components/others/repair-item/repair-item.component';
 import { RepairTypeListComponent } from './components/others/repair-type-list/repair-type-list.component';
+import { RouterLink } from '@angular/router'
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { RepairTypeListComponent } from './components/others/repair-type-list/re
     imports: [
         MatPaginatorModule,
         CommonModule,
+        RouterLink,
     ],
     providers: [
         {

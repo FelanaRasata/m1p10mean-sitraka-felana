@@ -59,4 +59,5 @@ export class PaginationService {
         this.paginationData.next({...paginationInfos})
 
     }
+
 }
