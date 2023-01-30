@@ -507,8 +507,8 @@ export const facture = (user, repair) => {
             <tr>
               <td class="service">${item.repairType.name}</td>
               <td class="unit">${item.repairType.repairCost}</td>
-              <td class="qty">1</td>
-              <td class="total">${item.price}</td>
+              <td class="qty">${item.quantity}</td>
+              <td class="total">${item.repairType.repairCost*item.quantity}</td>
             </tr>
           `
     }).join('')}
