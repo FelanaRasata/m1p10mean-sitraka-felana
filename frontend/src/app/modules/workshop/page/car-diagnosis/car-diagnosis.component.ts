@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { ICarDiagnosis } from '../../../shared/core/models/schemas/car-diagnosis.schema'
 import { IRepairType } from '../../../shared/core/models/schemas/repair_types.schema'
 import { NotificationService } from '../../../shared/core/services/notification/notification.service'
 import { isEmpty } from '../../../shared/core/services/utils/utils'
@@ -24,7 +23,7 @@ export class CarDiagnosisComponent {
         private carDiagnosisService: CarDiagnosisService,
         public repairService: RepairService,
         private router: Router,
-        private loaderService: LoaderService
+        private loaderService: LoaderService,
     ) {
         this.carDiagnosisCreate.diagnosisRepairs = []
     }
@@ -69,15 +68,17 @@ export class CarDiagnosisComponent {
         this.carDiagnosisCreate.repair = this.repairService.repair.value._id
 
         this.carDiagnosisService.createCarDiagnosis(this.carDiagnosisCreate).subscribe((status) => {
-            console.log(JSON.stringify(this.carDiagnosisCreate))
 
-            this.router.navigate(['/workshop/repairs']).then(() => {
+            if (status) {
 
-                this.notificationService.alert('Diagnostic', 'Car Diagnosis', 'success')
+                this.router.navigate(['/workshop/repairs']).then(() => {
 
-            })
+                    this.loaderService.hydrate(false)
+                    this.notificationService.alert('Diagnostic', 'Car Diagnosis', 'success')
 
-            this.loaderService.hydrate(false)
+                })
+
+            }
 
         })
     }

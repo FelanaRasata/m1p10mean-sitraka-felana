@@ -179,10 +179,13 @@ export class SessionService {
 
         return new Observable<boolean>((subscriber) => {
 
+            const urlPart: string | null = this.getUrlPart()
+            const navigateUrl: string = isEmpty(urlPart) ? 'sign_in' : `/${urlPart}/sign_in`
+
             this.removeToken()
             this.removeUrlPart()
 
-            this.router.navigate(['sign_in']).then((status) => {
+            this.router.navigate([navigateUrl]).then((status) => {
 
                 subscriber.next(status)
                 subscriber.complete()

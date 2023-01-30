@@ -36,10 +36,12 @@ export class CarDiagnosisService {
                     if (result.status != 200) {
 
                         this.notificationService.alert('Creation failed!', result.message, 'error')
-                        subscriber.next(false)
-                        subscriber.complete()
+
 
                     }
+
+                    subscriber.next(result.status == 200)
+                    subscriber.complete()
 
                 })
 
