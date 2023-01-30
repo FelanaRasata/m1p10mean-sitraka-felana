@@ -8,6 +8,11 @@
         <tr>
             <th>Car Number</th>
             <th>Car Dropped Off</th>
+            <th>Diagnosis</th>
+            <th>Validate Repair Type</th>
+            <th>Validate Purchase</th>
+            <th>Car Repaired</th>
+            <th>Repair paid</th>
             <th>Car Taken Back</th>
             <th>Price</th>
         </tr>
@@ -16,6 +21,11 @@
         <tr>
             <th>Car Number</th>
             <th>Car Dropped Off</th>
+            <th>Diagnosis</th>
+            <th>Validate Repair Type</th>
+            <th>Validate Purchase</th>
+            <th>Car Repaired</th>
+            <th>Repair paid</th>
             <th>Car Taken Back</th>
             <th>Price</th>
         </tr>
@@ -24,6 +34,11 @@
         <tr *ngFor="let repair of repairService.repairs.value">
             <td><a [routerLink]="[cardUrlPath?.replace(':id', repair._id)]">{{repair.car.carNumber}}</a></td>
             <td>{{repair.carDroppedOffAt | date:"d MMM. y"}}</td>
+            <td>{{(repair.diagnosedAt | date:"d MMM. y") || 'N/A'}}</td>
+            <td>{{(repair.initiatedAt | date:"d MMM. y") || 'N/A'}}</td>
+            <td>{{(repair.inProgressAt | date:"d MMM. y") || 'N/A'}}</td>
+            <td>{{(repair.carRepairedAt | date:"d MMM. y") || 'N/A'}}</td>
+            <td>{{(repair.paidAt | date:"d MMM. y") || 'N/A'}}</td>
             <td>{{(repair.carTakenBackAt | date:"d MMM. y") || 'N/A'}}</td>
             <td>{{repair.price}}</td>
         </tr>

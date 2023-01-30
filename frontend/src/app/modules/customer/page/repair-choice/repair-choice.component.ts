@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs'
 import { NotificationService } from '../../../shared/core/services/notification/notification.service'
 import { Router } from '@angular/router'
 import { LoaderService } from '../../../shared/core/services/loader/loader.service'
+import { IRepairTypeTemp } from '../../../shared/core/models/schemas/repairs.schema'
 
 
 @Component({
@@ -13,7 +14,7 @@ import { LoaderService } from '../../../shared/core/services/loader/loader.servi
 })
 export class RepairChoiceComponent {
 
-    selectedList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([])
+    selectedList: BehaviorSubject<IRepairTypeTemp[]> = new BehaviorSubject<IRepairTypeTemp[]>([])
 
 
     constructor(
@@ -39,7 +40,8 @@ export class RepairChoiceComponent {
             for (const selectedRepair of this.selectedList.value) {
 
                 repairDto.selectedRepairs.push({
-                    repairType: selectedRepair,
+                    repairType: selectedRepair.repairType,
+                    quantity: selectedRepair.quantity,
                     checked: false,
                 })
 

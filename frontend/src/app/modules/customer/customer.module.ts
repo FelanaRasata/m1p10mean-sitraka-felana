@@ -29,6 +29,7 @@ import { RouterLink } from '@angular/router'
     ],
     exports: [
         CarListComponent,
+        DiagnosisItemsTableComponent,
     ],
     imports: [
         CommonModule,

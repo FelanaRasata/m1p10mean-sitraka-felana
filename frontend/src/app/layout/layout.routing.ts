@@ -10,7 +10,6 @@ import { StatisticsComponent } from '../modules/financial/page/statistics/statis
 import { RepairsInitiatedComponent } from '../modules/financial/page/repairs-initiated/repairs-initiated.component'
 import { RepairInitiatedComponent } from '../modules/financial/page/repair-initiated/repair-initiated.component'
 import { RepairsPaidComponent } from '../modules/financial/page/repairs-paid/repairs-paid.component'
-import { RepairPaidComponent } from '../modules/financial/page/repair-paid/repair-paid.component'
 import { RepairsFilteredComponent } from '../modules/workshop/page/repairs-filtered/repairs-filtered.component'
 import { CarDiagnosisComponent } from '../modules/workshop/page/car-diagnosis/car-diagnosis.component'
 import { RepairInProgressComponent } from '../modules/workshop/page/repair-in-progress/repair-in-progress.component'
@@ -28,6 +27,7 @@ import {
     CustomerRepairInProgressResolver
 } from '../modules/customer/core/resolver/customer-repair-in-progress/customer-repair-in-progress.resolver'
 import { ProfilComponent } from '../modules/shared/components/others/profil/profil.component'
+import { RepairsPaidResolver } from '../modules/financial/core/resolver/repairs-paid/repairs-paid.resolver'
 
 
 const routes: Routes = [
@@ -104,13 +104,6 @@ const routes: Routes = [
                 component: RepairsInitiatedComponent,
             },
             {
-                path: 'repairs/:repair_id',
-                resolve: {
-                    data: RepairResolver
-                } ,
-                component: RepairCardComponent,
-            },
-            {
                 path: 'repair/:repair_id/initiated',
                 resolve: {
                     data: RepairResolver
@@ -119,11 +112,17 @@ const routes: Routes = [
             },
             {
                 path: 'repairs/paid',
+                resolve: {
+                    data: RepairsPaidResolver
+                },
                 component: RepairsPaidComponent,
             },
             {
-                path: 'repair/:repair_id/paid',
-                component: RepairPaidComponent,
+                path: 'repairs/:repair_id',
+                resolve: {
+                    data: RepairResolver
+                } ,
+                component: RepairCardComponent,
             },
         ],
     },

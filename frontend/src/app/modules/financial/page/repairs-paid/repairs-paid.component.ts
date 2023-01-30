@@ -7,5 +7,6 @@ import { Component } from '@angular/core'
     styleUrls: ['./repairs-paid.component.scss'],
 })
 export class RepairsPaidComponent {
-
+    constructor() {
+    }
 }

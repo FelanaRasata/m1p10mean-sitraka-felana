@@ -31,6 +31,12 @@ const RepairSchema = new mongoose.Schema(
                     ref: 'RepairType',
                     required: true
                 },
+                quantity: {
+                    type: Number,
+                    required: true,
+                    default: 1
+                }
+                ,
                 checked: {
                     type: Boolean,
                     required: true,

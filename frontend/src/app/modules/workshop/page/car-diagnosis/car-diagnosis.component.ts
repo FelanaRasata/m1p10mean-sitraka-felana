@@ -67,11 +67,20 @@ export class CarDiagnosisComponent {
     sendCarDiagnosis() {
         this.loaderService.hydrate(true)
         this.carDiagnosisCreate.repair = this.repairService.repair.value._id
-        this.carDiagnosisService.createCarDiagnosis(this.carDiagnosisCreate).subscribe({
-            next: () => {
-                this.loaderService.hydrate(false)
-                this.router.navigate(['/workshop/repairs'])
+        this.carDiagnosisService.createCarDiagnosis(this.carDiagnosisCreate).subscribe((status) =>{
+            if (status) {
+
+                this.router.navigate(['/workshop/repairs']).then(() => {
+
+                    this.notificationService.alert('Diagnostic', 'Car Diagnosis', 'success')
+                    this.loaderService.hydrate(false)
+
+                })
+
             }
+
+            this.loaderService.hydrate(false)
+
         })
     }
 }

@@ -16,6 +16,7 @@ import { RepairTypesTableComponent } from './components/tables/repair-types-tabl
 import { RepairCardComponent } from './components/others/repair-card/repair-card.component';
 import { ProfilComponent } from './components/others/profil/profil.component'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { CustomerModule } from '../customer/customer.module'
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
         CommonModule,
         RouterLink,
         FormsModule,
-        MatProgressBarModule
+        MatProgressBarModule,
     ],
     providers: [
         {

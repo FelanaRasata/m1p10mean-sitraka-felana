@@ -178,9 +178,9 @@ export class RepairService {
 
             const repairType = repairData.car_diagnosis.diagnosisRepairs.find(element => element.repairType._id === repairItem.repairType)
 
-            if (isEmpty(repairType)) {
+            if (!isEmpty(repairType)) {
 
-                price += repairType.repairCost * (1 + EXPENSES.manpower)
+                price += (repairType.repairType.repairCost * repairType.quantity ) * (1 + EXPENSES.manpower)
 
                 allNotPart *= repairType.repairType.carPart ? 0 : 1
 
@@ -188,7 +188,10 @@ export class RepairService {
 
         }
 
+
+
         currentRepair.price = price
+
         currentRepair.initiatedAt = new Date(repairData.initiatedAt)
 
         if (allNotPart===1) currentRepair.inProgressAt = new Date()

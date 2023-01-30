@@ -14,8 +14,8 @@ import { Router } from '@angular/router'
     styleUrls: ['./repair-card.component.scss'],
 })
 export class RepairCardComponent {
-    title = 'Repair Card'
 
+    title = 'Repair Card'
 
     workshopProgressButtonActive = false
 
@@ -67,16 +67,19 @@ export class RepairCardComponent {
 
     percentageNow = 0
 
-    progressWidth = ''
+    progressWidth = '0'
 
 
     calculateProgress() {
-        const max = this.repairService.repair.value.selectedRepairs.length
-        const now = this.repairService.repair.value.selectedRepairs.filter(element => element.checked).length
+        if (this.repairService.repair.value.selectedRepairs){
+            const max = this.repairService.repair.value.selectedRepairs.length
+            const now = this.repairService.repair.value.selectedRepairs.filter(element => element.checked).length
 
-        this.percentageNow = (now * 100) / max
+            this.percentageNow = (now * 100) / max
 
-        this.progressWidth = this.percentageNow + '%'
+            this.progressWidth = this.percentageNow + '%'
+        }
+
 
     }
 

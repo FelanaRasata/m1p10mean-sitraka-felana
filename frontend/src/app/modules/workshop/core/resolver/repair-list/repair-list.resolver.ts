@@ -28,7 +28,7 @@ export class RepairListResolver implements Resolve<boolean> {
                     {
                         page: 1,
                         limit: 10,
-                        sort: 'updateAt'
+                        sort: '-updatedAt'
                     }
                 )
                 .subscribe((status) => {

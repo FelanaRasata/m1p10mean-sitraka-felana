@@ -6,23 +6,23 @@
         <table class="table table-bordered" id="dataTable">
             <thead>
             <tr>
-                <th>Car Number</th>
-                <th>Name</th>
+                <th>Repair Type</th>
                 <th>Price</th>
-                <th></th>
+                <th>Action</th>
             </tr>
             </thead>
             <tfoot>
             <tr>
-                <th>Car Number</th>
-                <th>Name</th>
+                <th>Repair Type</th>
                 <th>Price</th>
-                <th></th>
+                <th>Action</th>
             </tr>
             </tfoot>
             <tbody>
             <tr *ngFor="let repairType of repairTypeService.repairTypes.value">
-                <td>{{repairType.name}}</td>
+                <td>{{repairType.name}}
+                    <span *ngIf="repairType.carPart" class="badge rounded-pill text-bg-info">(Car Part)</span>
+                </td>
                 <td>{{repairType.repairCost}}</td>
                 <td>
                     <span class="input-group">

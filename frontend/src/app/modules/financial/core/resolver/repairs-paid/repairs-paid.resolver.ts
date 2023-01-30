@@ -10,7 +10,7 @@ import { RepairService } from '../../../../shared/core/services/repair/repair.se
 @Injectable({
   providedIn: 'root'
 })
-export class RepairsInitiatedResolver implements Resolve<boolean> {
+export class RepairsPaidResolver implements Resolve<boolean> {
     constructor(
         private repairService: RepairService
     ) {
@@ -23,8 +23,7 @@ export class RepairsInitiatedResolver implements Resolve<boolean> {
             this.repairService
                 .getRepairs(
                     {
-                        initiatedAt : { $ne : null},
-                        inProgressAt : { $eq : null},
+                        paidAt : { $ne : null},
                     },
                     {
                         page: 1,

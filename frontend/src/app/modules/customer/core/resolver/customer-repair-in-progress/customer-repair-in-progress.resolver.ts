@@ -30,7 +30,7 @@ export class CustomerRepairInProgressResolver implements Resolve<boolean> {
                     {
                         page: 1,
                         limit: 10,
-                        sort: 'updateAt'
+                        sort: '-updatedAt'
                     }
                 )
                 .subscribe((status) => {

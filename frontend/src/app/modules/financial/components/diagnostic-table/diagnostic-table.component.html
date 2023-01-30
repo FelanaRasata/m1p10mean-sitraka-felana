@@ -6,14 +6,14 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
-                <th></th>
+                <th>Quantity</th>
             </tr>
             </thead>
             <tfoot>
             <tr>
                 <th>Name</th>
                 <th>Price</th>
-                <th></th>
+                <th>Quantity</th>
             </tr>
             </tfoot>
             <tbody>
@@ -21,12 +21,7 @@
             >
                 <td *ngIf="repairTypeItem.repairType.carPart">{{repairTypeItem.repairType.name}}</td>
                 <td *ngIf="repairTypeItem.repairType.carPart">{{repairTypeItem.repairType.repairCost}}</td>
-                <!--<td>
-                    <span class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" (click)="addRepairItem(repairType)"
-                                id="button-addon2">Add to Diagnostic</button>
-                    </span>
-                </td>-->
+                <td *ngIf="repairTypeItem.repairType.carPart">{{repairTypeItem.quantity}}</td>
             </tr>
             </tbody>
         </table>
