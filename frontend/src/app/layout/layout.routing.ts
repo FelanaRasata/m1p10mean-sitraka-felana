@@ -30,11 +30,14 @@ import { RepairsPaidResolver } from '../modules/financial/core/resolver/repairs-
 import { TimeAverageResolver } from '../modules/financial/core/resolver/time-average/time-average.resolver'
 import { BenefitResolver } from '../modules/financial/core/resolver/benefit/benefit.resolver'
 import { TurnoverResolver } from '../modules/financial/core/resolver/turnover/turnover.resolver'
+import { RedirectGuard } from '../modules/shared/core/guards/redirect/redirect.guard'
+import { NotFoundComponent } from '../modules/public/page/not-found/not-found.component'
 
 
 const routes: Routes = [
     {
         path: 'customer',
+        canActivateChild: [RedirectGuard],
         children: [
             {
                 path: '',
@@ -80,6 +83,7 @@ const routes: Routes = [
     },
     {
         path: 'financial',
+        canActivateChild: [RedirectGuard],
         children: [
             {
                 path: '',
@@ -131,6 +135,7 @@ const routes: Routes = [
     },
     {
         path: 'workshop',
+        canActivateChild: [RedirectGuard],
         children: [
             {
                 path: '',
@@ -176,6 +181,10 @@ const routes: Routes = [
             },
         ],
     },
+    {
+        path: '**',
+        component: NotFoundComponent
+    }
 ]
 
 
