@@ -56,7 +56,7 @@ export class RepairService {
         if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         return Repair
-            .findOne({_id: repairId, deleted: false})
+            .findOne({ _id: repairId, deleted: false })
             .populate('car')
             .populate({
                 path: 'car_diagnosis',
@@ -79,19 +79,21 @@ export class RepairService {
         if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
         const repair = Repair
-            .findOne({_id: repairId, deleted: false})
-            .populate('customer')
-            .populate('car')
+            .findOne({ _id: repairId, deleted: false })
             .populate({
-                path: 'car_diagnosis',
+                path: 'car',
                 populate: {
-                    path: 'diagnosisRepairs.repairType',
-                    model: 'RepairType'
+                    path: 'customer'
                 }
             })
             .populate({
-                path: 'selectedRepairs.repairType',
-                model: 'RepairType'
+                path: 'car_diagnosis',
+                populate: {
+                    path: 'diagnosisRepairs.repairType'
+                }
+            })
+            .populate({
+                path: 'selectedRepairs.repairType'
             })
             .lean()
 
@@ -288,13 +290,13 @@ export class RepairService {
         return Repair.aggregate([
             {
                 $match: {
-                    carTakenBackAt : {$ne : null}
+                    carTakenBackAt: { $ne: null }
                 }
             },
             {
                 $group: {
                     _id: null,
-                    totalDifference: {$sum: {$subtract: ['$carTakenBackAt', '$carDroppedOffAt']}}
+                    totalDifference: { $sum: { $subtract: ['$carTakenBackAt', '$carDroppedOffAt'] } }
                 }
             },
 
@@ -319,7 +321,7 @@ export class RepairService {
 
     async countRepair() {
         return Repair.countDocuments({
-            carTakenBackAt : {$ne : null},
+            carTakenBackAt: { $ne: null },
             deleted: false
         })
     }
@@ -334,9 +336,9 @@ export class RepairService {
         const average = (time[0].totalDifference / count)
 
         return {
-            millisecond : average.toFixed(2),
-            hour: (average/3600000).toFixed(2),
-            day: (average / (3600000*24)).toFixed(2)
+            millisecond: average.toFixed(2),
+            hour: (average / 3600000).toFixed(2),
+            day: (average / (3600000 * 24)).toFixed(2)
         }
 
     }
@@ -347,10 +349,10 @@ export class RepairService {
             {
                 $group: {
                     _id: {
-                        year: {$year: '$paidAt'},
-                        month: {$month: '$paidAt'}
+                        year: { $year: '$paidAt' },
+                        month: { $month: '$paidAt' }
                     },
-                    total: {$sum: '$price'}
+                    total: { $sum: '$price' }
                 },
 
 
@@ -360,7 +362,7 @@ export class RepairService {
                     _id: 1,
                 },
             },
-            {'$limit': 12}
+            { '$limit': 12 }
         ])
     }
 
