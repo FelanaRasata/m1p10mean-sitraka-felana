@@ -137,7 +137,7 @@ export class RepairService {
 
         console.log(user)
 
-        await sendEmail(["rasatadiamondra@gmail.com"], 'Exit Voucher', exit_ticket(repair.car.carNumber, user), true)
+        await sendEmail([user.emailAddress], 'Exit Voucher', exit_ticket(repair.car.carNumber, user), true)
 
         return repair
     }

@@ -18,7 +18,7 @@ export class SignInComponent {
 
     userCredentials = {
         customer: {
-            email: 'jean-ba@example.com',
+            email: 'rasatadiamondra@gmail.com',
             password: '1234_viva_l_galleried',
         },
         workshopManager: {
