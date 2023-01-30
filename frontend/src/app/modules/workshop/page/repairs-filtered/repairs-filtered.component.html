@@ -6,11 +6,11 @@
                 <form
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <input aria-describedby="basic-addon2" aria-label="Search"
-                               class="form-control bg-light border-0 small"
-                               placeholder="Search for..." type="text">
+                        <select name="request" class="form-select  bg-light border-0 small" aria-label="Default select example" [(ngModel)]="request">
+                            <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
+                        </select>
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
+                            <button class="btn btn-primary" type="button" (click)="search()">
                                 <i class="fas fa-search fa-sm"></i>
                             </button>
                         </div>

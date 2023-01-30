@@ -24,6 +24,38 @@ router.get('/time/average',async (request, response) => {
 
 })
 
+router.get('/benefit/month',async (request, response) => {
+
+    try {
+
+        const benefits = await repairService.benefitByMonth()
+
+        response.status(200).json(toResponseEntity(200, 'Benefits by month.', benefits))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
+router.get('/turnover/month',async (request, response) => {
+
+    try {
+
+        const benefits = await repairService.turnoverByMonth()
+
+        response.status(200).json(toResponseEntity(200, 'Benefits by month.', benefits))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
 router.get('/', async (request, response) => {
 
     try {

@@ -7,7 +7,7 @@ import { NotificationService } from '../notification/notification.service'
 import { PaginationService } from '../pagination/pagination.service'
 import { IRepair } from '../../models/schemas/repairs.schema'
 import { IResponseType } from '../../models/global/global'
-import { IAverageRepair } from '../../models/global/statistics'
+import { IAverageRepair, IBenefit } from '../../models/global/statistics'
 
 
 @Injectable({
@@ -20,6 +20,9 @@ export class RepairService {
     repair: BehaviorSubject<IRepair> = new BehaviorSubject<IRepair>({} as IRepair)
 
     averageTime : BehaviorSubject<IAverageRepair> = new BehaviorSubject<IAverageRepair>({} as IAverageRepair)
+
+    benefits: BehaviorSubject<IBenefit[]> = new BehaviorSubject<IBenefit[]>([])
+    turnovers: BehaviorSubject<IBenefit[]> = new BehaviorSubject<IBenefit[]>([])
 
     constructor(
         private apiService: ApiService,
@@ -344,4 +347,61 @@ export class RepairService {
         })
     }
 
+    getBenefit():Observable<boolean>{
+        return new Observable<boolean>((subscriber) => {
+
+            this.apiService
+                .get<any>(
+                    baseUrl(API_ENDPOINTS.repairs.benefits)
+                    , {},
+                )
+                .subscribe((result) => {
+
+                    if (result.status != 200) {
+
+                        this.notificationService.alert('No data found', result.message, 'error')
+                        subscriber.next(false)
+
+                    } else {
+
+                        this.benefits.next(result.data)
+                        subscriber.next(true)
+
+                    }
+
+                    subscriber.complete()
+
+                })
+
+        })
+    }
+
+    getTurnover():Observable<boolean>{
+        return new Observable<boolean>((subscriber) => {
+
+            this.apiService
+                .get<any>(
+                    baseUrl(API_ENDPOINTS.repairs.turnovers)
+                    , {},
+                )
+                .subscribe((result) => {
+
+                    if (result.status != 200) {
+
+                        this.notificationService.alert('No data found', result.message, 'error')
+                        subscriber.next(false)
+
+                    } else {
+
+                        this.turnovers.next(result.data)
+                        subscriber.next(true)
+
+                    }
+
+                    subscriber.complete()
+
+                })
+
+        })
+    }
 }

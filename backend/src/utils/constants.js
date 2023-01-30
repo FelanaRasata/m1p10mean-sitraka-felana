@@ -32,8 +32,8 @@ export const CONSTANTS = {
 
 export const EXPENSES = {
     diagnosis: 70000,
-    salaries: 7000000,
-    others: 2000000,
-    rent: 700000,
+    salaries: 70000,
+    others: 20000,
+    rent: 70000,
     manpower: 0.05
 }

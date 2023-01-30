@@ -4,7 +4,6 @@ import { CarListComponent } from '../modules/customer/page/car-list/car-list.com
 import { CarCardComponent } from '../modules/customer/page/car-card/car-card.component'
 import { RepairListComponent } from '../modules/customer/page/repair-list/repair-list.component'
 import { RepairChoiceComponent } from '../modules/customer/page/repair-choice/repair-choice.component'
-import { RepairPaymentComponent } from '../modules/customer/page/repair-payment/repair-payment.component'
 import { RepairCardComponent } from '../modules/shared/components/others/repair-card/repair-card.component'
 import { StatisticsComponent } from '../modules/financial/page/statistics/statistics.component'
 import { RepairsInitiatedComponent } from '../modules/financial/page/repairs-initiated/repairs-initiated.component'
@@ -29,6 +28,8 @@ import {
 import { ProfilComponent } from '../modules/shared/components/others/profil/profil.component'
 import { RepairsPaidResolver } from '../modules/financial/core/resolver/repairs-paid/repairs-paid.resolver'
 import { TimeAverageResolver } from '../modules/financial/core/resolver/time-average/time-average.resolver'
+import { BenefitResolver } from '../modules/financial/core/resolver/benefit/benefit.resolver'
+import { TurnoverResolver } from '../modules/financial/core/resolver/turnover/turnover.resolver'
 
 
 const routes: Routes = [
@@ -75,10 +76,6 @@ const routes: Routes = [
                 resolve: {data: DiagnosisResolver},
                 component: RepairChoiceComponent,
             },
-            {
-                path: 'repairs/:repair_id/pay',
-                component: RepairPaymentComponent,
-            },
         ],
     },
     {
@@ -96,7 +93,9 @@ const routes: Routes = [
             {
                 path: 'dashboard',
                 resolve: {
-                    data : TimeAverageResolver
+                    data : TimeAverageResolver,
+                    benefit: BenefitResolver,
+                    turnover: TurnoverResolver
                 },
                 component: StatisticsComponent,
             },

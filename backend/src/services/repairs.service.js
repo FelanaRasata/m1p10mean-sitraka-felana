@@ -284,9 +284,53 @@ export class RepairService {
         const average = (time[0].totalDifference / count) / (1000 * 60 * 60)
 
         return {
-            hour : average.toFixed(2),
-            day : (average/24).toFixed(2)
+            hour: average.toFixed(2),
+            day: (average / 24).toFixed(2)
         }
+
+    }
+
+
+    async turnoverByMonth() {
+        return Repair.aggregate([
+            {
+                $group: {
+                    _id: {
+                        year: {$year: '$paidAt'},
+                        month: {$month: '$paidAt'}
+                    },
+                    total: {$sum: '$price'}
+                },
+
+
+            },
+            {
+                $addFields: {
+                    year: "$_id.year",
+                    month: "$_id.month"
+                }
+            }
+            , {
+                $sort: {
+                    _id: 1,
+                },
+            },
+            {'$limit': 12}
+        ])
+    }
+
+
+    async benefitByMonth() {
+
+        const expenses = EXPENSES.salaries + EXPENSES.rent + EXPENSES.others
+
+        let repairMonth = await this.turnoverByMonth()
+
+        for (let repair of repairMonth) {
+            repair.total = repair.total - expenses
+        }
+
+        return repairMonth
 
     }
 

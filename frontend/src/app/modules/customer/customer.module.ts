@@ -4,7 +4,6 @@ import { CarCardComponent } from './page/car-card/car-card.component'
 import { RepairChoiceComponent } from './page/repair-choice/repair-choice.component'
 import { RepairListComponent } from './page/repair-list/repair-list.component'
 import { CarListComponent } from './page/car-list/car-list.component'
-import { RepairPaymentComponent } from './page/repair-payment/repair-payment.component'
 import { ComponentsModule } from '../../components/components.module'
 import { SharedModule } from '../shared/shared.module'
 import { MatDialogModule } from '@angular/material/dialog'
@@ -22,7 +21,6 @@ import { RouterLink } from '@angular/router'
         RepairChoiceComponent,
         RepairListComponent,
         CarListComponent,
-        RepairPaymentComponent,
         DiagnosisItemsTableComponent,
         CarCreationComponent,
         SelectedItemsTableComponent,
