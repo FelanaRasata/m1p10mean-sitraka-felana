@@ -43,14 +43,7 @@ export class StatisticsComponent {
                         label: 'Benefit by month (Ar)',
                         data: benefitData,
                         backgroundColor: [
-                            'rgb(75, 192, 192)',
                             'rgb(54, 162, 235)',
-                            'rgb(153, 102, 255)',
-                            'rgb(201, 203, 207)',
-                            'rgb(75, 192, 0)',
-                            'rgb(54, 162, 0)',
-                            'rgb(153, 102, 0)',
-                            'rgb(201, 203, 0)'
                         ],
                         borderWidth: 1
                     }]
@@ -65,17 +58,10 @@ export class StatisticsComponent {
                 data: {
                     labels: turnoverLabels,
                     datasets: [{
-                        label: 'Paiement enregisté (Ar)',
+                        label: 'Turnover of months  (Ar)',
                         data: turnoverData,
                         backgroundColor: [
                             'rgb(75, 192, 192)',
-                            'rgb(54, 162, 235)',
-                            'rgb(153, 102, 255)',
-                            'rgb(201, 203, 207)',
-                            'rgb(75, 192, 0)',
-                            'rgb(54, 162, 0)',
-                            'rgb(153, 102, 0)',
-                            'rgb(201, 203, 0)'
                         ],
                         borderWidth: 1
                     }]

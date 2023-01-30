@@ -44,9 +44,9 @@ router.get('/turnover/month',async (request, response) => {
 
     try {
 
-        const benefits = await repairService.turnoverByMonth()
+        const turnovers = await repairService.completeTurnover()
 
-        response.status(200).json(toResponseEntity(200, 'Benefits by month.', benefits))
+        response.status(200).json(toResponseEntity(200, 'Turnovers by month.', turnovers))
 
     } catch (error) {
 

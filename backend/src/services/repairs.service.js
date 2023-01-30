@@ -305,12 +305,6 @@ export class RepairService {
 
             },
             {
-                $addFields: {
-                    year: "$_id.year",
-                    month: "$_id.month"
-                }
-            }
-            , {
                 $sort: {
                     _id: 1,
                 },
@@ -320,17 +314,76 @@ export class RepairService {
     }
 
 
+    async completeTurnover() {
+
+        let dates = this.createArrayDate()
+
+        let turnoverMonth = await this.turnoverByMonth()
+
+        console.log(dates)
+
+        for (let date of dates) {
+            const element = turnoverMonth.find(element => element._id.year === date._id.year && element._id.month === date._id.month)
+
+            if (!isEmpty(element))
+                date.total = element.total
+        }
+
+        return dates
+
+    }
+
+
+    createArrayDate() {
+        const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        const currentYear = new Date().getFullYear()
+        const currentMonth = new Date().getMonth() + 1
+
+        const years = [currentYear - 1, currentYear]
+
+        const index = months.findIndex(item => item === currentMonth)
+
+        let dates = []
+
+        for (let i = 0; i < months.length; i++) {
+            let temp
+            if (i <= index) {
+                temp = {
+                    _id: {
+                        year: years[1],
+                        month: months[i]
+                    },
+                    total: 0
+                }
+            } else {
+                temp = {
+                    _id: {
+                        year: years[0],
+                        month: months[i]
+                    },
+                    total: 0
+                }
+            }
+            dates.push(temp)
+        }
+
+        dates.sort((a, b) => a._id.year - b._id.year)
+
+        return dates
+    }
+
+
     async benefitByMonth() {
 
         const expenses = EXPENSES.salaries + EXPENSES.rent + EXPENSES.others
 
-        let repairMonth = await this.turnoverByMonth()
+        let turnoverMonth = await this.completeTurnover()
 
-        for (let repair of repairMonth) {
-            repair.total = repair.total - expenses
+        for (let turnover of turnoverMonth) {
+            turnover.total = turnover.total - expenses
         }
 
-        return repairMonth
+        return turnoverMonth
 
     }
 
