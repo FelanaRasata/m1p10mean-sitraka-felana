@@ -78,7 +78,7 @@ export class RepairService {
 
         if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
 
-        const repair = Repair
+        const repair = await Repair
             .findOne({ _id: repairId, deleted: false })
             .populate({
                 path: 'car',

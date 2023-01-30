@@ -19,7 +19,7 @@ export async function convertHtmlToPdf(html) {
 
         let options = { format: 'A4' }
 
-        let file = { content: '<h1>Welcome to html-pdf-node</h1>' }
+        let file = { content: html }
 
         html_to_pdf
             .generatePdf(file, options)

@@ -130,7 +130,7 @@ export class RepairCardComponent {
 
 
     downloadInvoice() {
-
+        this.loaderService.hydrate(true)
         this.repairService.downloadInvoice(this.repairService.repair.value._id)
 
     }

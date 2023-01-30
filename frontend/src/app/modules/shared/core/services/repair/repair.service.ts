@@ -8,6 +8,7 @@ import { PaginationService } from '../pagination/pagination.service'
 import { IRepair } from '../../models/schemas/repairs.schema'
 import { IResponseType } from '../../models/global/global'
 import { IAverageRepair, IBenefit } from '../../models/global/statistics'
+import { LoaderService } from '../loader/loader.service'
 
 
 @Injectable({
@@ -30,6 +31,7 @@ export class RepairService {
         private apiService: ApiService,
         private notificationService: NotificationService,
         private paginationService: PaginationService,
+        private loaderService: LoaderService,
     ) {
     }
 
@@ -430,11 +432,11 @@ export class RepairService {
                         '',
                         'error',
                     )
-
+                    this.loaderService.hydrate(false)
                     return
 
                 }
-
+                this.loaderService.hydrate(false)
                 const objectURL: string = URL.createObjectURL(data)
                 window.open(objectURL, '_blank')
 

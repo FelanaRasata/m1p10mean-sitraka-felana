@@ -329,7 +329,10 @@ export const exit_voucher = (carNumber, user) => {
 
 export const invoice = (repair) => {
 
-    const user = repair.customer
+    const user = repair.car.customer
+
+    console.log(user)
+    console.log(">>>>>>>>>>>>>>>")
 
     return `
     <!DOCTYPE html>
