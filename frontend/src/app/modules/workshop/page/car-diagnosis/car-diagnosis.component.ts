@@ -70,7 +70,7 @@ export class CarDiagnosisComponent {
         this.carDiagnosisService.createCarDiagnosis(this.carDiagnosisCreate).subscribe((status) => {
 
             if (status) {
-                
+
                 this.router.navigate(['/workshop/repairs']).then(() => {
 
                     this.loaderService.hydrate(false)

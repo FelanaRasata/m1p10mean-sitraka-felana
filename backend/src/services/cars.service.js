@@ -57,7 +57,7 @@ export class CarService {
         if (isEmpty(foundCar)) throw createError(409, 'No car found')
 
         const repairsInProgress = await Repair
-            .findOne({ car: carId, paidAt: null, carTakenBackAt: null })
+            .findOne({ car: carId, carTakenBackAt: null })
             .lean()
 
         Object.assign(foundCar, { beingRepaired: !isEmpty(repairsInProgress) })
