@@ -486,7 +486,7 @@ export const invoice = (repair) => {
     </div>
     <div id="project">
       <div><span>PROJECT</span> Repair Car</div>
-      <div><span>CLIENT</span> ${user.username}</div>
+      <div><span>CLIENT</span> ${user.lastName}</div>
       <div><span>EMAIL</span> ${user.emailAddress}</a></div>
     </div>
   </header>

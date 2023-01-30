@@ -24,7 +24,7 @@ export class CustomerRepairInProgressResolver implements Resolve<boolean> {
             this.repairService
                 .getRepairs(
                     {
-                        initiatedAt : {$ne : null},
+                        carDroppedOffAt : {$ne : null},
                         carTakenBackAt : {$eq : null},
                     },
                     {
