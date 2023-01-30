@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { NotificationService } from '../../../core/services/notification/notification.service'
 import { RepairService } from '../../../core/services/repair/repair.service'
 import { SessionService } from '../../../core/services/session/session.service'
 import { EUserType } from '../../../core/models/global/static_enums'
-import { IRepairTypeItem } from '../../../core/models/schemas/repairs.schema'
 import { LoaderService } from '../../../core/services/loader/loader.service'
 import { Router } from '@angular/router'
 
@@ -39,7 +38,7 @@ export class RepairCardComponent {
         public repairService: RepairService,
         public sessionService: SessionService,
         private loaderService: LoaderService,
-        private router: Router
+        private router: Router,
     ) {
 
         const repair = this.repairService.repair.value
@@ -69,17 +68,17 @@ export class RepairCardComponent {
     }
 
 
-    percentageNow : any
+    percentageNow: any
 
     progressWidth = '0'
 
 
     calculateProgress() {
-        if (this.repairService.repair.value.selectedRepairs){
+        if (this.repairService.repair.value.selectedRepairs) {
             const max = this.repairService.repair.value.selectedRepairs.length
             const now = this.repairService.repair.value.selectedRepairs.filter(element => element.checked).length
 
-            this.percentageNow = ((now * 100) / max).toFixed(2);
+            this.percentageNow = ((now * 100) / max).toFixed(2)
 
             this.progressWidth = this.percentageNow + '%'
         }
@@ -102,11 +101,12 @@ export class RepairCardComponent {
 
         if (validate) {
             this.repairService.paidRepair(this.repairService.repair.value._id).subscribe({
-                next: () => this.router.navigate(['/customer/repairs'])
+                next: () => this.router.navigate(['/customer/repairs']),
             })
         }
 
     }
+
 
     async takeBackCar() {
 
@@ -122,14 +122,17 @@ export class RepairCardComponent {
 
         if (validate) {
             this.repairService.takenCarBack(this.repairService.repair.value._id).subscribe({
-                next: () => this.router.navigate(['/workshop/repairs'])
+                next: () => this.router.navigate(['/workshop/repairs']),
             })
         }
 
     }
 
-    downloadInvoice(){
-        this.repairService.downloadInvoice(this.repairService.repair.value._id).subscribe();
+
+    downloadInvoice() {
+
+        this.repairService.downloadInvoice(this.repairService.repair.value._id)
+
     }
 
 }

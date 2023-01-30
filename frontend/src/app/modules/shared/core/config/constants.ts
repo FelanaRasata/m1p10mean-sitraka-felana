@@ -28,7 +28,7 @@ export const API_ENDPOINTS = {
         average_time:'repairs/time/average',
         benefits:'repairs/benefit/month',
         turnovers:'repairs/turnover/month',
-        invoice:'repairs/:repair_id/month',
+        invoice:'repairs/:repair_id/invoice',
     },
     car_diagnosis: 'car_diagnosis',
     user: 'users',

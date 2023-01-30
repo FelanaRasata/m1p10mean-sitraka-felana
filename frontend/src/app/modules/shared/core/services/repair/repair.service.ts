@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { baseUrl } from '../utils/utils'
 import { API_ENDPOINTS } from '../../config/constants'
 import { ApiService } from '../api/api.service'
@@ -19,10 +19,12 @@ export class RepairService {
 
     repair: BehaviorSubject<IRepair> = new BehaviorSubject<IRepair>({} as IRepair)
 
-    averageTime : BehaviorSubject<IAverageRepair> = new BehaviorSubject<IAverageRepair>({} as IAverageRepair)
+    averageTime: BehaviorSubject<IAverageRepair> = new BehaviorSubject<IAverageRepair>({} as IAverageRepair)
 
     benefits: BehaviorSubject<IBenefit[]> = new BehaviorSubject<IBenefit[]>([])
+
     turnovers: BehaviorSubject<IBenefit[]> = new BehaviorSubject<IBenefit[]>([])
+
 
     constructor(
         private apiService: ApiService,
@@ -73,7 +75,7 @@ export class RepairService {
                 .put<any>(
                     baseUrl(API_ENDPOINTS.repairs.init.replace(':repair_id', repairId)),
                     {
-                        ...repairDto
+                        ...repairDto,
                     },
                 )
                 .subscribe((result) => {
@@ -108,7 +110,7 @@ export class RepairService {
                 .put<any>(
                     baseUrl(API_ENDPOINTS.repairs.proceed.replace(':repair_id', repairId)),
                     {
-                        ...repairDto
+                        ...repairDto,
                     },
                 )
                 .subscribe((result) => {
@@ -143,7 +145,7 @@ export class RepairService {
                 .put<any>(
                     baseUrl(API_ENDPOINTS.repairs.finish.replace(':repair_id', repairId)),
                     {
-                        ...repairDto
+                        ...repairDto,
                     },
                 )
                 .subscribe((result) => {
@@ -174,7 +176,7 @@ export class RepairService {
 
         return this.apiService
             .get<any>(
-                `${baseUrl(API_ENDPOINTS.repairs.list)}/${repairId}`
+                `${baseUrl(API_ENDPOINTS.repairs.list)}/${repairId}`,
             )
 
     }
@@ -267,6 +269,7 @@ export class RepairService {
 
     }
 
+
     takenCarBack(repairId: string): Observable<boolean> {
 
         const url = `${API_ENDPOINTS.repairs.car_back}/${repairId}`
@@ -284,7 +287,7 @@ export class RepairService {
                 .put<IRepair>(
                     baseUrl(url)
                     ,
-                    {}
+                    {},
                 )
                 .subscribe((result) => {
 
@@ -301,8 +304,8 @@ export class RepairService {
                             {
                                 page: 1,
                                 limit: 10,
-                                sort: '-updatedAt'
-                            }
+                                sort: '-updatedAt',
+                            },
                         ).subscribe((status) => {
 
                             subscriber.next(status)
@@ -318,7 +321,8 @@ export class RepairService {
 
     }
 
-    getAverageTime():Observable<boolean>{
+
+    getAverageTime(): Observable<boolean> {
         return new Observable<boolean>((subscriber) => {
 
             this.apiService
@@ -347,7 +351,8 @@ export class RepairService {
         })
     }
 
-    getBenefit():Observable<boolean>{
+
+    getBenefit(): Observable<boolean> {
         return new Observable<boolean>((subscriber) => {
 
             this.apiService
@@ -376,7 +381,8 @@ export class RepairService {
         })
     }
 
-    getTurnover():Observable<boolean>{
+
+    getTurnover(): Observable<boolean> {
         return new Observable<boolean>((subscriber) => {
 
             this.apiService
@@ -406,7 +412,33 @@ export class RepairService {
     }
 
 
-    downloadInvoice(repairId: string):Observable<boolean>{
-        return EMPTY
+    downloadInvoice(repairId: string): void {
+
+        this.apiService
+            .get(
+                baseUrl(API_ENDPOINTS.repairs.invoice.replace(':repair_id', repairId)),
+                {observe: 'response', responseType: 'blob' as 'json'},
+            )
+            .subscribe((response: any) => {
+
+                const data: any = response.body
+
+                if (data == null) {
+
+                    this.notificationService.alert(
+                        'Invoice download error',
+                        '',
+                        'error',
+                    )
+
+                    return
+
+                }
+
+                const objectURL: string = URL.createObjectURL(data)
+                window.open(objectURL, '_blank')
+
+            })
     }
+
 }
