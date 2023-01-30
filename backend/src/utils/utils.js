@@ -1,4 +1,6 @@
 import * as CryptoJS from 'crypto-js'
+
+import html_to_pdf from 'html-pdf-node'
 import createError from 'http-errors'
 import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
@@ -11,9 +13,35 @@ import { CONSTANTS } from './constants.js'
 const settings = new Settings()
 
 
+export async function convertHtmlToPdf(html) {
+
+    return new Promise((resolve, reject) => {
+
+        let options = { format: 'A4' }
+
+        let file = { content: '<h1>Welcome to html-pdf-node</h1>' }
+
+        html_to_pdf
+            .generatePdf(file, options)
+            .then(pdfBuffer => {
+
+                resolve(pdfBuffer)
+
+            })
+            .catch((error) => {
+
+                reject(error)
+
+            })
+
+    })
+
+}
+
+
 export async function sendEmail(recipients, topic, message, isHtml, cc = [], bcc = [], attachments = []) {
 
-    console.log(">>>>>>>>>>>>")
+    console.log('>>>>>>>>>>>>')
 
     const transporter = nodemailer.createTransport(CONSTANTS.nodemailer_options)
 

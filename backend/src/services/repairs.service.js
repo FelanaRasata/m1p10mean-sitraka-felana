@@ -2,10 +2,10 @@ import createError from 'http-errors'
 import { Settings } from '../config/settings.js'
 import { Repair } from '../models/repairs.schema.js'
 import { EXPENSES } from '../utils/constants.js'
-import { customLabels, isEmpty, sendEmail, toDocumentFormat } from '../utils/utils.js'
+import { exit_voucher, invoice } from '../utils/html_formatter.js'
+import { convertHtmlToPdf, customLabels, isEmpty, sendEmail, toDocumentFormat } from '../utils/utils.js'
 import { CarService } from './cars.service.js'
 import { UserService } from './users.service.js'
-import { exit_ticket } from '../utils/html_formatter.js'
 
 
 export class RepairService {
@@ -74,6 +74,34 @@ export class RepairService {
     }
 
 
+    async downloadInvoice(repairId) {
+
+        if (isEmpty(repairId)) throw createError(409, 'No repair ID found')
+
+        const repair = Repair
+            .findOne({_id: repairId, deleted: false})
+            .populate('customer')
+            .populate('car')
+            .populate({
+                path: 'car_diagnosis',
+                populate: {
+                    path: 'diagnosisRepairs.repairType',
+                    model: 'RepairType'
+                }
+            })
+            .populate({
+                path: 'selectedRepairs.repairType',
+                model: 'RepairType'
+            })
+            .lean()
+
+        if (isEmpty(repair)) throw createError(409, 'No repair found')
+
+        return await convertHtmlToPdf(invoice(repair))
+
+    }
+
+
     async updateDiagnosisState(repairId, price) {
 
         let currentRepair = await Repair.findById(repairId)
@@ -137,7 +165,7 @@ export class RepairService {
 
         console.log(user)
 
-        await sendEmail([user.emailAddress], 'Exit Voucher', exit_ticket(repair.car.carNumber, user), true)
+        await sendEmail([user.emailAddress], 'Exit Voucher', exit_voucher(repair.car.carNumber, user), true)
 
         return repair
     }

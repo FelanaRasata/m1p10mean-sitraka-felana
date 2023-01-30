@@ -8,7 +8,27 @@ const router = Router()
 
 const repairService = new RepairService()
 
-router.get('/time/average',async (request, response) => {
+
+router.get('/:repair_id/invoice', async (request, response) => {
+
+    try {
+
+        const buffer = await repairService.downloadInvoice(request.params.repair_id)
+
+        response.set('Content-Type', 'application/pdf');
+        response.set('Content-Disposition', `attachment; filename=invoice-${request.params.repair_id}.pdf`);
+        response.send(buffer);
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
+
+router.get('/time/average', async (request, response) => {
 
     try {
 
@@ -24,7 +44,8 @@ router.get('/time/average',async (request, response) => {
 
 })
 
-router.get('/benefit/month',async (request, response) => {
+
+router.get('/benefit/month', async (request, response) => {
 
     try {
 
@@ -40,7 +61,7 @@ router.get('/benefit/month',async (request, response) => {
 
 })
 
-router.get('/turnover/month',async (request, response) => {
+router.get('/turnover/month', async (request, response) => {
 
     try {
 

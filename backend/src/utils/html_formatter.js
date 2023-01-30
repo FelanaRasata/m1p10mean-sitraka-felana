@@ -141,7 +141,7 @@ export const index = () => {
   `
 }
 
-export const exit_ticket = (carNumber, user) => {
+export const exit_voucher = (carNumber, user) => {
 
     return `
     <!DOCTYPE html>
@@ -327,7 +327,9 @@ export const exit_ticket = (carNumber, user) => {
   `
 }
 
-export const facture = (user, repair) => {
+export const invoice = (repair) => {
+
+    const user = repair.customer
 
     return `
     <!DOCTYPE html>
@@ -508,7 +510,7 @@ export const facture = (user, repair) => {
               <td class="service">${item.repairType.name}</td>
               <td class="unit">${item.repairType.repairCost}</td>
               <td class="qty">${item.quantity}</td>
-              <td class="total">${item.repairType.repairCost*item.quantity}</td>
+              <td class="total">${item.repairType.repairCost * item.quantity}</td>
             </tr>
           `
     }).join('')}
