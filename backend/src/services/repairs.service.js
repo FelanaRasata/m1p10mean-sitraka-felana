@@ -180,7 +180,7 @@ export class RepairService {
 
             if (!isEmpty(repairType)) {
 
-                price += (repairType.repairType.repairCost * repairType.quantity ) * (1 + EXPENSES.manpower)
+                price += (repairType.repairType.repairCost * repairType.quantity) * (1 + EXPENSES.manpower)
 
                 allNotPart *= repairType.repairType.carPart ? 0 : 1
 
@@ -189,12 +189,11 @@ export class RepairService {
         }
 
 
-
         currentRepair.price = price
 
         currentRepair.initiatedAt = new Date(repairData.initiatedAt)
 
-        if (allNotPart===1) currentRepair.inProgressAt = new Date()
+        if (allNotPart === 1) currentRepair.inProgressAt = new Date()
 
         await currentRepair.save()
 
@@ -253,6 +252,41 @@ export class RepairService {
         await currentRepair.save()
 
         return await this.findById(repairId)
+
+    }
+
+
+    async timeRepair() {
+        return Repair.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalDifference: {$sum: {$subtract: ['$carTakenBackAt', '$carDroppedOffAt']}}
+                }
+            }
+        ]).exec()
+    }
+
+
+    async countRepair() {
+        return Repair.countDocuments({
+            deleted: false
+        })
+    }
+
+
+    async averageRepairTime() {
+
+        const time = await this.timeRepair()
+
+        const count = await this.countRepair()
+
+        const average = (time[0].totalDifference / count) / (1000 * 60 * 60)
+
+        return {
+            hour : average.toFixed(2),
+            day : (average/24).toFixed(2)
+        }
 
     }
 

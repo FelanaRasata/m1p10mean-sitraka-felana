@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { RepairService } from '../../../shared/core/services/repair/repair.service'
 
 
 @Component({
@@ -7,5 +8,8 @@ import { Component } from '@angular/core'
     styleUrls: ['./statistics.component.scss'],
 })
 export class StatisticsComponent {
-
+    constructor(
+        public repairService: RepairService
+    ) {
+    }
 }

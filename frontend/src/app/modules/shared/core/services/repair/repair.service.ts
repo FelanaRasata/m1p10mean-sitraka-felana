@@ -7,6 +7,7 @@ import { NotificationService } from '../notification/notification.service'
 import { PaginationService } from '../pagination/pagination.service'
 import { IRepair } from '../../models/schemas/repairs.schema'
 import { IResponseType } from '../../models/global/global'
+import { IAverageRepair } from '../../models/global/statistics'
 
 
 @Injectable({
@@ -18,6 +19,7 @@ export class RepairService {
 
     repair: BehaviorSubject<IRepair> = new BehaviorSubject<IRepair>({} as IRepair)
 
+    averageTime : BehaviorSubject<IAverageRepair> = new BehaviorSubject<IAverageRepair>({} as IAverageRepair)
 
     constructor(
         private apiService: ApiService,
@@ -311,6 +313,35 @@ export class RepairService {
 
         })
 
+    }
+
+    getAverageTime():Observable<boolean>{
+        return new Observable<boolean>((subscriber) => {
+
+            this.apiService
+                .get<any>(
+                    baseUrl(API_ENDPOINTS.repairs.average_time)
+                    , {},
+                )
+                .subscribe((result) => {
+
+                    if (result.status != 200) {
+
+                        this.notificationService.alert('No data found', result.message, 'error')
+                        subscriber.next(false)
+
+                    } else {
+
+                        this.averageTime.next(result.data)
+                        subscriber.next(true)
+
+                    }
+
+                    subscriber.complete()
+
+                })
+
+        })
     }
 
 }

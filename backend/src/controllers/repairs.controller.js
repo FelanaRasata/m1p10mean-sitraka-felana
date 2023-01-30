@@ -8,6 +8,22 @@ const router = Router()
 
 const repairService = new RepairService()
 
+router.get('/time/average',async (request, response) => {
+
+    try {
+
+        const time = await repairService.averageRepairTime()
+
+        response.status(200).json(toResponseEntity(200, 'Time repair.', time))
+
+    } catch (error) {
+
+        response.status(200).json(toResponseEntity(409, String(error)))
+
+    }
+
+})
+
 router.get('/', async (request, response) => {
 
     try {

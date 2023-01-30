@@ -28,6 +28,7 @@ import {
 } from '../modules/customer/core/resolver/customer-repair-in-progress/customer-repair-in-progress.resolver'
 import { ProfilComponent } from '../modules/shared/components/others/profil/profil.component'
 import { RepairsPaidResolver } from '../modules/financial/core/resolver/repairs-paid/repairs-paid.resolver'
+import { TimeAverageResolver } from '../modules/financial/core/resolver/time-average/time-average.resolver'
 
 
 const routes: Routes = [
@@ -94,6 +95,9 @@ const routes: Routes = [
             },
             {
                 path: 'dashboard',
+                resolve: {
+                    data : TimeAverageResolver
+                },
                 component: StatisticsComponent,
             },
             {

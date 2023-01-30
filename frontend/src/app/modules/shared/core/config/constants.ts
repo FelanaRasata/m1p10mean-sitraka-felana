@@ -25,6 +25,7 @@ export const API_ENDPOINTS = {
         finish: 'repairs/finish/:repair_id',
         paid:'repairs/paid',
         car_back:'repairs/car_back',
+        average_time:'repairs/time/average'
     },
     car_diagnosis: 'car_diagnosis',
     user: 'users',
