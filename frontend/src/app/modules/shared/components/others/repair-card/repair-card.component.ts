@@ -65,7 +65,7 @@ export class RepairCardComponent {
     }
 
 
-    percentageNow = 0
+    percentageNow : any
 
     progressWidth = '0'
 
@@ -75,7 +75,7 @@ export class RepairCardComponent {
             const max = this.repairService.repair.value.selectedRepairs.length
             const now = this.repairService.repair.value.selectedRepairs.filter(element => element.checked).length
 
-            this.percentageNow = (now * 100) / max
+            this.percentageNow = ((now * 100) / max).toFixed(2);
 
             this.progressWidth = this.percentageNow + '%'
         }

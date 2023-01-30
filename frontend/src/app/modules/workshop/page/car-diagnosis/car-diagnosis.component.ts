@@ -67,9 +67,9 @@ export class CarDiagnosisComponent {
     sendCarDiagnosis() {
         this.loaderService.hydrate(true)
         this.carDiagnosisCreate.repair = this.repairService.repair.value._id
-        this.carDiagnosisService.createCarDiagnosis(this.carDiagnosisCreate).subscribe((status) => {
 
-            this.loaderService.hydrate(false)
+        this.carDiagnosisService.createCarDiagnosis(this.carDiagnosisCreate).subscribe((status) => {
+            console.log(JSON.stringify(this.carDiagnosisCreate))
 
             this.router.navigate(['/workshop/repairs']).then(() => {
 

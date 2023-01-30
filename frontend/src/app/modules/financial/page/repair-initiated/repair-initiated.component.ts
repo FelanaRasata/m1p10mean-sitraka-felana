@@ -22,7 +22,7 @@ export class RepairInitiatedComponent {
         this.loaderService.hydrate(true)
         this.repairService.financeValidate(this.repairService.repair.value._id).subscribe({
             next:() => {
-                this.router.navigate(['/financial/repairs']);
+                this.router.navigate(['/financial/repairs/initiated']);
                 this.loaderService.hydrate(false)
             }
         })
