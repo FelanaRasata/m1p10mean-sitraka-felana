@@ -57,6 +57,14 @@
                                         </span>
             <span class="text">Validate Take Car back</span>
         </a>
+
+        <a *ngIf="customerDownloadFacture" (click)="downloadInvoice()"
+           class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-download"></i>
+                                        </span>
+            <span class="text">Download Invoice</span>
+        </a>
     </div>
     <div>
         <!-- DataTales Example -->

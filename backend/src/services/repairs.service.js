@@ -287,17 +287,39 @@ export class RepairService {
     async timeRepair() {
         return Repair.aggregate([
             {
+                $match: {
+                    carTakenBackAt : {$ne : null}
+                }
+            },
+            {
                 $group: {
                     _id: null,
                     totalDifference: {$sum: {$subtract: ['$carTakenBackAt', '$carDroppedOffAt']}}
                 }
-            }
+            },
+
         ]).exec()
+
+        /*return Repair.aggregate([
+                    {
+                        $match: {
+                            carTakenBackAt : {$ne : null}
+                        }
+                    },
+                    {
+                        $project: {
+                            _id: "$_id",
+                            totalDifference:  {$subtract: ['$carTakenBackAt', '$carDroppedOffAt']}
+                        }
+                    },
+
+                ]).exec()*/
     }
 
 
     async countRepair() {
         return Repair.countDocuments({
+            carTakenBackAt : {$ne : null},
             deleted: false
         })
     }
@@ -309,11 +331,12 @@ export class RepairService {
 
         const count = await this.countRepair()
 
-        const average = (time[0].totalDifference / count) / (1000 * 60 * 60)
+        const average = (time[0].totalDifference / count)
 
         return {
-            hour: average.toFixed(2),
-            day: (average / 24).toFixed(2)
+            millisecond : average.toFixed(2),
+            hour: (average/3600000).toFixed(2),
+            day: (average / (3600000*24)).toFixed(2)
         }
 
     }

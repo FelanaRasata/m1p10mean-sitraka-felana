@@ -31,6 +31,8 @@ export class RepairCardComponent {
 
     workshopConfirmTakeCar = false
 
+    customerDownloadFacture = false
+
 
     constructor(
         private notificationService: NotificationService,
@@ -53,6 +55,8 @@ export class RepairCardComponent {
         this.financialValidatePurchase = repair.initiatedAt && !repair.inProgressAt && this.sessionService.onlineUser.value?.type === EUserType.FIM
 
         this.workshopConfirmTakeCar = repair.paidAt && !repair.carTakenBackAt && this.sessionService.onlineUser.value?.type === EUserType.WOM
+
+        this.customerDownloadFacture = repair.paidAt && this.sessionService.onlineUser.value?.type === EUserType.CUS
 
         this.showProgressBar = !!repair.inProgressAt
 
@@ -122,6 +126,10 @@ export class RepairCardComponent {
             })
         }
 
+    }
+
+    downloadInvoice(){
+        this.repairService.downloadInvoice(this.repairService.repair.value._id).subscribe();
     }
 
 }

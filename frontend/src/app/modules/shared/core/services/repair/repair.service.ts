@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs'
 import { baseUrl } from '../utils/utils'
 import { API_ENDPOINTS } from '../../config/constants'
 import { ApiService } from '../api/api.service'
@@ -403,5 +403,10 @@ export class RepairService {
                 })
 
         })
+    }
+
+
+    downloadInvoice(repairId: string):Observable<boolean>{
+        return EMPTY
     }
 }
